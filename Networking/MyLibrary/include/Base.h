@@ -1,0 +1,5 @@
+#ifndef TEAMPROJECT_BASE_H
+#define TEAMPROJECT_BASE_H
+
+
+#endif //TEAMPROJECT_BASE_H
