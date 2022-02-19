@@ -1,9 +1,8 @@
 #ifndef TEAMPROJECT_CONNECTION_H
 #define TEAMPROJECT_CONNECTION_H
-#include <string>
-#include <iostream>
-#include <memory>
-#include <boost/asio.hpp>
+
+#include "fwd.h"
+
 namespace myServer{
     using boost::asio::ip::tcp;
     struct TCPConnection : std::enable_shared_from_this<TCPConnection> {

@@ -1,42 +1,61 @@
 #include <boost/asio.hpp>
+#include <thread>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <array>
-#include "../MyLibrary/include/server.h"
 
 using boost::asio::ip::tcp;
 
-int main(int argc, char* argv[]) {
-    try {
-        boost::asio::io_context context;
+void checkConnection(boost::system::error_code &ec) {
+    if (!ec) {
+        std::cout << "Well done!\n";
+        return;
+    }
+    std::cout << "Error: " << ec.message() << '\n';
+}
 
-        tcp::resolver resolver(context);
-        auto endpoint = resolver.resolve("127.0.0.1", "1337");
+//std::vector<char> &getBuffer{
+//        inline static  = {};
+//        return buf;
+//};
 
-        tcp::socket socket(context);
-        boost::asio::connect(socket, endpoint);
 
-        while (true) {
-            // At the moment it's a good result I think:)
-            std::vector<char> buf;
-            buf.resize(100);
-            boost::system::error_code err;
+std::vector<char> buf(1024);
 
-            auto len = socket.read_some(boost::asio::buffer(buf), err);
-            if (err == boost::asio::error::eof){
-                break;
-            } else if (err) {
-                throw boost::system::system_error(err);
-            }
-
-//            std::cout.write(buf.data(), len);
-            for (auto &c : buf){
+void grabData(tcp::socket &socket) {
+    socket.read_some(boost::asio::buffer(buf.data(), buf.size()),
+                     [&](std::size_t len, boost::system::error_code &ec)
+    {
+        if (!ec) {
+            std::cout << "\n\n+++" << len << "+++\n\n";
+            for (auto c: buf) {
                 std::cout << c;
             }
-            std::cout << '\n';
+            grabData(socket);
         }
-    } catch (std::exception &e) {
-        std::cout << e.what() << '\n';
+    }
+}
+
+
+int main(int argc, char *argv[]) {
+    boost::asio::io_context ioContext;
+    boost::system::error_code ec;
+    tcp::endpoint endpoint(boost::asio::ip::make_address("91.198.174.192", ec), 443);
+
+    std::thread thr([&]() { ioContext.run(); });
+
+
+
+    tcp::socket socket(ioContext);
+    socket.connect(endpoint, ec);
+
+    checkConnection(ec);
+    if (socket.is_open()) {
+        grabData(socket);
+
+        std::string request = "GET /index.html HTTP/1.1\r\n"
+                              "Host: ru.wikipedia.org/wiki/\r\n"
+                              "Connection: close\r\n\r\n";
+        socket.write_some(boost::asio::buffer(request.data(), request.size()), ec);
     }
 }
