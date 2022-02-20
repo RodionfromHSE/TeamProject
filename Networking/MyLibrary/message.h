@@ -13,7 +13,7 @@ namespace myLibrary{
 
     template<typename T>
     struct Message{
-        const std::size_t size() const noexcept{
+        [[nodiscard]] const std::size_t size() const noexcept{
             return body.size();
         }
 
@@ -57,6 +57,19 @@ namespace myLibrary{
     public:
         std::vector<uint8_t> body;
         Header<T> header;
+    };
+
+    template<typename T>
+    struct Connection;
+
+    template<typename T>
+    struct OwnedMessage{
+        OwnedMessage() : remote(nullptr){}
+        std::shared_ptr<Connection<T>> remote;
+        Message<T> msg;
+        friend std::ostream &operator<<(std::ostream& os, OwnedMessage msg){
+            return os << msg.msg;
+        }
     };
 }
 
