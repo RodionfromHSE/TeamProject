@@ -54,13 +54,15 @@ struct GameObject {
     GameObject(string name, unordered_map<string, std::shared_ptr<Component>> newComponents) : namePlayer(std::move(name)), components(std::move(newComponents)){
     }
     int& get_positionX(){
-        return dynamic_cast<PositionComponent *>(components["position"].get())->x;
+//        dynamic_cast<type>(expression)
+
+        return dynamic_pointer_cast<PositionComponent>(components["position"])->x;
     }
     int& get_positionY(){
-        return dynamic_cast<PositionComponent *>(components["position"].get())->y;
+        return dynamic_pointer_cast<PositionComponent>(components["position"])->y;
     }
     char& get_texture(){
-        return dynamic_cast<TextureComponent *>(components["texture"].get())->texture;
+        return dynamic_pointer_cast<TextureComponent>(components["texture"])->texture;
     }
 };
 
@@ -162,7 +164,7 @@ void show_game(vector<GameObject> &gameObjects){ // заменить на отр
 void update(vector<GameObject> &gameObjects){
     for(auto &gameObject : gameObjects){
         if(gameObject.components.count("controller")){
-            dynamic_cast<PlayerController *>(gameObject.components["controller"].get())->update(gameObjects, gameObject);
+            dynamic_pointer_cast<PlayerController>(gameObject.components["controller"])->update(gameObjects, gameObject);
         }
     }
 }
@@ -180,6 +182,8 @@ void initialize_game(vector<GameObject> &gameObjects) {
     coinComponent["texture"] = std::make_unique<Component>(TextureComponent { '$' });
     GameObject gameObjectPlayer(namePlayer, playerComponent);
     GameObject gameObjectCoin(nameCoin, coinComponent);
+    gameObjects.push_back(gameObjectPlayer);
+    gameObjects.push_back(gameObjectCoin);
 }
 
 
