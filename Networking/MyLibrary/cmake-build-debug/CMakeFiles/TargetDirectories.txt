@@ -1,0 +1,3 @@
+/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/CMakeFiles/MyLibrary.dir

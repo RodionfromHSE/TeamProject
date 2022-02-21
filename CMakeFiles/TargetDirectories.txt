@@ -1,0 +1,13 @@
+C:/Users/home/Desktop/Programming/C++/TeamProject/CMakeFiles/rebuild_cache.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/CMakeFiles/edit_cache.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/CMakeFiles/rebuild_cache.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/CMakeFiles/edit_cache.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/CMakeFiles/rebuild_cache.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/CMakeFiles/edit_cache.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/CMakeFiles/MyLibrary.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyClient/CMakeFiles/rebuild_cache.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyClient/CMakeFiles/edit_cache.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyClient/CMakeFiles/MyClient.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyServer/CMakeFiles/rebuild_cache.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyServer/CMakeFiles/edit_cache.dir
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyServer/CMakeFiles/MyServer.dir
