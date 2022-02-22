@@ -2,22 +2,39 @@
 #define TEAMPROJECT_CONNECTION_H
 
 #include "fwd.h"
+#include "message.h"
+#include "tsqueue.h"
 
-namespace myServer{
-    using boost::asio::ip::tcp;
-    struct TCPConnection : std::enable_shared_from_this<TCPConnection> {
-        using ptr_t = std::shared_ptr<TCPConnection>;
+namespace myLibrary {
 
-        static ptr_t create_ptr(boost::asio::io_context &io_context);
+    template<typename T>
+    struct TCPConnection : std::enable_shared_from_this<TCPConnection<T>> {
+        TCPConnection() = default;
 
-        tcp::socket& socket();
+        ~TCPConnection() = default;
 
-        void Start();
+        bool is_connected() {
+            return false;
+        }
+
+        bool connect_to_server() {
+            return false;
+        }
+
+        bool disconnect() {
+            return false;
+        }
+
     private:
-        explicit TCPConnection(boost::asio::io_context &io_context);
+        void send(Message<T> &msg) {}
+
     private:
         tcp::socket _socket;
-        std::string _msg{"Hi, Client!"};
+        boost::asio::io_context &_ioContext;
+
+
+        TSQueue<Message<T>> _queueOut;
+        TSQueue<OwnedMessage<T>> &_queueIn;
     };
 }
 

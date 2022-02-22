@@ -10,4 +10,6 @@
 #include <memory>
 #include <cassert>
 
+using boost::asio::ip::tcp;
+
 #endif //TEAMPROJECT_FWD_H
