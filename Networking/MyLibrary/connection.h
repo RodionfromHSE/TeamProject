@@ -8,10 +8,16 @@
 namespace myLibrary {
 
     template<typename T>
-    struct TCPConnection : std::enable_shared_from_this<TCPConnection<T>> {
-        TCPConnection() = default;
+    struct Connection : std::enable_shared_from_this<Connection<T>> {
+        enum class Owner {
+            CLIENT,
+            SERVER
+        };
 
-        ~TCPConnection() = default;
+
+        Connection() = default;
+
+        ~Connection() = default;
 
         bool is_connected() {
             return false;
@@ -25,8 +31,9 @@ namespace myLibrary {
             return false;
         }
 
-    private:
-        void send(Message<T> &msg) {}
+        void send(const Message<T> &msg) {
+
+        }
 
     private:
         tcp::socket _socket;

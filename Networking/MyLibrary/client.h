@@ -25,7 +25,7 @@ namespace myLibrary {
 
         bool connect(const std::string &host, uint16_t port){
             try {
-                _connection = std::make_unique<TCPConnection<T>>();
+                _connection = std::make_unique<Connection<T>>();
 
                 tcp::resolver resolver(_ioContext);
                 tcp::endpoint endpoint(resolver.resolve(host, port));
@@ -33,7 +33,7 @@ namespace myLibrary {
                 _connection->connect_to_server(endpoint);
             } catch (std::exception& e){
                 std::cout << e.what() << '\n';
-                return true;
+                return false;
             }
             return true;
         }
@@ -43,8 +43,11 @@ namespace myLibrary {
                 _connection->disconnect();
             }
         }
-    private:
 
+    protected:
+        void send(Message<T> &msg){
+            _connection->send(msg);
+        }
     private:
         // It's needed in order to create "premature" contact between server and client
         boost::asio::io_context _ioContext;
