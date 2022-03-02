@@ -2,8 +2,8 @@
 #define TEAMPROJECT_SERVER_H
 
 
-#include "fwd.h"
 #include "connection.h"
+#include "fwd.h"
 #include "message.h"
 #include "tsqueue.h"
 
@@ -13,8 +13,7 @@ namespace myLibrary {
 
     template<typename T>
     struct ServerInterface {
-        explicit ServerInterface(uint16_t port) : _acceptor(port, tcp::endpoint(tcp::v4(), port)), _idCount(0) {
-
+        explicit ServerInterface(uint16_t port) : _acceptor(_ioContext, tcp::endpoint(tcp::v4(), port)), _idCount(0) {
         }
 
         ~ServerInterface() {
@@ -25,12 +24,12 @@ namespace myLibrary {
             try {
                 start_accept();
 
-                _contextThr([&]() { _ioContext.run(); });
+                _contextThr = std::thread([this]() { _ioContext.run(); });
             } catch (std::exception &e) {
-                std::cout << e.what() << '\n';
+                std::cout << e.what() << std::endl;
                 return false;
             }
-            std::cout << "Server runs!\n";
+            std::cout << "Server runs!" << std::endl;
             return true;
         }
 
@@ -41,10 +40,11 @@ namespace myLibrary {
                 _contextThr.join();
             }
 
-            std::cout << "Server closed!\n";
+            std::cout << "Server closed!" << std::endl;
         }
 
-        void send_to_client(std::shared_ptr<Connection<T>> client, Message<T> &msg) {
+        void send_to_client(std::shared_ptr<Connection<T>> client,
+                            Message<T> &msg) {
             if (client && client->is_connected()) {
                 client->send(msg);
                 return;
@@ -58,7 +58,7 @@ namespace myLibrary {
         void send_to_everyone(Message<T> &msg, std::shared_ptr<Connection<T>> ignoreClient) {
             bool isAnyDisconnected = false;
 
-            for (auto &client: _connections) {
+            for (auto &client : _connections) {
                 if (client && client->is_connected()) {
                     if (client != ignoreClient) {
                         client->send(msg);
@@ -79,32 +79,33 @@ namespace myLibrary {
         void update(std::size_t maxCount = -1) {
             std::size_t count = 0;
 
-            while (count < maxCount && !_inMessages.empty()) {
-                auto msg = _inMessages.back();
-                _inMessages.pop_back();
+            while (count++ < maxCount && !_inMessages.empty()) {
+                auto msg = _inMessages.pop_back();
 
-                handle_message(msg);
+                handle_message(msg.remote, msg.msg);
             }
+
         }
 
     protected:
         void start_accept() {
-            _acceptor.async_accept([&](boost::system::error_code ec, tcp::socket) {
+            _acceptor.async_accept([this](const boost::system::error_code& ec, tcp::socket socket) {
                 if (!ec) {
+//                    std::shared_ptr<Connection<T>> conn = nullptr;
                     std::shared_ptr<Connection<T>> conn = std::make_shared<Connection<T>>(Connection<T>::Owner::SERVER,
                                                                                           _inMessages,
                                                                                           std::move(socket),
                                                                                           _ioContext);
 
                     if (conn) {
+                        std::cout << "Got connection!" << std::endl;
                         _connections.push_back(conn);
                     } else {
-                        std::cout << "Rejected!\n";
+                        std::cout << "Rejected!" << std::endl;
                     }
                 } else {
-                    std::cout << "Server error!\n";
+                    std::cout << "Server error!" << std::endl;
                 }
-
                 start_accept();
             });
         }
@@ -113,12 +114,11 @@ namespace myLibrary {
             return false;
         }
 
-        void handle_message(std::shared_ptr<Connection<T>> client, Message<T> &msg) {
-
+        void handle_message(std::shared_ptr<Connection<T>> client,
+                            Message<T> &msg) {
         }
 
         void disconnect_client(std::shared_ptr<Connection<T>> client) {
-
         }
 
     private:
@@ -127,9 +127,9 @@ namespace myLibrary {
         tcp::acceptor _acceptor;
 
         std::vector<std::shared_ptr<Connection<T>>> _connections;
-        std::vector<OwnedMessage<T>> _inMessages;
+        TSQueue<OwnedMessage<T>> _inMessages;
 
         uint16_t _idCount;
     };
-}
-#endif //TEAMPROJECT_SERVER_H
+}// namespace myLibrary
+#endif//TEAMPROJECT_SERVER_H

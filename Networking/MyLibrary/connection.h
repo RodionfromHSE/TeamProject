@@ -19,6 +19,13 @@ namespace myLibrary {
 
         ~Connection() = default;
 
+
+        Connection(Owner owner, TSQueue<OwnedMessage<T>> &queueIn, tcp::socket socket,
+                   boost::asio::io_context &ioContext) : _owner(owner), _queueIn(queueIn), _socket(std::move(socket)),
+                                                         _ioContext(ioContext){
+
+        }
+
         bool is_connected() {
             return false;
         }
@@ -32,16 +39,16 @@ namespace myLibrary {
         }
 
         void send(const Message<T> &msg) {
-
         }
 
     private:
-        tcp::socket _socket;
-        boost::asio::io_context &_ioContext;
-
+        Owner _owner;
 
         TSQueue<Message<T>> _queueOut;
         TSQueue<OwnedMessage<T>> &_queueIn;
+
+        tcp::socket _socket;
+        boost::asio::io_context &_ioContext;
     };
 }
 
