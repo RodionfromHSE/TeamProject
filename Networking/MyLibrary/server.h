@@ -100,6 +100,7 @@ namespace myLibrary {
                     if (conn) {
                         std::cout << "Got connection!" << std::endl;
                         _connections.push_back(conn);
+                        _connections.back()->connect_to_client(_idCount++);
                     } else {
                         std::cout << "Rejected!" << std::endl;
                     }

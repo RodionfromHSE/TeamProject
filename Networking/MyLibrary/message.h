@@ -13,7 +13,7 @@ namespace myLibrary{
 
     template<typename T>
     struct Message{
-        [[nodiscard]] const std::size_t size() const noexcept{
+        [[nodiscard]] std::size_t size() const noexcept{
             return body.size();
         }
 
