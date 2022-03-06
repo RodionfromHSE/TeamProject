@@ -28,7 +28,9 @@ Component::~Component() = default;
 struct PositionComponent : Component {
     int x;
     int y;
-    PositionComponent(int newX, int newY) : x(newX), y(newY){}
+
+    PositionComponent(int newX, int newY) : x(newX), y(newY) {}
+
     ~PositionComponent() override;
 };
 
@@ -36,6 +38,7 @@ PositionComponent::~PositionComponent() = default;
 
 struct TextureComponent : Component {
     char texture = '.';
+
     explicit TextureComponent(char newTexture) : texture(newTexture) {}
 };
 
@@ -45,30 +48,26 @@ struct BehaviourComponent : Component {
 
 struct GameObject {
     string namePlayer;
-    unordered_map<string, std::shared_ptr<Component>> components;
-    /*void update() {
-        for (auto c : components) {
-            c.second.update();
-        }
-    }*/
-    GameObject(string name, unordered_map<string, std::shared_ptr<Component>> newComponents) : namePlayer(std::move(name)), components(std::move(newComponents)){
+    unordered_map <string, std::shared_ptr<Component>> components;
+    GameObject(string name, unordered_map <string, std::shared_ptr<Component>> newComponents) : namePlayer(
+            std::move(name)), components(std::move(newComponents)) {
     }
-    int& get_positionX(){
-//        dynamic_cast<type>(expression)
 
-        return dynamic_pointer_cast<PositionComponent>(components["position"])->x;
-    }
-    int& get_positionY(){
-        return dynamic_pointer_cast<PositionComponent>(components["position"])->y;
-    }
-    char& get_texture(){
-        return dynamic_pointer_cast<TextureComponent>(components["texture"])->texture;
+    template<typename T>
+    std::shared_ptr <T> getComponent(const std::string &componentName) {
+        return dynamic_pointer_cast<T>(this->components[componentName]);
     }
 };
 
-GameObject* get_nearby_object(vector<GameObject> &gameObjects, GameObject &object) {
-    for (auto &gameObject : gameObjects) {
-        if (gameObject.get_positionX() == object.get_positionX() && gameObject.get_positionY() == object.get_positionY() && gameObject.get_texture() == '$') {
+GameObject *get_nearby_object(vector <GameObject> &gameObjects, GameObject &object) {
+    for (auto &gameObject: gameObjects) {
+        std::shared_ptr <PositionComponent> objectPosition = object.getComponent<PositionComponent>("position");
+        std::shared_ptr <PositionComponent> otherPosition = gameObject.getComponent<PositionComponent>("position");
+        auto textureComponent = gameObject.getComponent<TextureComponent>("texture");
+
+
+        bool isCoin = textureComponent->texture == '$';
+        if (objectPosition->x == otherPosition->x && objectPosition->y == otherPosition->y && isCoin) {
             return &gameObject;
         }
     }
@@ -76,110 +75,124 @@ GameObject* get_nearby_object(vector<GameObject> &gameObjects, GameObject &objec
 }
 
 struct PlayerController : BehaviourComponent {
-    int balance ;
-    explicit PlayerController(int i) : balance(i){
+    int balance;
+
+    explicit PlayerController(int i) : balance(i) {
     }
+
     static void move_player(GameObject &player) {
-        if(pointer == Pointer::Right){
-            if(player.get_positionX() == size_filed - 1){
-                player.get_positionX() = 0;
+        std::shared_ptr <PositionComponent> positionComponent = player.getComponent<PositionComponent>("position");
+
+        if (pointer == Pointer::Right) {
+            if (positionComponent->x == size_filed - 1) {
+                positionComponent->x = 0;
             } else {
-                player.get_positionX() += 1;
+                positionComponent->x += 1;
             }
         }
-        if(pointer == Pointer::Left){
-            if(player.get_positionX() == 0){
-                player.get_positionX() = size_filed - 1;
+        if (pointer == Pointer::Left) {
+            if (positionComponent->x == 0) {
+                positionComponent->x = size_filed - 1;
             } else {
-                player.get_positionX() -= 1;
+                positionComponent->x -= 1;
             }
         }
-        if(pointer == Pointer::Up){
-            if(player.get_positionX() == 0){
-                player.get_positionX() = size_filed - 1;
+        if (pointer == Pointer::Up) {
+            if (positionComponent->y == 0) {
+                positionComponent->y = size_filed - 1;
             } else {
-                player.get_positionX() -= 1;
+                positionComponent->y -= 1;
             }
         }
-        if(pointer == Pointer::Bottom){
-            if(player.get_positionY() == size_filed - 1){
-                player.get_positionY() = 0;
+        if (pointer == Pointer::Bottom) {
+            if (positionComponent->y == size_filed - 1) {
+                positionComponent->y = 0;
             } else {
-                player.get_positionY() += 1;
+                positionComponent->y += 1;
             }
         }
     }
-    void update(vector<GameObject> &gameObjects, GameObject &player)  {
-        GameObject* object = get_nearby_object(gameObjects, player);
+
+    void update(vector <GameObject> &gameObjects, GameObject &player) {
+        move_player(player);
+        GameObject *object = get_nearby_object(gameObjects, player);
         if (object != nullptr) {
             balance += 1;
+            object->getComponent<PositionComponent>("position")->x = rand() % size_filed;
+            object->getComponent<PositionComponent>("position")->y = rand() % size_filed;
         }
-        move_player(player);
     }
 };
 
 /*struct NetworkController : BehaviourComponent {
-
     // получает от сервера позицию игрока по сети и перемещает соответственно
 };*/
 
-void input(){ // Сделать объект Input который будет содержать в том числе и Pointer (мотивация - есть же еще мышка, свайпы, другие клавиши)
+
+void input() { // Сделать объект Input который будет содержать в том числе и Pointer (мотивация - есть же еще мышка, свайпы, другие клавиши)
     char ch;
     cin >> ch;
-    if(ch == 'a'){
+    if (ch == 'a') {
         pointer = Pointer::Left;
     }
-    if(ch == 'd'){
+    if (ch == 'd') {
         pointer = Pointer::Right;
     }
-    if(ch == 'w'){
+    if (ch == 'w') {
         pointer = Pointer::Up;
     }
-    if(ch == 's'){
+    if (ch == 's') {
         pointer = Pointer::Bottom;
     }
-    if(ch == 'q'){
+    if (ch == 'q') {
         pointer = Pointer::Exit;
     }
 }
 
-void show_game(vector<GameObject> &gameObjects){ // заменить на отрисовку с SFML, когда текстовая игра снова заработает :)
-    vector<vector<char>> buffer(size_filed, vector<char> (size_filed, '.'));
-    for (auto &gameObject : gameObjects) {
-        int x = gameObject.get_positionX();
-        int y = gameObject.get_positionY();
-        char texture = gameObject.get_texture();
+void
+show_game(vector <GameObject> &gameObjects) { // заменить на отрисовку с SFML, когда текстовая игра снова заработает :)
+    vector <vector<char>> buffer(size_filed, vector<char>(size_filed, '.'));
+    for (auto &gameObject: gameObjects) {
+        //std::shared_ptr <PositionComponent> positionComponent = gameObject.getComponent<PositionComponent>("position");
+        int x = gameObject.getComponent<PositionComponent>("position").get()->x;
+        int y = gameObject.getComponent<PositionComponent>("position").get()->y;
+
+        auto textureComponent = gameObject.getComponent<TextureComponent>("texture");
+
+        char texture = textureComponent->texture;
         buffer[y][x] = texture;
     }
     // рисую буфер на экране
     cout << '\n';
-    for(int i = 0; i < size_filed; i++){
-        for(int j = 0; j < size_filed; j++){
+    for (int i = 0; i < size_filed; i++) {
+        for (int j = 0; j < size_filed; j++) {
             cout << buffer[i][j] << " ";
         }
         cout << '\n';
     }
 }
 
-void update(vector<GameObject> &gameObjects){
-    for(auto &gameObject : gameObjects){
-        if(gameObject.components.count("controller")){
-            dynamic_pointer_cast<PlayerController>(gameObject.components["controller"])->update(gameObjects, gameObject);
+void update(vector <GameObject> &gameObjects) {
+    for (auto &gameObject: gameObjects) {
+        if (gameObject.components.count("controller")) {
+            /*dynamic_pointer_cast<PlayerController>(gameObject.components["controller"])->update(gameObjects,
+                                                                                                gameObject);*/
+            gameObject.getComponent<PlayerController>("controller")->update(gameObjects, gameObject);
         }
     }
 }
 
-void initialize_game(vector<GameObject> &gameObjects) {
+void initialize_game(vector <GameObject> &gameObjects) {
     // добавить игрока и монетки
-    unordered_map<string, std::shared_ptr<Component>> playerComponent;
+    unordered_map <string, std::shared_ptr<Component>> playerComponent;
     string namePlayer = "player0001";
-    playerComponent["position"] = std::make_unique<Component>(PositionComponent { size_filed / 2, size_filed / 2 });
-    playerComponent["texture"] = std::make_unique<Component>(TextureComponent { '#' });
-    playerComponent["controller"] = std::make_unique<Component>(PlayerController {0});
-    unordered_map<string, std::shared_ptr<Component>> coinComponent;
+    playerComponent["position"] = std::make_shared<PositionComponent>(PositionComponent{size_filed - 1, size_filed - 1});
+    playerComponent["texture"] = std::make_shared<TextureComponent>(TextureComponent{'#'});
+    playerComponent["controller"] = std::make_shared<PlayerController>(PlayerController{0});
+    unordered_map <string, std::shared_ptr<Component>> coinComponent;
     string nameCoin = "coin0001";
-    coinComponent["position"] = std::make_unique<Component>(PositionComponent { 0, 0});
-    coinComponent["texture"] = std::make_unique<Component>(TextureComponent { '$' });
+    coinComponent["position"] = std::make_shared<PositionComponent>(PositionComponent{0, 0});
+    coinComponent["texture"] = std::make_shared<TextureComponent>(TextureComponent{'$'});
     GameObject gameObjectPlayer(namePlayer, playerComponent);
     GameObject gameObjectCoin(nameCoin, coinComponent);
     gameObjects.push_back(gameObjectPlayer);
@@ -188,12 +201,12 @@ void initialize_game(vector<GameObject> &gameObjects) {
 
 
 int main() {
-    vector<GameObject> gameObjects;
+    vector <GameObject> gameObjects;
     initialize_game(gameObjects);
     show_game(gameObjects);
-    while(true) {
+    while (true) {
         input();
-        if(pointer == Pointer::Exit){
+        if (pointer == Pointer::Exit) {
             return 0;
         }
         update(gameObjects);
