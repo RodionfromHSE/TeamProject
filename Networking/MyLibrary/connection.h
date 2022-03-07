@@ -31,18 +31,23 @@ namespace myLibrary {
         }
 
         void disconnect() {
-            if (is_connected()){
+            if (is_connected()) {
                 boost::asio::post(_ioContext, [this]() {
                     _socket.close();
                 });
             }
         }
 
-        bool connect_to_server() {
-            return false;
+        void connect_to_server(const boost::asio::ip::tcp::resolver::results_type &endpoints) {
+            if (_owner == Owner::CLIENT) {
+                boost::asio::async_connect(_socket, endpoints,
+                                        [this](boost::system::error_code &ec, std::size_t bytes_transferred) {
+                                            if (!ec) { read_header(); }
+                                        });
+            }
         }
 
-        bool connect_to_client(uint32_t id) {
+        void connect_to_client(uint32_t id) {
             if (_owner == Owner::SERVER) {
                 if (_socket.is_open()) {
                     _uid = id;

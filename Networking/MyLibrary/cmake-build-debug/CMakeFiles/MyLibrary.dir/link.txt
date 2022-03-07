@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/MyLibrary.dir/connection.cpp.o CMakeFiles/MyLibrary.dir/main.cpp.o CMakeFiles/MyLibrary.dir/server.cpp.o  -o MyLibrary  -lpthread 
+/usr/bin/c++  -g   CMakeFiles/MyLibrary.dir/main.cpp.o  -o MyLibrary  -lpthread 

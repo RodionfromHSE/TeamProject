@@ -84,7 +84,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/connection.cpp">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/client.h">
 			<Option target="MyLibrary"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/connection.h">
@@ -97,9 +97,6 @@
 			<Option target="MyLibrary"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/message.h">
-			<Option target="MyLibrary"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/server.cpp">
 			<Option target="MyLibrary"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/server.h">
