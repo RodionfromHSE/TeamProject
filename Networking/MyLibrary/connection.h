@@ -57,7 +57,7 @@ namespace myLibrary {
 
         // MESSAGE
         void read_header() {
-            boost::asio::async_read(_socket, boost::asio::buffer(&_inMessage.header, sizeof(OwnedMessage<T>)),
+            boost::asio::async_read(_socket, boost::asio::buffer(&_inMessage.header, sizeof(Header<T>)),
                                     [&](boost::system::error_code ec, [[maybe_unused]] std::size_t bytes_transferred) {
                                         if (ec) {
                                             std::cout << "Header reading failed\n";

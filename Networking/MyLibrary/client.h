@@ -8,15 +8,15 @@
 using boost::asio::ip::tcp;
 namespace myLibrary {
     struct ClientInterface {
-        ClientInterface() : _socket(_ioContext);
+        ClientInterface() : _socket(_ioContext){
 
-        ~ClientInterface() {
-            if (is_connected()) {
-                _connection->disconnect();
-            }
         };
 
-        bool is_connected() const noexcept {
+        ~ClientInterface() {
+            disconnect();
+        };
+
+        [[nodiscard]] bool is_connected() const noexcept {
             if (_connection) {
                 return _connection->is_connected();
             }

@@ -65,11 +65,12 @@ namespace myLibrary{
     template<typename T>
     struct OwnedMessage{
         OwnedMessage() : remote(nullptr){}
-        std::shared_ptr<Connection<T>> remote;
-        Message<T> msg;
         friend std::ostream &operator<<(std::ostream& os, OwnedMessage msg){
             return os << msg.msg;
         }
+    public:
+        std::shared_ptr<Connection<T>> remote;
+        Message<T> msg;
     };
 }
 

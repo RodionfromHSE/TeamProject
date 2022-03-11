@@ -13,7 +13,7 @@ namespace myLibrary {
 
     template<typename T>
     struct ServerInterface {
-        explicit ServerInterface(uint16_t port) : _acceptor(_ioContext, tcp::endpoint(tcp::v4(), port)), _idCount(0) {
+        explicit ServerInterface(uint16_t port) : _acceptor(_ioContext, tcp::endpoint(tcp::v4(), port)), _idCount(10'000) {
         }
 
         ~ServerInterface() {
