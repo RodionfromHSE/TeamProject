@@ -136,7 +136,7 @@ namespace myLibrary {
         void send(const Message<T> &msg) {
             boost::asio::post(_ioContext, [this, msg]() {
                 // Hope you enjoy my variable aliases
-                bool anyReasonToRead = !_queueOut.empty();
+                bool anyReasonToRead = _queueOut.empty();
                 _queueOut.push_back(msg);
                 if (anyReasonToRead) {
                     write_header();

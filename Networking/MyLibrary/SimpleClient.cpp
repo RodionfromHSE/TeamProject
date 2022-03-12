@@ -59,7 +59,7 @@ int main() {
             sleep_for(1s);
         }
     } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
+        std::cout << e.what() << " Failed " << std::endl;
     }
 
     return 0;

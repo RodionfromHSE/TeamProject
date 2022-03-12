@@ -14,7 +14,7 @@ struct Server : ServerInterface<SIGNAL>{
 
     void handle_message(std::shared_ptr<Connection<SIGNAL>> client, Message<SIGNAL> &msg) override {
         if (msg.header.id == SIGNAL::ServerPing){
-            std::cout << reinterpret_cast<char*>(&msg.body);
+            std::cout << reinterpret_cast<char*>(&msg.body) << std::endl;
         }
     }
 };
