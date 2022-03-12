@@ -37,8 +37,8 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="MyLibrary">
-				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/MyLibrary" prefix_auto="0" extension_auto="0"/>
+			<Target title="Client">
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Client" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -54,14 +54,14 @@
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 MyLibrary"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 Client"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="MyLibrary/fast">
-				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/MyLibrary" prefix_auto="0" extension_auto="0"/>
+			<Target title="Client/fast">
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Client" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -77,33 +77,64 @@
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 MyLibrary/fast"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 Client/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Server">
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Server/fast">
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/client.h">
-			<Option target="MyLibrary"/>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/SimpleClient.cpp">
+			<Option target="Client"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/connection.h">
-			<Option target="MyLibrary"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/fwd.h">
-			<Option target="MyLibrary"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/main.cpp">
-			<Option target="MyLibrary"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/message.h">
-			<Option target="MyLibrary"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/server.h">
-			<Option target="MyLibrary"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/tsqueue.h">
-			<Option target="MyLibrary"/>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/SimpleServer.cpp">
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

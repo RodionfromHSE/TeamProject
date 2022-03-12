@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/SimpleServer.cpp
+connection.h
+/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/connection.h
+server.h
+/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/server.h
+tsqueue.h
+/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/tsqueue.h
+message.h
+/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/message.h
+fwd.h
+/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/fwd.h
+
 /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/connection.h
 fwd.h
 /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/fwd.h
@@ -30,20 +42,6 @@ boost/asio.hpp
 memory
 -
 cassert
--
-
-/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/main.cpp
-connection.h
-/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/connection.h
-server.h
-/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/server.h
-tsqueue.h
-/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/tsqueue.h
-message.h
-/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/message.h
-fwd.h
-/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/fwd.h
-ostream
 -
 
 /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/message.h

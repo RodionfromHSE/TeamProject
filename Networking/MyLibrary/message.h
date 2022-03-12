@@ -64,7 +64,6 @@ namespace myLibrary{
 
     template<typename T>
     struct OwnedMessage{
-        OwnedMessage() : remote(nullptr){}
         friend std::ostream &operator<<(std::ostream& os, OwnedMessage msg){
             return os << msg.msg;
         }

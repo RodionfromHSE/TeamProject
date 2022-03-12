@@ -7,18 +7,19 @@
 namespace myLibrary {
     template<typename T>
     struct TSQueue {
+        // TODO: fix race condition here
         bool empty() const noexcept {
             std::unique_lock l(_m);
             return _msgQueue.empty();
         }
 
-        T &front() const {
+        T &front() {
             std::unique_lock l(_m);
-            assert(!_msgQueue.empty());
+//            assert(!_msgQueue.empty());
             return _msgQueue.front();
         }
 
-        T &back() const {
+        T &back() {
             std::unique_lock l(_m);
             assert(!_msgQueue.empty());
             return _msgQueue.back();

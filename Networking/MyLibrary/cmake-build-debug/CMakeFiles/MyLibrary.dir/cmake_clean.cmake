@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/MyLibrary.dir/main.cpp.o"
+  "CMakeFiles/MyLibrary.dir/SimpleServer.cpp.o"
   "MyLibrary"
   "MyLibrary.pdb"
 )

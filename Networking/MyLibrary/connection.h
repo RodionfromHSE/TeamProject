@@ -41,9 +41,11 @@ namespace myLibrary {
         void connect_to_server(const boost::asio::ip::tcp::resolver::results_type &endpoints) {
             if (_owner == Owner::CLIENT) {
                 boost::asio::async_connect(_socket, endpoints,
-                                        [this](boost::system::error_code &ec, std::size_t bytes_transferred) {
-                                            if (!ec) { read_header(); }
-                                        });
+                                           [this](boost::system::error_code ec,
+                                                  boost::asio::ip::tcp::endpoint endpoint) {
+                                               if
+                                               (!ec) { read_header(); }
+                                           });
             }
         }
 
@@ -74,7 +76,7 @@ namespace myLibrary {
         }
 
         void read_body() {
-            boost::asio::async_read(_socket, boost::asio::buffer(&_inMessage.body.data(), _inMessage.size()),
+            boost::asio::async_read(_socket, boost::asio::buffer(_inMessage.body.data(), _inMessage.size()),
                                     [&](boost::system::error_code ec, [[maybe_unused]] std::size_t bytes_transferred) {
                                         if (ec) {
                                             std::cout << "Body reading failed\n";
@@ -86,8 +88,9 @@ namespace myLibrary {
         }
 
         void write_header() {
-            boost::asio::async_write(_socket, boost::asio::buffer(_queueOut.front().header, sizeof(Header<T>)),
-                                     [&](boost::system::error_code &ec, std::size_t bytes_transferred) {
+            assert(!_queueOut.empty());
+            boost::asio::async_write(_socket, boost::asio::buffer(&_queueOut.front().header, sizeof(Header<T>)),
+                                     [&](boost::system::error_code ec, std::size_t bytes_transferred) {
                                          if (ec) {
                                              std::cout << "Header writing failed\n";
                                              _socket.close();
@@ -104,9 +107,10 @@ namespace myLibrary {
         }
 
         void write_body() {
+            assert(!_queueOut.empty());
             boost::asio::async_write(_socket,
-                                     boost::asio::buffer(_queueOut.front().body, sizeof(_queueOut.front().body.size())),
-                                     [&](boost::system::error_code &ec, std::size_t bytes_transferred) {
+                                     boost::asio::buffer(&_queueOut.front().body, _queueOut.front().body.size()),
+                                     [&](boost::system::error_code ec, std::size_t bytes_transferred) {
                                          if (ec) {
                                              std::cout << "Body writing failed\n";
                                              _socket.close();
@@ -120,9 +124,9 @@ namespace myLibrary {
 
         void add_to_incoming() {
             if (_owner == Owner::SERVER) {
-                _queueIn.push_back(this->shared_from_this(), _inMessage);
+                _queueIn.push_back({this->shared_from_this(), _inMessage});
             } else {
-                _queueIn.push_back(nullptr, _inMessage);
+                _queueIn.push_back({nullptr, _inMessage});
             }
             read_header();
         }

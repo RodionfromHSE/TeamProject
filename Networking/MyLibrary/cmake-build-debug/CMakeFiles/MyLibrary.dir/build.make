@@ -57,27 +57,27 @@ include CMakeFiles/MyLibrary.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/MyLibrary.dir/flags.make
 
-CMakeFiles/MyLibrary.dir/main.cpp.o: CMakeFiles/MyLibrary.dir/flags.make
-CMakeFiles/MyLibrary.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MyLibrary.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyLibrary.dir/main.cpp.o -c /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/main.cpp
+CMakeFiles/MyLibrary.dir/SimpleServer.cpp.o: CMakeFiles/MyLibrary.dir/flags.make
+CMakeFiles/MyLibrary.dir/SimpleServer.cpp.o: ../SimpleServer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MyLibrary.dir/SimpleServer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyLibrary.dir/SimpleServer.cpp.o -c /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/SimpleServer.cpp
 
-CMakeFiles/MyLibrary.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyLibrary.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/main.cpp > CMakeFiles/MyLibrary.dir/main.cpp.i
+CMakeFiles/MyLibrary.dir/SimpleServer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyLibrary.dir/SimpleServer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/SimpleServer.cpp > CMakeFiles/MyLibrary.dir/SimpleServer.cpp.i
 
-CMakeFiles/MyLibrary.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyLibrary.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/main.cpp -o CMakeFiles/MyLibrary.dir/main.cpp.s
+CMakeFiles/MyLibrary.dir/SimpleServer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyLibrary.dir/SimpleServer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/SimpleServer.cpp -o CMakeFiles/MyLibrary.dir/SimpleServer.cpp.s
 
 # Object files for target MyLibrary
 MyLibrary_OBJECTS = \
-"CMakeFiles/MyLibrary.dir/main.cpp.o"
+"CMakeFiles/MyLibrary.dir/SimpleServer.cpp.o"
 
 # External object files for target MyLibrary
 MyLibrary_EXTERNAL_OBJECTS =
 
-MyLibrary: CMakeFiles/MyLibrary.dir/main.cpp.o
+MyLibrary: CMakeFiles/MyLibrary.dir/SimpleServer.cpp.o
 MyLibrary: CMakeFiles/MyLibrary.dir/build.make
 MyLibrary: CMakeFiles/MyLibrary.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable MyLibrary"

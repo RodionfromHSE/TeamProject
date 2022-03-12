@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/main.cpp" "/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/CMakeFiles/MyLibrary.dir/main.cpp.o"
+  "/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/SimpleServer.cpp" "/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/cmake-build-debug/CMakeFiles/MyLibrary.dir/SimpleServer.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "Clang")
 

@@ -105,21 +105,21 @@ namespace myLibrary {
                         std::cout << "Rejected!" << std::endl;
                     }
                 } else {
-                    std::cout << "Server error!" << std::endl;
+                    std::cout << "Connection is rejected!" << std::endl;
                 }
                 start_accept();
             });
         }
 
-        bool connect_client(std::shared_ptr<Connection<T>> client) {
+        virtual bool connect_client(std::shared_ptr<Connection<T>> client) {
             return false;
         }
 
-        void handle_message(std::shared_ptr<Connection<T>> client,
+        virtual void handle_message(std::shared_ptr<Connection<T>> client,
                             Message<T> &msg) {
         }
 
-        void disconnect_client(std::shared_ptr<Connection<T>> client) {
+        virtual void disconnect_client(std::shared_ptr<Connection<T>> client) {
         }
 
     private:
