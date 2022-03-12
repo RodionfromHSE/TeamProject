@@ -7,6 +7,10 @@
 namespace myLibrary {
     template<typename T>
     struct TSQueue {
+//        TSQueue() = default;
+//        TSQueue(const tsqueue<T>&) = delete;
+//        virtual ~TSQueue() { clear(); }
+//    public:
         // TODO: fix race condition here
         bool empty() const noexcept {
             std::unique_lock l(_m);
@@ -15,7 +19,7 @@ namespace myLibrary {
 
         T &front() {
             std::unique_lock l(_m);
-//            assert(!_msgQueue.empty());
+            assert(!_msgQueue.empty());
             return _msgQueue.front();
         }
 

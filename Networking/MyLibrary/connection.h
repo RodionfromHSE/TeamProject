@@ -45,6 +45,8 @@ namespace myLibrary {
                                                   boost::asio::ip::tcp::endpoint endpoint) {
                                                if
                                                (!ec) { read_header(); }
+                                               if (!is_connected())
+                                                   std::cout << "Fuhh..." << std::endl;
                                            });
             }
         }

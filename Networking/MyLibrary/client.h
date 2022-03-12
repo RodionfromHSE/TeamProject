@@ -10,7 +10,7 @@ using boost::asio::ip::tcp;
 namespace myLibrary {
     template<typename T>
     struct ClientInterface {
-        ClientInterface() : _socket(_ioContext){
+        ClientInterface() : _socket(_ioContext) {
 
         };
 
@@ -29,11 +29,11 @@ namespace myLibrary {
         bool connect(const std::string &host, uint16_t port) {
             try {
                 tcp::resolver resolver(_ioContext);
-                auto endpoint(resolver.resolve(host, std::to_string(port)));
+                boost::asio::ip::tcp::resolver::results_type endpoints = resolver.resolve(host, std::to_string(port));
 
                 _connection = std::make_unique<Connection<T>>(Connection<T>::Owner::CLIENT, _inQueue,
                                                               boost::asio::ip::tcp::socket(_ioContext), _ioContext);
-                _connection->connect_to_server(endpoint);
+                _connection->connect_to_server(endpoints);
 
                 _thrClient = std::thread([&]() { _ioContext.run(); });
             } catch (std::exception &e) {
@@ -47,13 +47,21 @@ namespace myLibrary {
             if (is_connected()) {
                 _connection->disconnect();
             }
+
+            _ioContext.stop();
+
+            if (_thrClient.joinable())
+                _thrClient.join();
+
+            _connection.release();
         }
 
     public:
-        TSQueue<OwnedMessage<T>> _inQueue;
+        TSQueue <OwnedMessage<T>> _inQueue;
     protected:
-        void send(Message<T> &msg) {
-            _connection->send(msg);
+        void send(Message <T> &msg) {
+            if (is_connected())
+                _connection->send(msg);
         }
 
 
