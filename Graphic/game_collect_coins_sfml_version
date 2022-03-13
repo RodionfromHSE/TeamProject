@@ -1,0 +1,85 @@
+
+#include <SFML/Graphics.hpp>
+#include <time.h>
+using namespace sf;
+
+int window_size = 800;
+int num_of_cell = 8;
+int distance = window_size/num_of_cell;
+struct point {
+    int x, y;
+};
+
+
+int main()
+{
+    srand(time(0));
+
+    RenderWindow app(VideoMode(window_size, window_size), "Team PR 1");
+    app.setFramerateLimit(10);
+
+    Texture t1, t2, t3;
+    t1.loadFromFile("Background.PNG");
+    t2.loadFromFile("Cube.png");
+    t3.loadFromFile("Coin.png");
+    Sprite sBackground(t1), sPers(t2), sCoin(t3);
+    sPers.setPosition(distance,distance);
+    sCoin.setPosition(window_size, window_size);
+
+    int x = window_size - distance, y = window_size - distance;
+
+    bool isFlipped = false;
+
+    point Coin;
+        Coin.x = rand() % num_of_cell * distance;
+        Coin.y = rand() % num_of_cell * distance;
+
+    while (app.isOpen())
+    {
+        Event e;
+       while (app.pollEvent(e))
+       {
+           if (e.type == Event::Closed)
+               app.close();
+       }
+
+        if (Keyboard::isKeyPressed(Keyboard::Right)) {
+            x+=distance;
+
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Left)) {
+            x -=distance;
+
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Down)) {
+            y += distance;
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Up)) {
+            y -= distance;
+        }
+
+        if (x < 0) x = window_size - distance;
+        if (x > window_size - distance) x = 0;
+        if (y < 0) y = window_size - distance;
+        if (y > window_size - distance) y = 0;
+
+
+        if (abs(x - Coin.x) <=distance/2 && abs(y - Coin.y) <= distance/2) {
+            Coin.x = rand() % num_of_cell * distance;
+            Coin.y = rand() % num_of_cell * distance;
+        }
+
+
+
+        
+        sPers.setPosition(x , y);
+        app.draw(sBackground);
+        app.draw(sPers);
+
+        sCoin.setPosition(Coin.x,Coin.y);
+        app.draw(sCoin);
+        app.display();
+    }
+
+    return 0;
+}
