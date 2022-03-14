@@ -2,6 +2,14 @@
 #include <time.h>
 using namespace sf;
 
+int number_of_obstacles = 3;
+int speed = 10;
+int gravitation = 50;
+int horizontal = 1700;
+int vertical = 800;
+int left_border = 600;
+int jump = 50;
+
 struct point {
     int x, y;
 };
@@ -15,22 +23,22 @@ int main()
     app.setFramerateLimit(60);
 
     Texture t1, t2, t3;
-    t1.loadFromFile("/Users/arno/Desktop/ohmygodness/images/background.png");
-    t2.loadFromFile("/Users/arno/Desktop/ohmygodness/images/avatar.gif");
-    t3.loadFromFile("/Users/arno/Desktop/ohmygodness/images/dmdld.png");
+    t1.loadFromFile("background.png");
+    t2.loadFromFile("avatar.gif");
+    t3.loadFromFile("flower.png");
     Sprite sBackground(t1), sPers(t2), sObstacle(t3);
-    sPers.setPosition(100,100);
+    sPers.setPosition(1000,800);
     sObstacle.setPosition(900, 805);
 
-    int x = 100, y = 800, dx = 5;
+    int x = 100, y = 800, dx = 10;
 
     bool isFlipped = false;
 
-    point Obstacle[5];
-    for (int i = 0; i < 5; i++)
+    point Obstacle[number_of_obstacles];
+    for (int i = 0; i < number_of_obstacles; i++)
     {
-        Obstacle[i].x = rand() % 1700;
-        Obstacle[i].y = 805;
+        Obstacle[i].x = rand() % horizontal;
+        Obstacle[i].y = vertical + 5;
     }
 
     while (app.isOpen())
@@ -43,10 +51,10 @@ int main()
         }
 
         if (Keyboard::isKeyPressed(Keyboard::Right)) {
-            x+=3;
+            x+=speed;
             isFlipped = true;
             if (x > 1000)
-                for (int i = 0; i < 5;i++)
+                for (int i = 0; i < number_of_obstacles; i++)
                 {
                     x = 1000;
                     Obstacle[i].x  = Obstacle[i].x - dx;
@@ -57,12 +65,12 @@ int main()
                 }
         }
         if (Keyboard::isKeyPressed(Keyboard::Left)) {
-            x -= 3;
+            x -= speed;
             isFlipped = false;
-            if (x < 400)
-                for (int i = 0; i < 5;i++)
+            if (x < left_border)
+                for (int i = 0; i < number_of_obstacles ;i++)
                 {
-                    x = 400;
+                    x = left_border;
                     Obstacle[i].x = Obstacle[i].x + dx;
                     if (Obstacle[i].x > 1794) {
                         Obstacle[i].x = 0;
@@ -74,7 +82,7 @@ int main()
             y += 100;
         }
         if (Keyboard::isKeyPressed(Keyboard::Up)) {
-            y -= 10;
+            y -= 100;
         }
 
         if (y > 800) {
@@ -83,7 +91,11 @@ int main()
         if (y < 0) {
             y = 0;
         }
-        for (int i = 0; i < 5; i++) { //TODO: перенести в спец функцию для проверки препятствий
+        if (y < 800) {
+            y += gravitation;
+        }
+
+        for (int i = 0; i < number_of_obstacles; i++) { //TODO: перенести в спец функцию для проверки препятствий
             if ((x >= Obstacle[i].x - 60) && (x < Obstacle[i].x + 15) && y >= 680) {
                 x -= 6;
             }
@@ -93,7 +105,7 @@ int main()
         }
 
         if (x > 1000)
-            for (int i = 0; i < 5;i++)
+            for (int i = 0; i < number_of_obstacles;i++)
             {
                 x = 1000;
                 Obstacle[i].x =Obstacle[i].x - dx;
@@ -103,10 +115,10 @@ int main()
                 }
             }
 
-        if (x < 400)
-            for (int i = 0; i < 5;i++)
+        if (x < left_border)
+            for (int i = 0; i < number_of_obstacles;i++)
             {
-                x = 400;
+                x = left_border;
                 Obstacle[i].x =Obstacle[i].x - dx;
                 if (Obstacle[i].x > 1794) {
                     Obstacle[i].x = 0;
@@ -124,7 +136,7 @@ int main()
 
         app.draw(sBackground);
         app.draw(sPers);
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < number_of_obstacles; i++)
         {
             sObstacle.setPosition(Obstacle[i].x,Obstacle[i].y);
             app.draw(sObstacle);
