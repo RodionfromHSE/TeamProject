@@ -6,60 +6,100 @@
 #include <chrono>
 #include <thread>
 
-enum class SIGNAL {
-    ServerPing
+enum class CustomMsgTypes : uint32_t
+{
+    ServerAccept,
+    ServerDeny,
+    ServerPing,
+    MessageAll,
+    ServerMessage,
 };
 
 using namespace myLibrary;
 
-struct Client : ClientInterface<SIGNAL> {
-    void ping() {
-        if (is_connected()) {
-            Message<SIGNAL> msg;
-            msg.header.id = SIGNAL::ServerPing;
-            msg << "Message " << ++_msgCount;
+class CustomClient : public ClientInterface<CustomMsgTypes>
+{
+public:
+    void PingServer()
+    {
+        Message<CustomMsgTypes> msg;
+        msg.header.id = CustomMsgTypes::ServerPing;
 
-            send(msg);
-        }
+        // Caution with this...
+        std::chrono::system_clock::time_point timeNow = std::chrono::system_clock::now();
+
+        msg << timeNow;
+        send(msg);
     }
 
-private:
-    uint32_t _msgCount = 0;
+    void MessageAll()
+    {
+        Message<CustomMsgTypes> msg;
+        msg.header.id = CustomMsgTypes::MessageAll;
+        send(msg);
+    }
 };
 
-int main() {
-    try {
-        Client c;
+int main()
+{
+    CustomClient c;
+    c.connect("127.0.0.1", 60000);
 
-        // Just skip this
-//        boost::asio::io_context io;
-//        boost::asio::ip::tcp::socket s(io);
-//        tcp::resolver resolver(io);
-//        boost::asio::ip::tcp::resolver::results_type endpoints = resolver.resolve("127.0.0.1", "600");
-//        boost::asio::connect(s, endpoints);
-//        if (s.is_open())
-//            std::cout << "What???" << std::endl;
-//        for(tcp::endpoint const& endpoint : endpoints)
-//        {
-//            std::cout << endpoint << "\n";
-//        }
+    bool bQuit = false;
+    while (!bQuit)
+    {
+        char symb;
+        std::cin >> symb;
 
+        if (symb == '1') c.PingServer();
+        else if (symb == '2') c.MessageAll();
+        else if (symb == '3') bQuit = true;
 
-        c.connect("127.0.0.1", 60000);
-        for (int i = 0; i < 5; ++i) {
-            c.ping();
-        }
-
-        // a small delay
+        if (c.is_connected())
         {
-            using namespace std::this_thread;     // sleep_for, sleep_until
-            using namespace std::chrono_literals; // ns, us, ms, s, h, etc.
-            using std::chrono::system_clock;
+            if (!c.inQueue.empty())
+            {
 
-            sleep_for(1s);
+
+                auto msg = c.inQueue.pop_front().msg;
+
+                switch (msg.header.id)
+                {
+                    case CustomMsgTypes::ServerAccept:
+                    {
+                        // Server has responded to a ping request				
+                        std::cout << "Server Accepted Connection\n";
+                    }
+                        break;
+
+
+                    case CustomMsgTypes::ServerPing:
+                    {
+                        // Server has responded to a ping request
+                        std::chrono::system_clock::time_point timeNow = std::chrono::system_clock::now();
+                        std::chrono::system_clock::time_point timeThen;
+                        msg >> timeThen;
+                        std::cout << "Ping: " << std::chrono::duration<double>(timeNow - timeThen).count() << "\n";
+                    }
+                        break;
+
+                    case CustomMsgTypes::ServerMessage:
+                    {
+                        // Server has responded to a ping request	
+                        uint32_t clientID;
+                        msg >> clientID;
+                        std::cout << "Hello from [" << clientID << "]\n";
+                    }
+                        break;
+                }
+            }
         }
-    } catch (std::exception &e) {
-        std::cout << e.what() << " Failed " << std::endl;
+        else
+        {
+            std::cout << "Server Down\n";
+            bQuit = true;
+        }
+
     }
 
     return 0;

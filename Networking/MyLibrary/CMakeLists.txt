@@ -6,8 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(Boost 1.71.0 REQUIRED)
 
 #include_directories(src)
-#file(GLOB SOURCES *.cpp *.h)
+#file(GLOB SOURCES C:/Users/home/Desktop/garbage/olcPixelGameEngine/Videos/Networking/Parts1&2/SimpleServer.cpp)
 add_executable(Server SimpleServer.cpp)
+#add_executable(WorkingServer SOURCES)
 add_executable(Client SimpleClient.cpp)
 
 

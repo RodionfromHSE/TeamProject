@@ -77,6 +77,8 @@ namespace myLibrary {
         }
 
         void update(std::size_t maxCount = -1) {
+            // TODO: wait msg
+            // ??? What count for?
             std::size_t count = 0;
 
             while (count++ < maxCount && !_inMessages.empty()) {
@@ -87,9 +89,10 @@ namespace myLibrary {
 
         }
 
+
     protected:
         void start_accept() {
-            _acceptor.async_accept([this](const boost::system::error_code& ec, tcp::socket socket) {
+            _acceptor.async_accept([this](boost::system::error_code ec, tcp::socket socket) {
                 if (!ec) {
 //                    std::shared_ptr<Connection<T>> conn = nullptr;
                     std::shared_ptr<Connection<T>> conn = std::make_shared<Connection<T>>(Connection<T>::Owner::SERVER,
@@ -99,7 +102,7 @@ namespace myLibrary {
 
                     if (conn) {
                         std::cout << "Got connection!" << std::endl;
-                        _connections.push_back(conn);
+                        _connections.push_back(std::move(conn));
                         _connections.back()->connect_to_client(_idCount++);
                     } else {
                         std::cout << "Rejected!" << std::endl;

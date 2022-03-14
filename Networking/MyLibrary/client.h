@@ -31,11 +31,11 @@ namespace myLibrary {
                 tcp::resolver resolver(_ioContext);
                 boost::asio::ip::tcp::resolver::results_type endpoints = resolver.resolve(host, std::to_string(port));
 
-                _connection = std::make_unique<Connection<T>>(Connection<T>::Owner::CLIENT, _inQueue,
+                _connection = std::make_unique<Connection<T>>(Connection<T>::Owner::CLIENT, inQueue,
                                                               boost::asio::ip::tcp::socket(_ioContext), _ioContext);
                 _connection->connect_to_server(endpoints);
 
-                _thrClient = std::thread([&]() { _ioContext.run(); });
+                _thrClient = std::thread([this]() { _ioContext.run(); });
             } catch (std::exception &e) {
                 std::cout << "Failed to connect with error:" << e.what() << std::endl;
                 return false;
@@ -57,7 +57,7 @@ namespace myLibrary {
         }
 
     public:
-        TSQueue <OwnedMessage<T>> _inQueue;
+        TSQueue <OwnedMessage<T>> inQueue;
     protected:
         void send(Message <T> &msg) {
             if (is_connected())

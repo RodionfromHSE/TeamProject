@@ -17,6 +17,11 @@ namespace myLibrary{
             return body.size();
         }
 
+        void clear() {
+            header.size = 0;
+            body.resize(header.size);
+        }
+
         // Nice output
         friend std::ostream & operator<<(std::ostream& os, Message& msg){
             os << "ID:" << int(msg.header.id) << " Size:" << msg.header.size;
@@ -25,7 +30,7 @@ namespace myLibrary{
 
         // Message recording
         template<typename DataType>
-        friend Message& operator<<(Message<T>& msg, DataType& data){
+        friend Message& operator<<(Message<T>& msg, const DataType& data){
             static_assert(std::is_standard_layout_v<DataType>);
 
             std::size_t sz = msg.size();

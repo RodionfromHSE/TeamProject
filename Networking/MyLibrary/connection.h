@@ -43,10 +43,7 @@ namespace myLibrary {
                 boost::asio::async_connect(_socket, endpoints,
                                            [this](boost::system::error_code ec,
                                                   boost::asio::ip::tcp::endpoint endpoint) {
-                                               if
-                                               (!ec) { read_header(); }
-                                               if (!is_connected())
-                                                   std::cout << "Fuhh..." << std::endl;
+                                               if (!ec) { read_header(); }
                                            });
             }
         }
@@ -55,6 +52,7 @@ namespace myLibrary {
             if (_owner == Owner::SERVER) {
                 if (_socket.is_open()) {
                     _uid = id;
+                    read_header();
                 }
             }
         }
@@ -63,29 +61,29 @@ namespace myLibrary {
         void read_header() {
             boost::asio::async_read(_socket, boost::asio::buffer(&_inMessage.header, sizeof(Header<T>)),
                                     [&](boost::system::error_code ec, [[maybe_unused]] std::size_t bytes_transferred) {
-                                        if (ec) {
-                                            std::cout << "Header reading failed\n";
-                                            _socket.close();
-                                        }
-                                        if (_inMessage.header.size > 0) {
-                                            _inMessage.body.resize(_inMessage.header.size);
-                                            read_body();
+                                        if (!ec) {
+                                            if (_inMessage.header.size > 0) {
+                                                _inMessage.body.resize(_inMessage.header.size);
+                                                read_body();
+                                            } else {
+                                                add_to_incoming();
+                                            }
                                         } else {
-                                            add_to_incoming();
-                                            read_header();
+                                            std::cout << "Header reading failed" << std::endl;
+                                            _socket.close();
                                         }
                                     });
         }
 
         void read_body() {
-            boost::asio::async_read(_socket, boost::asio::buffer(_inMessage.body.data(), _inMessage.size()),
+            boost::asio::async_read(_socket, boost::asio::buffer(_inMessage.body.data(), _inMessage.header.size),
                                     [&](boost::system::error_code ec, [[maybe_unused]] std::size_t bytes_transferred) {
-                                        if (ec) {
-                                            std::cout << "Body reading failed\n";
+                                        if (!ec) {
+                                            add_to_incoming();
+                                        } else {
+                                            std::cout << "Body reading failed" << std::endl;
                                             _socket.close();
                                         }
-                                        add_to_incoming();
-                                        read_header();
                                     });
         }
 
@@ -94,16 +92,17 @@ namespace myLibrary {
             boost::asio::async_write(_socket, boost::asio::buffer(&_queueOut.front().header, sizeof(Header<T>)),
                                      [&](boost::system::error_code ec, std::size_t bytes_transferred) {
                                          if (ec) {
-                                             std::cout << "Header writing failed\n";
-                                             _socket.close();
-                                         }
-                                         if (_queueOut.front().header.size > 0) {
-                                             write_body();
-                                         } else {
-                                             _queueOut.pop_front();
-                                             if (!_queueOut.empty()) {
-                                                 write_header();
+                                             if (_queueOut.front().header.size > 0) {
+                                                 write_body();
+                                             } else {
+                                                 _queueOut.pop_front();
+                                                 if (!_queueOut.empty()) {
+                                                     write_header();
+                                                 }
                                              }
+                                         } else {
+                                             std::cout << "Header writing failed" << std::endl;
+                                             _socket.close();
                                          }
                                      });
         }
@@ -113,13 +112,14 @@ namespace myLibrary {
             boost::asio::async_write(_socket,
                                      boost::asio::buffer(&_queueOut.front().body, _queueOut.front().body.size()),
                                      [&](boost::system::error_code ec, std::size_t bytes_transferred) {
-                                         if (ec) {
-                                             std::cout << "Body writing failed\n";
+                                         if (!ec) {
+                                             _queueOut.pop_front();
+                                             if (!_queueOut.empty()) {
+                                                 write_header();
+                                             }
+                                         } else {
+                                             std::cout << "Body writing failed" << std::endl;
                                              _socket.close();
-                                         }
-                                         _queueOut.pop_front();
-                                         if (!_queueOut.empty()) {
-                                             write_header();
                                          }
                                      });
         }
@@ -144,9 +144,14 @@ namespace myLibrary {
             });
         }
 
+
+        int get_id() {
+            return _uid;
+        }
+
     private:
         Owner _owner;
-        uint32_t _uid;
+        uint32_t _uid = 0;
 
         TSQueue<Message<T>> _queueOut;
         TSQueue<OwnedMessage<T>> &_queueIn;
