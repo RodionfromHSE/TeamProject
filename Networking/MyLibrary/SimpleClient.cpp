@@ -15,6 +15,10 @@ enum class CharacterAction : uint32_t
 using namespace myLibrary;
 
 struct Player{
+    int getOx(){
+        return i++;
+    }
+
     std::pair<float, float> get_position(){
         return std::make_pair(x, y);
     }
@@ -24,6 +28,7 @@ struct Player{
         return std::make_pair(x, y);
     }
 private:
+    int i = 0;
     float x = 0, y = 0;
 
 };
@@ -36,9 +41,8 @@ public:
     {
         Message<CharacterAction> msg;
         msg.header.id = CharacterAction::Move;
-        msg << p.get_position() << p.move(1, 1);
-        std::cout << sizeof p.get_position() << '\n';
-        std::cout << msg << '\n';
+        p.move(1, 0);
+        msg << p.getOx();
         send(msg);
     }
 
@@ -82,7 +86,6 @@ int main()
                         break;
                 }
             }
-            std::cout << "+\n";
             std::cout.flush();
         }
         else

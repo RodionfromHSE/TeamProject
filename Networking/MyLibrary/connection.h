@@ -79,6 +79,7 @@ namespace myLibrary {
             boost::asio::async_read(_socket, boost::asio::buffer(_inMessage.body.data(), _inMessage.header.size),
                                     [&](boost::system::error_code ec, [[maybe_unused]] std::size_t bytes_transferred) {
                                         if (!ec) {
+                                            assert(_inMessage.header.size == _inMessage.size());
                                             add_to_incoming();
                                         } else {
                                             std::cout << "Body reading failed\n";
@@ -110,9 +111,10 @@ namespace myLibrary {
         void write_body() {
             assert(!_queueOut.empty());
             boost::asio::async_write(_socket,
-                                     boost::asio::buffer(&_queueOut.front().body, _queueOut.front().body.size()),
+                                     boost::asio::buffer(_queueOut.front().body.data(), _queueOut.front().body.size()),
                                      [&](boost::system::error_code ec, std::size_t bytes_transferred) {
                                          if (!ec) {
+                                             assert(bytes_transferred == _queueOut.front().body.size());
                                              _queueOut.pop_front();
                                              if (!_queueOut.empty()) {
                                                  write_header();

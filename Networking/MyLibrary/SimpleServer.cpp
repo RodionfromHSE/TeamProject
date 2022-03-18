@@ -36,12 +36,15 @@ protected:
     void handle_message(std::shared_ptr<Connection<CharacterAction>> client, Message<CharacterAction> &msg) override {
         switch (msg.header.id) {
             case CharacterAction::Move: {
-                std::pair<float, float> startPoint;
-                std::pair<float, float> endPoint;
-                msg >> startPoint >> endPoint;
-                std::cout << "[" << client->get_id() << "]: Move from: " << startPoint.first << ' ' << startPoint.second
-                          << " to " << endPoint.first << ' ' << endPoint.second << '\n';
+//                std::pair<float, float> startPoint;
+//                std::pair<float, float> endPoint;
+//                msg >> startPoint >> endPoint;
+//                std::cout << "[" << client->get_id() << "]: Move from: " << startPoint.first << ' ' << startPoint.second
+//                          << " to " << endPoint.first << ' ' << endPoint.second << '\n';
 
+                int x;
+                msg >> x;
+                std::cout << x << '\n';
                 // Simply bounce Message  back to client
                 msg.clear();
                 msg.header.id = CharacterAction::SuccessfulMove;
