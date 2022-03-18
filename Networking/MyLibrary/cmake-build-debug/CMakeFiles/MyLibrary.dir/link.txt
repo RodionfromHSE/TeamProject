@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/MyLibrary.dir/SimpleServer.cpp.o  -o MyLibrary  -lpthread 

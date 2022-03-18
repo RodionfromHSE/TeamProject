@@ -69,7 +69,7 @@ namespace myLibrary {
                                                 add_to_incoming();
                                             }
                                         } else {
-                                            std::cout << "Header reading failed" << std::endl;
+                                            std::cout << "Header reading failed\n";
                                             _socket.close();
                                         }
                                     });
@@ -81,7 +81,7 @@ namespace myLibrary {
                                         if (!ec) {
                                             add_to_incoming();
                                         } else {
-                                            std::cout << "Body reading failed" << std::endl;
+                                            std::cout << "Body reading failed\n";
                                             _socket.close();
                                         }
                                     });
@@ -91,7 +91,7 @@ namespace myLibrary {
             assert(!_queueOut.empty());
             boost::asio::async_write(_socket, boost::asio::buffer(&_queueOut.front().header, sizeof(Header<T>)),
                                      [&](boost::system::error_code ec, std::size_t bytes_transferred) {
-                                         if (ec) {
+                                         if (!ec) {
                                              if (_queueOut.front().header.size > 0) {
                                                  write_body();
                                              } else {
@@ -101,7 +101,7 @@ namespace myLibrary {
                                                  }
                                              }
                                          } else {
-                                             std::cout << "Header writing failed" << std::endl;
+                                             std::cout << "Header writing failed\n";
                                              _socket.close();
                                          }
                                      });
@@ -118,7 +118,7 @@ namespace myLibrary {
                                                  write_header();
                                              }
                                          } else {
-                                             std::cout << "Body writing failed" << std::endl;
+                                             std::cout << "Body writing failed\n";
                                              _socket.close();
                                          }
                                      });

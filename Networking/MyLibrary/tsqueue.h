@@ -11,7 +11,10 @@ namespace myLibrary {
 //        TSQueue(const tsqueue<T>&) = delete;
 //        virtual ~TSQueue() { clear(); }
 //    public:
-        // TODO: fix race condition here
+        void wait(){
+            std::unique_lock l(_waitMutex);
+            _cv.wait(l, [this](){ return !empty(); });
+        }
         bool empty() const noexcept {
             std::unique_lock l(_m);
             return _msgQueue.empty();
@@ -32,11 +35,18 @@ namespace myLibrary {
         void push_front(const T& item) {
             std::unique_lock l(_m);
             _msgQueue.push_front(item);
+
+            std::unique_lock<std::mutex> ul(_waitMutex);
+            _cv.notify_one();
         }
 
         void push_back(const T& item) {
             std::unique_lock l(_m);
-            _msgQueue.push_back(item);}
+            _msgQueue.push_back(item);
+
+            std::unique_lock<std::mutex> ul(_waitMutex);
+            _cv.notify_one();
+        }
 
         T pop_front() {
             std::unique_lock l(_m);
@@ -57,6 +67,8 @@ namespace myLibrary {
     private:
         std::deque<T> _msgQueue;
         mutable std::mutex _m;
+        mutable std::mutex _waitMutex;
+        mutable std::condition_variable _cv;
     };
 }
 

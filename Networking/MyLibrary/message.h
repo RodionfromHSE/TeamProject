@@ -13,7 +13,7 @@ namespace myLibrary{
 
     template<typename T>
     struct Message{
-        [[nodiscard]] std::size_t size() const noexcept{
+        [[nodiscard]] std::size_t size() const noexcept {
             return body.size();
         }
 
@@ -30,14 +30,18 @@ namespace myLibrary{
 
         // Message recording
         template<typename DataType>
-        friend Message& operator<<(Message<T>& msg, const DataType& data){
+        friend Message& operator<<(Message<T> &msg, const DataType& data){
             static_assert(std::is_standard_layout_v<DataType>);
 
             std::size_t sz = msg.size();
 
+            for (auto &c : msg.body)
+                std::cout << c << ' ';
+            std::cout << '\n';
+
             msg.body.resize(sz + sizeof(DataType));
 
-            std::memcpy(msg.body.data() + sz, &data, sizeof(DataType));
+            std::memcpy(msg.body.data() + sz, reinterpret_cast<const uint8_t*>(&data), sizeof(DataType));
 
             msg.header.size = msg.size();
 
@@ -51,9 +55,13 @@ namespace myLibrary{
 
             std::size_t sz = msg.size() - sizeof(DataType);
 
-            std::memcpy(&data, msg.body.data() + sz, sizeof(DataType));
+            std::memcpy(reinterpret_cast<uint8_t*>(&data), msg.body.data() + sz, sizeof(DataType));
 
             msg.body.resize(sz);
+
+            for (auto &c : msg.body)
+                std::cout << c << ' ';
+            std::cout << '\n';
 
             msg.header.size = msg.size();
 

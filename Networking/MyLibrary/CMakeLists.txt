@@ -10,8 +10,12 @@ find_package(Boost 1.71.0 REQUIRED)
 add_executable(Server SimpleServer.cpp)
 #add_executable(WorkingServer SOURCES)
 add_executable(Client SimpleClient.cpp)
+add_executable(Client2 SimpleClient.cpp)
+add_executable(draft DRAFT.cpp)
+target_link_libraries(draft PRIVATE Threads::Threads)
 
 
 find_package(Threads REQUIRED)
 target_link_libraries(Server PRIVATE Threads::Threads)
 target_link_libraries(Client PRIVATE Threads::Threads)
+target_link_libraries(Client2 PRIVATE Threads::Threads)

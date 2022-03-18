@@ -10,7 +10,6 @@
 
 using boost::asio::ip::tcp;
 namespace myLibrary {
-
     template<typename T>
     struct ServerInterface {
         explicit ServerInterface(uint16_t port) : _acceptor(_ioContext, tcp::endpoint(tcp::v4(), port)), _idCount(10'000) {
@@ -26,10 +25,10 @@ namespace myLibrary {
 
                 _contextThr = std::thread([this]() { _ioContext.run(); });
             } catch (std::exception &e) {
-                std::cout << e.what() << std::endl;
+                std::cerr << e.what() << "\n";
                 return false;
             }
-            std::cout << "Server runs!" << std::endl;
+            std::cout << "Server runs!\n";
             return true;
         }
 
@@ -40,7 +39,7 @@ namespace myLibrary {
                 _contextThr.join();
             }
 
-            std::cout << "Server closed!" << std::endl;
+            std::cout << "Server closed!\n";
         }
 
         void send_to_client(std::shared_ptr<Connection<T>> client,
@@ -77,14 +76,14 @@ namespace myLibrary {
         }
 
         void update(std::size_t maxCount = -1) {
-            // TODO: wait msg
-            // ??? What count for?
             std::size_t count = 0;
+            _inMessages.wait();
 
             while (count++ < maxCount && !_inMessages.empty()) {
                 auto msg = _inMessages.pop_back();
 
                 handle_message(msg.remote, msg.msg);
+//                std::cout << std::flush;
             }
 
         }
@@ -101,14 +100,14 @@ namespace myLibrary {
                                                                                           _ioContext);
 
                     if (conn) {
-                        std::cout << "Got connection!" << std::endl;
+                        std::cout << "Got connection!\n";
                         _connections.push_back(std::move(conn));
                         _connections.back()->connect_to_client(_idCount++);
                     } else {
-                        std::cout << "Rejected!" << std::endl;
+                        std::cout << "Rejected!\n";
                     }
                 } else {
-                    std::cout << "Connection is rejected!" << std::endl;
+                    std::cout << "Connection is rejected!\n";
                 }
                 start_accept();
             });
