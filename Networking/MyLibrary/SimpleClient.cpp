@@ -41,8 +41,7 @@ public:
     {
         Message<CharacterAction> msg;
         msg.header.id = CharacterAction::Move;
-        p.move(1, 0);
-        msg << p.getOx();
+        msg << p.get_position() << p.move(1, 1);
         send(msg);
     }
 
