@@ -3,8 +3,8 @@ project(MyLibrary)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../.)
-message("CMake runtime output Directory : ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ..)
+message("CMake runtime output directory: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
 find_package(Boost 1.71.0 REQUIRED)
 find_package(Threads REQUIRED)
@@ -29,7 +29,8 @@ if (WIN32 AND NOT MSVC AND NOT BORLAND)
 
     # Add sfml's dlls to your cmake build
     file(GLOB BINARY_DEP_DLLS "${SFML_INCLUDE_DIR}/../bin/*.dll")
-    file(COPY ${BINARY_DEP_DLLS} DESTINATION ${CMAKE_BINARY_DIR})
+    file(COPY ${BINARY_DEP_DLLS} DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+#    file(COPY ${BINARY_DEP_DLLS} DESTINATION C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary)
 else ()
     # Here you are awaited to be on Linux
     include_directories(/usr/local/include)
