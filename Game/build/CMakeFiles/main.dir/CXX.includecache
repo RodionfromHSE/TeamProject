@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Game/main.cpp
+iostream
+-
+utility
+-
+vector
+-
+algorithm
+-
+unordered_map
+-
+memory
+-
+
