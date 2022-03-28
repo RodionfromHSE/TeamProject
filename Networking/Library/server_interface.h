@@ -48,7 +48,7 @@ namespace myLibrary {
                 return;
             }
 
-            disconnect_client(client);
+            off_client(client);
             client.reset();
             _connections.erase(std::remove(_connections.begin(), _connections.end(), client), _connections.end());
         }
@@ -64,7 +64,7 @@ namespace myLibrary {
                     continue;
                 }
 
-                disconnect_client(client);
+                off_client(client);
                 client.reset();
                 isAnyDisconnected = true;
             }
@@ -112,7 +112,7 @@ namespace myLibrary {
             });
         }
 
-        virtual bool connect_client(std::shared_ptr<Connection<T>> client) {
+        virtual bool on_client(std::shared_ptr<Connection<T>> client) {
             return false;
         }
 
@@ -120,7 +120,7 @@ namespace myLibrary {
                             Message<T> &msg) {
         }
 
-        virtual void disconnect_client(std::shared_ptr<Connection<T>> client) {
+        virtual void off_client(std::shared_ptr<Connection<T>> client) {
         }
 
     private:

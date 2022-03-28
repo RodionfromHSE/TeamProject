@@ -1,7 +1,16 @@
 #pragma once
 
-enum class CharacterAction : uint32_t
+enum class OBJECT_TYPE : uint32_t
 {
-    Move,
-    SuccessfulMove
+    PLAYER,
+    DECORATION
 };
+
+enum class PLAYER_STATE : uint32_t
+{
+    RUN,
+    IDLE,
+    JUMP
+};
+
+
