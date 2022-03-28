@@ -2,7 +2,7 @@
 #define CLIENT_H
 
 #include "connection.h"
-#include "client.h"
+#include "client_interface.h"
 #include "fwd.h"
 #include "message.h"
 

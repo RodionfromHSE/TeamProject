@@ -1,3 +1,0 @@
-C:\msys64\mingw64\bin\cmake.exe -E rm -f CMakeFiles\MyClient.dir/objects.a
-C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\MyClient.dir/objects.a @CMakeFiles\MyClient.dir\objects1.rsp
-C:\msys64\mingw64\bin\g++.exe -Wl,--whole-archive CMakeFiles\MyClient.dir/objects.a -Wl,--no-whole-archive -o MyClient.exe -Wl,--out-implib,libMyClient.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\MyClient.dir\linklibs.rsp

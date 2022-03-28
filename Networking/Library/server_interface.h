@@ -1,11 +1,10 @@
 #ifndef TEAMPROJECT_SERVER_H
 #define TEAMPROJECT_SERVER_H
 
-
-#include "connection.h"
 #include "fwd.h"
 #include "message.h"
 #include "tsqueue.h"
+#include "connection.h"
 
 
 using boost::asio::ip::tcp;
