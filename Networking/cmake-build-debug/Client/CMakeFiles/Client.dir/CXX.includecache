@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/Client.cpp
+../MyLibrary/connection.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/connection.h
+../MyLibrary/client.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/client.h
+../MyLibrary/tsqueue.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/tsqueue.h
+../MyLibrary/message.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/message.h
+../MyLibrary/fwd.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/MyLibrary/fwd.h
+chrono
+-
+thread
+-
+
