@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 enum class OBJECT_TYPE : uint32_t
 {
     PLAYER,

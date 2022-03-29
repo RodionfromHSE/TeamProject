@@ -45,6 +45,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
@@ -68,6 +69,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
@@ -91,6 +93,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
@@ -114,6 +117,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
@@ -137,6 +141,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
@@ -160,6 +165,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
 					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
@@ -183,6 +189,14 @@
 			<Option target="Client"/>
 		</Unit>
 		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/main.cpp">
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game/object.cpp">
+			<Option target="Server"/>
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game/object.h">
+			<Option target="Server"/>
 			<Option target="Client"/>
 		</Unit>
 		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library/main.cpp">

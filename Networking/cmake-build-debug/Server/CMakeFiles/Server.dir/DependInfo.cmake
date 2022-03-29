@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game/object.cpp" "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/CMakeFiles/Server.dir/__/Game/object.cpp.obj"
   "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/main.cpp" "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/CMakeFiles/Server.dir/main.cpp.obj"
   "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.cpp" "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/CMakeFiles/Server.dir/server.cpp.obj"
   )
@@ -16,6 +17,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../Library"
+  "../Game"
   )
 
 # The set of dependency files which are needed:

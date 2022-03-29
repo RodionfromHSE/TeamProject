@@ -15,6 +15,9 @@ else ()
 endif ()
 
 include_directories(Library)
+include_directories(Game)
 add_subdirectory(Server Server/)
 add_subdirectory(Client Client/)
 add_subdirectory(Library Library/)
+#add_subdirectory(Game Game/)
+

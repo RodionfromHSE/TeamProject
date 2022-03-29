@@ -15,7 +15,6 @@ namespace myLibrary {
             SERVER
         };
 
-
         Connection() = default;
 
         ~Connection() = default;

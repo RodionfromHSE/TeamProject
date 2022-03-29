@@ -118,6 +118,7 @@ namespace myLibrary {
 
         virtual void handle_message(std::shared_ptr<Connection<T>> client,
                             Message<T> &msg) {
+
         }
 
         virtual void off_client(std::shared_ptr<Connection<T>> client) {
