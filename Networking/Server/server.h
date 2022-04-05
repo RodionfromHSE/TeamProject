@@ -21,11 +21,10 @@ struct Server : net::ServerInterface<EVENT>{
 
     const std::vector<Object>& get_objects();
 
-    net::SynchroniziedHandler<EVENT> &syn_handler();
+    net::SynchronizedHandler<EVENT> &syn_handler();
 
 private:
-    net::SynchroniziedHandler<EVENT> m_synHandler;
+    net::SynchronizedHandler<EVENT> m_synHandler;
     std::vector<Object> _objects;
     uint16_t _limit;
 };
-

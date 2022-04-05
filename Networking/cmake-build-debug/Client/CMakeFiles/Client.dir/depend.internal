@@ -12,16 +12,22 @@ Client/CMakeFiles/Client.dir/client.cpp.obj
  ../Library/fwd.h
  ../Library/game_enum.h
  ../Library/message.h
+ ../Library/synchronizied_handler.h
  ../Library/tsqueue.h
  C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/client.cpp
  C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/client.h
 Client/CMakeFiles/Client.dir/main.cpp.obj
+ ../Client/client.h
  ../Game/object.h
  ../Library/client_interface.h
  ../Library/connection.h
  ../Library/fwd.h
  ../Library/game_enum.h
  ../Library/message.h
+ ../Library/server_interface.h
+ ../Library/synchronizied.h
+ ../Library/synchronizied_handler.h
  ../Library/tsqueue.h
+ ../Server/server.h
  C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/client.h
  C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/main.cpp

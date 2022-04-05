@@ -1,5 +1,4 @@
-#ifndef FWD_H
-#define FWD_H
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -9,7 +8,7 @@
 #include <boost/asio.hpp>
 #include <memory>
 #include <cassert>
-
-using boost::asio::ip::tcp;
-
-#endif //TEAMPROJECT_FWD_H
+// main tools
+#include "game_enum.h"
+#include "tsqueue.h"
+#include "message.h"

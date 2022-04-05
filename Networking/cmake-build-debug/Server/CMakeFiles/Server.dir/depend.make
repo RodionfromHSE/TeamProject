@@ -6,13 +6,18 @@ Server/CMakeFiles/Server.dir/__/Game/object.cpp.obj: \
  ../Game/object.cpp \
  ../Game/object.h
 Server/CMakeFiles/Server.dir/main.cpp.obj: \
+ ../Client/client.h \
  ../Game/object.h \
+ ../Library/client_interface.h \
  ../Library/connection.h \
  ../Library/fwd.h \
  ../Library/game_enum.h \
  ../Library/message.h \
  ../Library/server_interface.h \
+ ../Library/synchronizied.h \
+ ../Library/synchronizied_handler.h \
  ../Library/tsqueue.h \
+ ../Server/server.h \
  ../Server/main.cpp \
  ../Server/server.h
 Server/CMakeFiles/Server.dir/server.cpp.obj: \
@@ -22,6 +27,7 @@ Server/CMakeFiles/Server.dir/server.cpp.obj: \
  ../Library/game_enum.h \
  ../Library/message.h \
  ../Library/server_interface.h \
+ ../Library/synchronizied_handler.h \
  ../Library/tsqueue.h \
  ../Server/server.cpp \
  ../Server/server.h

@@ -12,16 +12,22 @@ Client/CMakeFiles/Client.dir/client.cpp.obj: \
  ../Library/fwd.h \
  ../Library/game_enum.h \
  ../Library/message.h \
+ ../Library/synchronizied_handler.h \
  ../Library/tsqueue.h \
  ../Client/client.cpp \
  ../Client/client.h
 Client/CMakeFiles/Client.dir/main.cpp.obj: \
+ ../Client/client.h \
  ../Game/object.h \
  ../Library/client_interface.h \
  ../Library/connection.h \
  ../Library/fwd.h \
  ../Library/game_enum.h \
  ../Library/message.h \
+ ../Library/server_interface.h \
+ ../Library/synchronizied.h \
+ ../Library/synchronizied_handler.h \
  ../Library/tsqueue.h \
+ ../Server/server.h \
  ../Client/client.h \
  ../Client/main.cpp

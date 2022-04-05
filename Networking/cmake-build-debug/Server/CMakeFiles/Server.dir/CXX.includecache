@@ -6,17 +6,31 @@
 
 #IncludeRegexTransform: 
 
+../Client/client.h
+client_interface.h
+../Client/client_interface.h
+object.h
+../Client/object.h
+game_enum.h
+../Client/game_enum.h
+message.h
+../Client/message.h
+synchronizied_handler.h
+../Client/synchronizied_handler.h
+
 ../Game/object.h
 game_enum.h
 ../Game/game_enum.h
 
+../Library/client_interface.h
+fwd.h
+../Library/fwd.h
+connection.h
+../Library/connection.h
+
 ../Library/connection.h
 fwd.h
 ../Library/fwd.h
-message.h
-../Library/message.h
-tsqueue.h
-../Library/tsqueue.h
 
 ../Library/fwd.h
 iostream
@@ -35,6 +49,12 @@ memory
 -
 cassert
 -
+game_enum.h
+../Library/game_enum.h
+tsqueue.h
+../Library/tsqueue.h
+message.h
+../Library/message.h
 
 ../Library/game_enum.h
 cstdint
@@ -47,22 +67,48 @@ fwd.h
 ../Library/server_interface.h
 fwd.h
 ../Library/fwd.h
-message.h
-../Library/message.h
-tsqueue.h
-../Library/tsqueue.h
 connection.h
 ../Library/connection.h
 
-../Library/tsqueue.h
+../Library/synchronizied.h
+fwd.h
+../Library/fwd.h
+../Server/server.h
+../Server/server.h
+../Client/client.h
+../Client/client.h
+
+../Library/synchronizied_handler.h
 fwd.h
 ../Library/fwd.h
 message.h
 ../Library/message.h
 
-C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.cpp
+../Library/tsqueue.h
+fwd.h
+../Library/fwd.h
+
+../Server/server.h
+vector
+-
+iostream
+-
+server_interface.h
+../Server/server_interface.h
+game_enum.h
+../Server/game_enum.h
+message.h
+../Server/message.h
+object.h
+../Server/object.h
+synchronizied_handler.h
+../Server/synchronizied_handler.h
+
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/main.cpp
 server.h
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.h
+synchronizied.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/synchronizied.h
 
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.h
 vector
@@ -77,4 +123,6 @@ message.h
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/message.h
 object.h
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/object.h
+synchronizied_handler.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/synchronizied_handler.h
 

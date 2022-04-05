@@ -1,11 +1,8 @@
-#ifndef TEAMPROJECT_CONNECTION_H
-#define TEAMPROJECT_CONNECTION_H
+#pragma once
 
 #include "fwd.h"
-#include "message.h"
-#include "tsqueue.h"
 
-
+using boost::asio::ip::tcp;
 namespace net {
 
     template<typename T>
@@ -41,7 +38,7 @@ namespace net {
             if (_owner == Owner::CLIENT) {
                 boost::asio::async_connect(_socket, endpoints,
                                            [this](boost::system::error_code ec,
-                                                  boost::asio::ip::tcp::endpoint endpoint) {
+                                                  const boost::asio::ip::tcp::endpoint& endpoint) {
                                                if (!ec) { read_header(); }
                                            });
             }
@@ -56,6 +53,23 @@ namespace net {
             }
         }
 
+        void send(const Message<T> &msg) {
+            boost::asio::post(_ioContext, [this, msg]() {
+                // Hope you enjoy my variable aliases
+                bool isOutQueueEmpty = _queueOut.empty();
+                _queueOut.push_back(msg);
+                if (isOutQueueEmpty) {
+                    write_header();
+                }
+            });
+        }
+
+
+        [[nodiscard]] int get_id() const {
+            return _uid;
+        }
+
+    protected:
         // MESSAGE
         void read_header() {
             boost::asio::async_read(_socket, boost::asio::buffer(&_inMessage.header, sizeof(Header<T>)),
@@ -88,7 +102,6 @@ namespace net {
         }
 
         void write_header() {
-            assert(!_queueOut.empty());
             boost::asio::async_write(_socket, boost::asio::buffer(&_queueOut.front().header, sizeof(Header<T>)),
                                      [&](boost::system::error_code ec, std::size_t bytes_transferred) {
                                          if (!ec) {
@@ -108,12 +121,10 @@ namespace net {
         }
 
         void write_body() {
-            assert(!_queueOut.empty());
             boost::asio::async_write(_socket,
                                      boost::asio::buffer(_queueOut.front().body.data(), _queueOut.front().body.size()),
                                      [&](boost::system::error_code ec, std::size_t bytes_transferred) {
                                          if (!ec) {
-                                             assert(bytes_transferred == _queueOut.front().body.size());
                                              _queueOut.pop_front();
                                              if (!_queueOut.empty()) {
                                                  write_header();
@@ -134,22 +145,6 @@ namespace net {
             read_header();
         }
 
-        void send(const Message<T> &msg) {
-            boost::asio::post(_ioContext, [this, msg]() {
-                // Hope you enjoy my variable aliases
-                bool anyReasonToRead = _queueOut.empty();
-                _queueOut.push_back(msg);
-                if (anyReasonToRead) {
-                    write_header();
-                }
-            });
-        }
-
-
-        int get_id() {
-            return _uid;
-        }
-
     private:
         Owner _owner;
         uint32_t _uid = 0;
@@ -162,6 +157,4 @@ namespace net {
 
         Message<T> _inMessage;
     };
-}// namespace myLibrary
-
-#endif//TEAMPROJECT_CONNECTION_H
+}

@@ -5,14 +5,13 @@
 
 namespace net {
     template<typename T>
-    struct SynchroniziedHandler {
-
-        bool empty(int id) const {
+    struct SynchronizedHandler {
+        [[nodiscard]] bool empty(int id) {
             std::unique_lock l(_m);
             return _synTable[id].empty();
         };
 
-        Message <T> last_message(int id) {
+        [[nodiscard]] Message <T> last_message(int id) {
             std::unique_lock l(_m);
             auto msg = std::move(_synTable[id].back());
             clear_impl(id);
@@ -36,7 +35,6 @@ namespace net {
 
     private:
         std::mutex _m;
-        std::unordered_map<int, std::vector<Message < T>>>
-        _synTable;
+        std::unordered_map<int, std::vector<Message < T>>> _synTable;
     };
 }

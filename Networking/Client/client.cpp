@@ -7,10 +7,12 @@ std::vector<Point> moves{{1,  0},
 
 void Client::move(int step) {
     m_player.set(m_player.coordinates() + moves[step]);
+
     net::Message<EVENT> msg;
     msg.header.id = EVENT::NOTHING;
 //    std::cout << _player.coordinates().x << ' ' << _player.coordinates().y << " after change\n";
     msg << m_player.coordinates() << m_player.state();
+
     send(msg);
 }
 
@@ -29,6 +31,7 @@ void Client::handle_message(net::Message<EVENT> msg, std::shared_ptr<net::Connec
     }
 }
 
-net::SynchroniziedHandler<EVENT> &Client::syn_handler() {
+
+net::SynchronizedHandler<EVENT> &Client::syn_handler() {
     return m_synHandler;
 }

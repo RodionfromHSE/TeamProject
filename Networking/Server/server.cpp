@@ -16,20 +16,19 @@ const std::vector<Object> &Server::get_objects() {
     return _objects;
 }
 
+int cnt = 0;
 void Server::handle_message(std::shared_ptr<net::Connection<EVENT>> client, net::Message<EVENT> &msg) {
-    Point coors;
-    PLAYER_STATE state;
-
-    msg >> state >> coors;
-    std::cout << coors.x << ' ' << coors.y << " got coordinates\n";
-    if (__COUNTER__ % 2)
-        msg << coors << PLAYER_STATE::JUMP;
-    else
-        msg << coors << PLAYER_STATE::RUN;
-
-    send_to_client(client, msg);
+    switch (msg.header.id) {
+        case EVENT::SYNCHRONIZATION:
+            int id;
+            msg >> id;
+            m_synHandler.add_message(msg, id);
+            break;
+        default:
+            break;
+    }
 }
 
-net::SynchroniziedHandler<EVENT> &Server::syn_handler() {
+net::SynchronizedHandler<EVENT> &Server::syn_handler() {
     return m_synHandler;
 }
