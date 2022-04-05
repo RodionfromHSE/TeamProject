@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+../Game/object.h
+game_enum.h
+../Game/game_enum.h
+
 ../Library/connection.h
 fwd.h
 ../Library/fwd.h
@@ -33,6 +37,8 @@ cassert
 -
 
 ../Library/game_enum.h
+cstdint
+-
 
 ../Library/message.h
 fwd.h
@@ -54,8 +60,6 @@ fwd.h
 message.h
 ../Library/message.h
 
-C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/main.cpp
-
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.cpp
 server.h
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.h
@@ -71,4 +75,6 @@ game_enum.h
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/game_enum.h
 message.h
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/message.h
+object.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/object.h
 

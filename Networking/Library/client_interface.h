@@ -7,7 +7,7 @@
 #include "message.h"
 
 using boost::asio::ip::tcp;
-namespace myLibrary {
+namespace net {
     template<typename T>
     struct ClientInterface {
         ClientInterface() : _socket(_ioContext) {
@@ -56,13 +56,25 @@ namespace myLibrary {
             _connection.release();
         }
 
-    public:
-        TSQueue <OwnedMessage<T>> inQueue;
-    protected:
         void send(Message <T> &msg) {
             if (is_connected())
                 _connection->send(msg);
         }
+
+        virtual void handle_message(Message<T> msg, std::shared_ptr<Connection<T>> sender_ptr) = 0;
+
+        void update() {
+            inQueue.wait();
+            while (!inQueue.empty()){
+                // Here we know where message from
+                auto ownMsg = inQueue.pop_front();
+                handle_message(std::move(ownMsg.msg), ownMsg.remote);
+            }
+        }
+
+    public:
+        TSQueue <OwnedMessage<T>> inQueue;
+    protected:
 
 
         // It's needed in order to create "premature" contact between server and client

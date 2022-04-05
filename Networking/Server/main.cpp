@@ -3,5 +3,5 @@
 int main() {
     Server server(60'000);
     while (true)
-        server.update();
+        server.update(), std::cout.flush();
 }

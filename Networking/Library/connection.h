@@ -6,7 +6,7 @@
 #include "tsqueue.h"
 
 
-namespace myLibrary {
+namespace net {
 
     template<typename T>
     struct Connection : std::enable_shared_from_this<Connection<T>> {

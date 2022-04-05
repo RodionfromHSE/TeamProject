@@ -4,20 +4,22 @@
 #include "fwd.h"
 #include "message.h"
 
-namespace myLibrary {
+namespace net {
     template<typename T>
     struct TSQueue {
-//        TSQueue() = default;
-//        TSQueue(const tsqueue<T>&) = delete;
-//        virtual ~TSQueue() { clear(); }
-//    public:
         void wait(){
             std::unique_lock l(_waitMutex);
             _cv.wait(l, [this](){ return !empty(); });
         }
+
         bool empty() const noexcept {
             std::unique_lock l(_m);
             return _msgQueue.empty();
+        }
+
+        std::size_t size() const noexcept{
+            std::unique_lock l(_m);
+            return _msgQueue.size();
         }
 
         T &front() {

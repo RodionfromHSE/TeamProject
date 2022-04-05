@@ -3,7 +3,7 @@
 
 #include "fwd.h"
 
-namespace myLibrary{
+namespace net {
 
     template<typename T>
     struct Header{

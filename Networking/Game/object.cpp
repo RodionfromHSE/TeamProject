@@ -19,3 +19,7 @@ const Point& Object::coordinates() const {
 const PLAYER_STATE& Object::state() const {
     return _state;
 }
+
+Point operator+(const Point& first, const Point& second) {
+    return Point{first.x + second.x, first.y + second.y};
+}

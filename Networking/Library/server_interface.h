@@ -8,7 +8,7 @@
 
 
 using boost::asio::ip::tcp;
-namespace myLibrary {
+namespace net {
     template<typename T>
     struct ServerInterface {
         explicit ServerInterface(uint16_t port) : _acceptor(_ioContext, tcp::endpoint(tcp::v4(), port)), _idCount(10'000) {
@@ -53,7 +53,7 @@ namespace myLibrary {
             _connections.erase(std::remove(_connections.begin(), _connections.end(), client), _connections.end());
         }
 
-        void send_to_everyone(Message<T> &msg, std::shared_ptr<Connection<T>> ignoreClient) {
+        void send_to_everyone(Message<T> &msg, std::shared_ptr<Connection<T>> ignoreClient=nullptr) {
             bool isAnyDisconnected = false;
 
             for (auto &client : _connections) {

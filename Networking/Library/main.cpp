@@ -3,12 +3,13 @@
 #include "tsqueue.h"
 #include "message.h"
 #include "fwd.h"
+#include "synchronizied.h"
 #include <chrono>
 #include <thread>
 
 
 
-using namespace myLibrary;
+using namespace net;
 
 struct Player{
     int getOx(){
