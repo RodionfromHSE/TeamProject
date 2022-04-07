@@ -1,9 +1,4 @@
-//
-// Created by aleksandr on 10.03.2022.
-//
-
-#ifndef __PROJECT_POSITION_H
-#define __PROJECT_POSITION_H
+#pragma once
 
 #include "game_object.h"
 
@@ -17,5 +12,3 @@ struct PositionComponent : Component {
 };
 
 PositionComponent::~PositionComponent() = default;
-
-#endif //__PROJECT_POSITION_H

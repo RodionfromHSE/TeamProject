@@ -6,18 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../Client/client.h
-client_interface.h
-../Client/client_interface.h
-object.h
-../Client/object.h
-game_enum.h
-../Client/game_enum.h
-message.h
-../Client/message.h
-synchronizied_handler.h
-../Client/synchronizied_handler.h
-
 ../Game/object.h
 game_enum.h
 ../Game/game_enum.h
@@ -64,20 +52,6 @@ cstdint
 fwd.h
 ../Library/fwd.h
 
-../Library/server_interface.h
-fwd.h
-../Library/fwd.h
-connection.h
-../Library/connection.h
-
-../Library/synchronizied.h
-fwd.h
-../Library/fwd.h
-../Server/server.h
-../Server/server.h
-../Client/client.h
-../Client/client.h
-
 ../Library/synchronizied_handler.h
 fwd.h
 ../Library/fwd.h
@@ -88,21 +62,9 @@ message.h
 fwd.h
 ../Library/fwd.h
 
-../Server/server.h
-vector
--
-iostream
--
-server_interface.h
-../Server/server_interface.h
-game_enum.h
-../Server/game_enum.h
-message.h
-../Server/message.h
-object.h
-../Server/object.h
-synchronizied_handler.h
-../Server/synchronizied_handler.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/client.cpp
+client.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/client.h
 
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/client.h
 client_interface.h
@@ -115,10 +77,4 @@ message.h
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/message.h
 synchronizied_handler.h
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/synchronizied_handler.h
-
-C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/main.cpp
-client.h
-C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/client.h
-synchronizied.h
-C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/synchronizied.h
 

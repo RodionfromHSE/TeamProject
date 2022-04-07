@@ -1,14 +1,3 @@
-//
-// Created by aleksandr on 10.03.2022.
-//
-
-#include <time.h>
-#include <SFML/Graphics.hpp>
-#include <memory>
-#include <unordered_map>
-#include <algorithm>
-#include <vector>
-#include <utility>
 #include "game_object.h"
 
 struct GameObject;

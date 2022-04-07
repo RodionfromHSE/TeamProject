@@ -1,10 +1,4 @@
-#include <utility>
-#include <vector>
-#include <algorithm>
-#include <unordered_map>
-#include <memory>
-#include <SFML/Graphics.hpp>
-#include <time.h>
+#include "fwd.h"
 #include "game_object.h"
 #include "position.h"
 #include "graphics.h"

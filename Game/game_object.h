@@ -1,17 +1,6 @@
-//
-// Created by aleksandr on 10.03.2022.
-//
+#pragma once
 
-#ifndef __PROJECT_GAME_OBJECT_H
-#define __PROJECT_GAME_OBJECT_H
-
-#include <time.h>
-#include <SFML/Graphics.hpp>
-#include <memory>
-#include <unordered_map>
-#include <algorithm>
-#include <vector>
-#include <utility>
+#include "fwd.h"
 
 struct Component {
     virtual ~Component();
@@ -33,5 +22,3 @@ struct GameObject {
         return std::dynamic_pointer_cast<T>(this->components[componentName]);
     }
 };
-
-#endif //__PROJECT_GAME_OBJECT_H

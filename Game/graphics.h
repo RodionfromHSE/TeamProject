@@ -1,9 +1,4 @@
-//
-// Created by aleksandr on 10.03.2022.
-//
-
-#ifndef __PROJECT_GRAPHICS_H
-#define __PROJECT_GRAPHICS_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -52,6 +47,3 @@ void show_game(std::vector<GameObject> &gameObjects) {
     }
     app.display();
 }
-
-
-#endif //__PROJECT_GRAPHICS_H
