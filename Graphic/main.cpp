@@ -1,148 +1,146 @@
 #include <SFML/Graphics.hpp>
-#include <time.h>
-using namespace sf;
 
-int number_of_obstacles = 3;
+#include <ctime>
+#include <cmath>
+#include <iostream>
+#include <vector>
+
+
 int speed = 10;
-int gravitation = 50;
 int horizontal = 1700;
-int vertical = 800;
-int left_border = 600;
+int vertical = 600;
+int leftBorder = 600;
 int jump = 50;
 
-struct point {
-    int x, y;
+struct World {
+    const float groundLevel = 600;
+    const float gravitation = 1500;
+    const float rightBorder = 1200;
+    const float leftBorder = 600;
+
+    float cameraX = 0;
+    std::vector<sf::Vector2f> obstacles;
 };
 
+struct Player {
+    Player(const sf::Texture &texture,
+           sf::Vector2f initialPos,
+           sf::Vector2f scale,
+           sf::Vector2f origin,
+           World *world)
+            : origin(origin),
+              position(initialPos),
+              scale(scale),
+              sprite(texture),
+              world(world) {}
 
-int main()
-{
-    srand(time(0));
+    void processEvents() {
+        float right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
+        float left = sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
 
-    RenderWindow app(VideoMode(1794, 1248), "Team PR 1");
-    app.setFramerateLimit(60);
+        velocity.x = horSpeed * (right - left);
 
-    Texture t1, t2, t3;
-    t1.loadFromFile("background.png");
-    t2.loadFromFile("avatar.gif");
-    t3.loadFromFile("flower.png");
-    Sprite sBackground(t1), sPers(t2), sObstacle(t3);
-    sPers.setPosition(1000,800);
-    sObstacle.setPosition(900, 805);
-
-    int x = 100, y = 800, dx = 10;
-
-    bool isFlipped = false;
-
-    point Obstacle[number_of_obstacles];
-    for (int i = 0; i < number_of_obstacles; i++)
-    {
-        Obstacle[i].x = rand() % horizontal;
-        Obstacle[i].y = vertical + 5;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && onTheGround)
+            velocity.y -= jumpSpeed;
     }
 
-    while (app.isOpen())
-    {
-        Event e;
-        while (app.pollEvent(e))
-        {
-            if (e.type == Event::Closed)
+    void update(float dt) {
+        velocity.y += world->gravitation * dt;
+        position += velocity * dt;
+
+        position.y = std::min(world->groundLevel, position.y);
+        onTheGround = position.y >= world->groundLevel - 1e-5;
+        if (onTheGround) velocity.y = 0;
+
+        for (auto obPos : world->obstacles) { //TODO: убрать магические константы
+            if ((position.x >= obPos.x - 60) && (position.x < obPos.x + 15) && position.y >= 560) {
+                position.x -= 11;
+            }
+            if ((position.x >= obPos.x + 15) && (position.x < obPos.x + 140) && position.y >= 560) {
+                position.x += 11;
+            }
+        }
+
+        float screenX = -world->cameraX + position.x;
+        if (screenX > world->rightBorder)
+            world->cameraX -= world->rightBorder - screenX;
+        if (screenX < world->leftBorder)
+            world->cameraX -= world->leftBorder - screenX;
+    }
+
+    void draw(sf::RenderWindow &render) {
+        if (std::abs(velocity.x) > 0)
+            isFlipped = velocity.x > 0;
+
+        float flipFactor = isFlipped ? 1 : -1;
+        auto drawPos = position
+                       - sf::Vector2f{origin.x * scale.x * flipFactor, origin.y * scale.y}
+                       - sf::Vector2f{world->cameraX, 0};
+        sprite.setScale(flipFactor * scale.x, scale.y);
+        sprite.setPosition(drawPos);
+        render.draw(sprite);
+    }
+
+private:
+    const sf::Vector2f origin; // center of object relative to sprite
+    const sf::Vector2f scale;
+    const float jumpSpeed = 800;
+    const float horSpeed = 500;
+    sf::Vector2f velocity;
+    sf::Vector2f position;
+    sf::Sprite sprite;
+
+    World *world;
+
+    bool isFlipped = false;
+    bool onTheGround = false;
+};
+
+int main() {
+    srand(time(0));
+
+    sf::RenderWindow app(sf::VideoMode(1700, 1000), "Team PR 1");
+    app.setFramerateLimit(60);
+
+    sf::Texture bgTex, obstacleTex, persATex, persBTex;
+    bgTex.loadFromFile("textures/background.png");
+    obstacleTex.loadFromFile("textures/obstacle.png");
+    persATex.loadFromFile("textures/player1.png");
+    persBTex.loadFromFile("textures/player2.png");
+
+    sf::Sprite sBackground(bgTex), sObstacle(obstacleTex);
+
+    World world;
+    Player persA(persATex, {1000, 300}, {-1, 1}, {75, 0}, &world);
+
+    world.obstacles.emplace_back(100, world.groundLevel);
+    for (int i = 0; i < 100; ++i) {
+        float lastX = world.obstacles.back().x;
+        world.obstacles.emplace_back(lastX + rand() % 500 + 400, world.groundLevel);
+    }
+
+    sf::Clock deltaClock;
+    while (app.isOpen()) {
+        sf::Time dt = deltaClock.restart();
+
+        sf::Event e{};
+        while (app.pollEvent(e)) {
+            if (e.type == sf::Event::Closed)
                 app.close();
         }
 
-        if (Keyboard::isKeyPressed(Keyboard::Right)) {
-            x+=speed;
-            isFlipped = true;
-            if (x > 1000)
-                for (int i = 0; i < number_of_obstacles; i++)
-                {
-                    x = 1000;
-                    Obstacle[i].x  = Obstacle[i].x - dx;
-                    if (Obstacle[i].x < 0) {
-                        Obstacle[i].x = 0;
-                        Obstacle[i].x = rand() % 10 + 1500;
-                    }
-                }
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Left)) {
-            x -= speed;
-            isFlipped = false;
-            if (x < left_border)
-                for (int i = 0; i < number_of_obstacles ;i++)
-                {
-                    x = left_border;
-                    Obstacle[i].x = Obstacle[i].x + dx;
-                    if (Obstacle[i].x > 1794) {
-                        Obstacle[i].x = 0;
-                        Obstacle[i].x = rand() % 70;
-                    }
-                }
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Down)) {
-            y += 100;
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Up)) {
-            y -= 100;
-        }
-
-        if (y > 800) {
-            y = 800;
-        }
-        if (y < 0) {
-            y = 0;
-        }
-        if (y < 800) {
-            y += gravitation;
-        }
-
-        for (int i = 0; i < number_of_obstacles; i++) { //TODO: перенести в спец функцию для проверки препятствий
-            if ((x >= Obstacle[i].x - 60) && (x < Obstacle[i].x + 15) && y >= 680) {
-                x -= 6;
-            }
-            if ((x >= Obstacle[i].x + 15) && (x < Obstacle[i].x + 140) && y >= 680) {
-                x += 10;
-            }
-        }
-
-        if (x > 1000)
-            for (int i = 0; i < number_of_obstacles;i++)
-            {
-                x = 1000;
-                Obstacle[i].x =Obstacle[i].x - dx;
-                if (Obstacle[i].x < -40) {
-                    Obstacle[i].x = 0;
-                    Obstacle[i].x = rand() % 300 + 1500;
-                }
-            }
-
-        if (x < left_border)
-            for (int i = 0; i < number_of_obstacles;i++)
-            {
-                x = left_border;
-                Obstacle[i].x =Obstacle[i].x - dx;
-                if (Obstacle[i].x > 1794) {
-                    Obstacle[i].x = 0;
-                    Obstacle[i].x = rand() % 70;
-                }
-            }
-
-        if (isFlipped) {
-            sPers.setScale(sf::Vector2f(-1, 1));
-            sPers.setPosition(x + 75, y);
-        } else {
-            sPers.setScale(sf::Vector2f(1, 1));
-            sPers.setPosition(x - 75, y);
-        }
-
         app.draw(sBackground);
-        app.draw(sPers);
-        for (int i = 0; i < number_of_obstacles; i++)
-        {
-            sObstacle.setPosition(Obstacle[i].x,Obstacle[i].y);
+
+        for (auto pos: world.obstacles) {
+            sObstacle.setPosition(pos.x - world.cameraX, pos.y);
             app.draw(sObstacle);
         }
-        app.display();
-    }
 
-    return 0;
+        persA.processEvents();
+        persA.update(dt.asSeconds());
+        persA.draw(app);
+
+        app.display();
+        app.clear();
+    }
 }
