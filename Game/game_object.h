@@ -3,19 +3,13 @@
 #include "fwd.h"
 
 struct Component {
-    virtual ~Component();
+    virtual ~Component() = default;
 };
-
-Component::~Component() = default;
-
-struct GameObject;
 
 struct GameObject {
     std::string namePlayer;
     std::unordered_map <std::string, std::shared_ptr<Component>> components;
-    GameObject(std::string name, std::unordered_map <std::string, std::shared_ptr<Component>> newComponents) : namePlayer(
-            std::move(name)), components(std::move(newComponents)) {
-    }
+    GameObject(std::string name, std::unordered_map <std::string, std::shared_ptr<Component>> newComponents);
 
     template<typename T>
     std::shared_ptr <T> getComponent(const std::string &componentName) {

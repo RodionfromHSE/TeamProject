@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(Game)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../.)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 find_package(Boost 1.71.0 REQUIRED)
 find_package(Threads REQUIRED)
@@ -38,4 +38,4 @@ else ()
     link_libraries(Threads::Threads)
 endif ()
 
-add_executable(main main.cpp)
+add_executable(main main.cpp game_object.cpp graphics.cpp)

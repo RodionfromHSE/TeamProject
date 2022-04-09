@@ -135,7 +135,7 @@ void initialize_game(vector <GameObject> &gameObjects) {
 }
 
 void graphics(){
-    prettyGraphics.player.loadFromFile("/home/aleksandr/Pictures/Cube.png");
+    prettyGraphics.player.loadFromFile("../Pictures/Cube.png");
     prettyGraphics.coin.loadFromFile("/home/aleksandr/Pictures/Coin.png");
     prettyGraphics.background.loadFromFile("/home/aleksandr/Pictures/Background.png");
 }

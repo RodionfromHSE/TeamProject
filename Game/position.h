@@ -7,8 +7,4 @@ struct PositionComponent : Component {
     int y;
 
     PositionComponent(int newX, int newY) : x(newX), y(newY) {}
-
-    ~PositionComponent() override;
 };
-
-PositionComponent::~PositionComponent() = default;
