@@ -1,3 +1,0 @@
-/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Game/build/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Game/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Game/build/CMakeFiles/main.dir
