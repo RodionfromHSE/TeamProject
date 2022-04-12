@@ -15,7 +15,7 @@ namespace myLibrary {
         };
 
         ~ClientInterface() {
-            //  TODO: is such destructor is memory leak here? Further more in heirs?
+            //  TODO: does such destructor cause memory leak? Further more in successors?
             disconnect();
         };
 

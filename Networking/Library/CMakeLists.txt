@@ -16,8 +16,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 #    link_libraries(Threads::Threads)
 #endif ()
 
-add_executable(main main.cpp)
-
 #add_executable(draft DRAFT.cpp)
 
 # Messages
