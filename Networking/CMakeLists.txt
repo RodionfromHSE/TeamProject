@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(Library)
 
 set(CMAKE_CXX_STANDARD 17)
-
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIS_DIR})
 
 find_package(Boost 1.71.0 REQUIRED)
 find_package(Threads REQUIRED)
@@ -22,5 +22,3 @@ add_subdirectory(Library Library/)
 #add_subdirectory(libs)
 #add_subdirectory(test)
 #add_subdirectory(Game Game/)
-
-add_executable(draft draft.cpp)

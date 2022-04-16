@@ -3,7 +3,7 @@ project(teamproject)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../.)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 find_package(Boost 1.71.0 REQUIRED)
 find_package(Threads REQUIRED)
@@ -42,3 +42,5 @@ endif ()
 
 set(SOURCE_FILES main.cpp)
 add_executable(teamproject ${SOURCE_FILES})
+message("Path: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+

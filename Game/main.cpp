@@ -1,241 +1,160 @@
-#include <utility>
-#include <memory>
-#include <cassert>
-#include <ctime>
-#include <iostream>
-
-#include <SFML/Graphics.hpp>
-
+#include "fwd.h"
 #include "game_object.h"
 #include "position.h"
 #include "graphics.h"
-#include "animation.h"
 
-constexpr std::size_t groundLevel = 300;
-constexpr std::size_t worldWidth = 2048;
-constexpr std::size_t worldHeight = 600;
 
-struct ColliderComponent : Component {
-    sf::Vector2i boundingBox; // relative to position
+using namespace std;
+
+int size_filed = 9;
+
+enum Input {
+    Left, Right, Up, Down, Stop, Exit
 };
 
-using PlayerPtr = GameObject *;
 
-struct PlayerSystem : System {
-    explicit PlayerSystem(GameObjects &gameObjects, PlayerPtr &player, const DeltaTime &deltaTime)
-            : gameObjects(gameObjects), player(player), deltaTime(deltaTime) {}
+//Pointer pointer = Pointer::Stop;
 
-    void init() override {
-        createPlayer();
-    }
+//vector<vector<char>> game_field(size_filed, vector<char> (size_filed, '.'));
 
-    void update() override {
-        assert(player);
 
-        int dx = (int) sf::Keyboard::isKeyPressed(sf::Keyboard::Right) -
-                 (int) sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
-        movePlayer(dx);
-        updatePlayerAnimation(dx);
-    }
+struct BehaviourComponent : Component {
 
-private:
-    void createPlayer() {
-        sf::Texture playerTexture;
-        playerTexture.loadFromFile("Pictures/Free/Main Characters/Pink Man/Sprite Sheet.png");
+};
 
-        auto playerUPtr = std::make_unique<GameObject>();
-        player = &*playerUPtr;
 
-        playerUPtr->addComponent(std::make_unique<PositionComponent>(0.0f, groundLevel));
-        playerUPtr->addComponent(std::make_unique<RenderingComponent>(
-                playerTexture, sf::Vector2i{originX, originY}));
-        playerUPtr->addComponent(std::make_unique<AnimatorComponent>(
-                sf::Vector2u{animationFrameSize, animationFrameSize}, idleAnimation));
-
-        gameObjects.push_back(std::move(playerUPtr));
-    }
-
-    void movePlayer(int dx) {
-        auto positionComponent = player->getComponent<PositionComponent>();
-        assert(positionComponent);
-
-        positionComponent->x += (int) ((float) dx * speedInPxsPerSecond * deltaTime.seconds());
-    }
-
-    void updatePlayerAnimation(int dx) {
-        auto animationComponent = player->getComponent<AnimatorComponent>();
-        assert(animationComponent);
-
-        if (abs(dx) > 0) {
-            animationComponent->setAnimation(runAnimation);
-            animationComponent->horizontalFlip = (dx < 0);
-        } else {
-            animationComponent->setAnimation(idleAnimation);
+GameObject *get_nearby_object(vector <GameObject> &gameObjects, GameObject &object) {
+    std::shared_ptr <PositionComponent> objectPosition = object.getComponent<PositionComponent>("position");
+    for (auto &gameObject: gameObjects) {
+        std::shared_ptr <PositionComponent> otherPosition = gameObject.getComponent<PositionComponent>("position");
+        auto renderingComponent = gameObject.getComponent<RenderingComponent>("texture");
+        /*if (objectPosition->x == otherPosition->x && objectPosition->y == otherPosition->y && isCoin) {
+            return &gameObject;
+        }*/
+        if (abs(objectPosition->x - otherPosition->x) <= prettyGraphics.distance / 2 &&
+            abs(objectPosition->y - otherPosition->y) <= prettyGraphics.distance / 2 && &gameObject != &object) {
+            return &gameObject;
         }
     }
+    return nullptr;
+}
 
-    static constexpr float speedInPxsPerSecond = 80.0f;
+struct PlayerController : BehaviourComponent {
+    int balance;
 
-    static constexpr std::size_t animationFrameSize = 32;
-    static constexpr int originX = animationFrameSize / 2;
-    static constexpr int originY = animationFrameSize;
+    explicit PlayerController(int i) : balance(i) {
+    }
 
-    static constexpr float animationFps = 22.0f;
+    static void move_player(GameObject &player, Input& input) {
+        std::shared_ptr <PositionComponent> positionComponent = player.getComponent<PositionComponent>("position");
 
-    static constexpr Animation idleAnimation = {0, 11, animationFps};
-    static constexpr Animation runAnimation = {1, 12, animationFps};
-    static constexpr Animation jumpAnimation = {2, 1, animationFps};
-    static constexpr Animation hitAnimation = {3, 7, animationFps};
-    static constexpr Animation fallAnimation = {4, 1, animationFps};
-    static constexpr Animation wallJumpAnimation = {5, 5, animationFps};
-    static constexpr Animation doubleJumpAnimation = {6, 6, animationFps};
+        if (input == Input::Right) {
+            positionComponent->x += prettyGraphics.distance;
+        }
+        if (input == Input::Left) {
+            positionComponent->x -= prettyGraphics.distance;
+        }
+        if (input == Input::Up) {
+            positionComponent->y -= prettyGraphics.distance;
+        }
+        if (input == Input::Down) {
+            positionComponent->y += prettyGraphics.distance;
+        }
+        if (positionComponent->x < 0) positionComponent->x = prettyGraphics.window_size - prettyGraphics.distance;
+        if (positionComponent->x > prettyGraphics.window_size - prettyGraphics.distance) positionComponent->x = 0;
+        if (positionComponent->y < 0) positionComponent->y = prettyGraphics.window_size - prettyGraphics.distance;
+        if (positionComponent->y > prettyGraphics.window_size - prettyGraphics.distance) positionComponent->y = 0;
+    }
 
-    PlayerPtr &player;
-    GameObjects &gameObjects;
-    const DeltaTime &deltaTime;
+    void update(vector <GameObject> &gameObjects, GameObject &player, Input input) {
+        move_player(player, input);
+        GameObject *object = get_nearby_object(gameObjects, player);
+        if (object != nullptr) {
+            balance += 1;
+            object->getComponent<PositionComponent>("position")->x = rand() % prettyGraphics.num_of_cell * prettyGraphics.distance;
+            object->getComponent<PositionComponent>("position")->y = rand() % prettyGraphics.num_of_cell * prettyGraphics.distance;
+        }
+    }
 };
 
-struct PlayerCameraSystem : System {
-    explicit PlayerCameraSystem(GameObjects &gameObjects,
-                                const PlayerPtr &player, CameraPtr &camera)
-            : gameObjects(gameObjects),
-              player(player), camera(camera) {}
 
-    void init() override {
-        auto cameraUPtr = std::make_unique<GameObject>();
-        camera = &*cameraUPtr;
-        gameObjects.push_back(std::move(cameraUPtr));
+/*struct NetworkController : BehaviourComponent {
+    // получает от сервера позицию игрока по сети и перемещает соответственно
+};*/
 
-        camera->addComponent(std::make_unique<PositionComponent>(0, 0));
-        camera->addComponent(std::make_unique<CameraComponent>(0.0f));
-    }
 
-    void update() override {
-        assert(player);
-        assert(camera);
-
-        auto cameraPositionComponent = camera->getComponent<PositionComponent>();
-        auto cameraComponent = camera->getComponent<CameraComponent>();
-        auto playerPositionComponent = player->getComponent<PositionComponent>();
-
-        assert(cameraPositionComponent);
-        assert(cameraComponent);
-        assert(playerPositionComponent);
-
-        cameraComponent->viewWidth = 300;
-        cameraPositionComponent->x = playerPositionComponent->x;
-        cameraPositionComponent->y = playerPositionComponent->y;
-    }
-
-    GameObjects &gameObjects;
-    CameraPtr &camera;
-    const PlayerPtr &player;
-};
-
-struct SurroundingsSystem : System {
-    explicit SurroundingsSystem(GameObjects &gameObjects)
-            : gameObjects(gameObjects) {}
-
-    void init() override {
-        createBackground();
-        createGround();
-    }
-
-private:
-    void createBackground() {
-        sf::Texture backgroundTexture;
-        backgroundTexture.loadFromFile("Pictures/Free/Background/Blue.png");
-        backgroundTexture.setRepeated(true);
-
-        auto background = std::make_unique<GameObject>();
-        background->addComponent(std::make_unique<PositionComponent>(-worldWidth, groundLevel - worldHeight));
-        auto renderingComponent =
-                background->addComponent(std::make_unique<RenderingComponent>(
-                        backgroundTexture, sf::Vector2i{}, Layer::Background));
-        renderingComponent->rect = sf::IntRect(0, 0, 2 * worldWidth, worldHeight);
-
-        gameObjects.push_back(std::move(background));
-    }
-
-    void createGround() {
-        sf::Texture groundTexture;
-        groundTexture.loadFromFile("Pictures/Free/Background/Pink.png");
-        groundTexture.setRepeated(true);
-
-        auto ground = std::make_unique<GameObject>();
-        ground->addComponent(std::make_unique<PositionComponent>(-worldWidth, groundLevel));
-        ground->addComponent(std::make_unique<RenderingComponent>(groundTexture))
-                ->rect = sf::IntRect(0, 0, 2 * worldWidth, worldHeight);
-
-        gameObjects.push_back(std::move(ground));
-    }
-
-    GameObjects &gameObjects;
-};
-
-struct CoinsSystem : System {
-    explicit CoinsSystem(GameObjects &gameObjects, const PlayerPtr &player)
-            : gameObjects(gameObjects), player(player) {}
-
-    void init() override {
-        createStrawberry();
-    }
-
-private:
-    void createStrawberry() {
-        sf::Texture fruitTexture;
-        fruitTexture.loadFromFile("Pictures/Free/Items/Fruits/Cherries.png");
-
-        auto fruitUPtr = std::make_unique<GameObject>();
-        fruitUPtr->addComponent(std::make_unique<PositionComponent>(40.0f, groundLevel));
-        fruitUPtr->addComponent(std::make_unique<RenderingComponent>(
-                fruitTexture, sf::Vector2i{16, 32}));
-        fruitUPtr->addComponent(std::make_unique<AnimatorComponent>(
-                sf::Vector2u{32, 32}, Animation{0, 17, 22.0f}));
-        gameObjects.push_back(std::move(fruitUPtr));
-    }
-
-    GameObjects &gameObjects;
-    const PlayerPtr &player;
-};
-
-void pollEvents(sf::RenderWindow &app) {
-    /// TODO: Сделать объект Input который будет содержать в том числе и Pointer
-    /// (мотивация - есть же еще мышка, свайпы, другие клавиши)
-    sf::Event e{};
+Input input() {
+    // Сделать объект Input который будет содержать в том числе и Pointer (мотивация - есть же еще мышка, свайпы, другие клавиши)
+    Event e;
     while (app.pollEvent(e))
-        if (e.type == sf::Event::Closed)
+    {
+        if (e.type == Event::Closed)
             app.close();
+    }
+    Input pointer;
+    if (Keyboard::isKeyPressed(Keyboard::Right)) {
+        pointer = Input::Right;
+    }
+    if (Keyboard::isKeyPressed(Keyboard::Left)) {
+        pointer = Input::Left;
+    }
+    if (Keyboard::isKeyPressed(Keyboard::Down)) {
+        pointer = Input::Down;
+    }
+    if (Keyboard::isKeyPressed(Keyboard::Up)) {
+        pointer = Input::Up;
+    }
+    return pointer;
+}
+
+void update(vector <GameObject> &gameObjects, Input& input) {
+    for (auto &gameObject: gameObjects) {
+        if (gameObject.components.count("controller")) {
+            /*dynamic_pointer_cast<PlayerController>(gameObject.components["controller"])->update(gameObjects,
+                                                                                                gameObject);*/
+            gameObject.getComponent<PlayerController>("controller")->update(gameObjects, gameObject, input);
+        }
+    }
+}
+
+void initialize_game(vector <GameObject> &gameObjects) {
+    // добавить игрока и монетки
+    unordered_map <string, std::shared_ptr<Component>> playerComponent;
+    string namePlayer = "player0001";
+    playerComponent["position"] = std::make_shared<PositionComponent>(PositionComponent{prettyGraphics.window_size - prettyGraphics.distance, prettyGraphics.window_size - prettyGraphics.distance});
+    playerComponent["texture"] = std::make_shared<RenderingComponent>(RenderingComponent{prettyGraphics.player});
+    playerComponent["controller"] = std::make_shared<PlayerController>(PlayerController{0});
+    unordered_map <string, std::shared_ptr<Component>> coinComponent;
+    string nameCoin = "coin0001";
+    coinComponent["position"] = std::make_shared<PositionComponent>(PositionComponent{rand() % prettyGraphics.num_of_cell * prettyGraphics.distance, rand() % prettyGraphics.num_of_cell * prettyGraphics.distance});
+    coinComponent["texture"] = std::make_shared<RenderingComponent>(RenderingComponent{prettyGraphics.coin});
+    GameObject gameObjectPlayer(namePlayer, playerComponent);
+    GameObject gameObjectCoin(nameCoin, coinComponent);
+    gameObjects.push_back(gameObjectPlayer);
+    gameObjects.push_back(gameObjectCoin);
+}
+
+void graphics(){
+    prettyGraphics.player.loadFromFile("../Pictures/Cube.png");
+    prettyGraphics.coin.loadFromFile("/home/aleksandr/Pictures/Coin.png");
+    prettyGraphics.background.loadFromFile("/home/aleksandr/Pictures/Background.png");
+}
+
+void play(){
+    srand(time(0));
+    app.setFramerateLimit(10);
+    graphics();
+    vector<GameObject> gameObjects;
+    initialize_game(gameObjects);
+    show_game(gameObjects);
+    while (app.isOpen()) {
+        Input pointer = input();
+        update(gameObjects, pointer);
+        show_game(gameObjects);
+        //pointer = Pointer::Stop;
+    }
 }
 
 int main() {
-    sf::RenderWindow app(sf::VideoMode(1600, 1200), "Team PR 1");
-
-    DeltaTime deltaTime;
-    GameObjects gameObjects;
-    PlayerPtr player = nullptr;
-    CameraPtr currentCamera = nullptr;
-
-    Systems systems;
-    systems.push_back(std::make_unique<RenderingSystem>(gameObjects, app, currentCamera));
-    systems.push_back(std::make_unique<PlayerSystem>(gameObjects, player, deltaTime));
-    systems.push_back(std::make_unique<SurroundingsSystem>(gameObjects));
-    systems.push_back(std::make_unique<AnimationSystem>(gameObjects, deltaTime));
-    systems.push_back(std::make_unique<PlayerCameraSystem>(gameObjects, player, currentCamera));
-    systems.push_back(std::make_unique<CoinsSystem>(gameObjects, player));
-
-    for (auto &system: systems)
-        system->init();
-    deltaTime.update();
-
-    while (app.isOpen()) {
-        deltaTime.update();
-        pollEvents(app);
-
-        for (auto &system: systems)
-            system->update();
-    }
-
-    for (auto &system: systems)
-        system->shutdown();
+    play();
 }
