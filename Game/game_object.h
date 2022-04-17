@@ -6,6 +6,9 @@
 #define __PROJECT_GAME_OBJECT_H
 
 #include <ctime>
+#include <cassert>
+#include <chrono>
+#include <cmath>
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <unordered_map>
@@ -19,6 +22,7 @@ struct GameObject;
 
 struct Component {
     GameObject *owner = nullptr;
+
     virtual ~Component() = default;
 };
 

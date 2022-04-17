@@ -1,5 +1,6 @@
 #include "graphics.h"
 
+using namespace sf;
 void RenderingComponent::draw(GameObject &game_object, RenderWindow &app) const {
     Sprite sprite(texture);
     auto positionComponent = game_object.getComponent<PositionComponent>("position");

@@ -1,5 +1,7 @@
 "C:\Program Files\JetBrains\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - MinGW Makefiles" C:\Users\home\Desktop\Programming\C++\TeamProject\Networking
 Current dir: C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server
+-- Found SFML 2.5.1 in C:/SFML/include
+Copied from C:/SFML/include/../bin/openal32.dll;C:/SFML/include/../bin/sfml-audio-2.dll;C:/SFML/include/../bin/sfml-audio-d-2.dll;C:/SFML/include/../bin/sfml-graphics-2.dll;C:/SFML/include/../bin/sfml-graphics-d-2.dll;C:/SFML/include/../bin/sfml-network-2.dll;C:/SFML/include/../bin/sfml-network-d-2.dll;C:/SFML/include/../bin/sfml-system-2.dll;C:/SFML/include/../bin/sfml-system-d-2.dll;C:/SFML/include/../bin/sfml-window-2.dll;C:/SFML/include/../bin/sfml-window-d-2.dll to C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client
 Current dir: C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library
 -- Configuring done
 -- Generating done

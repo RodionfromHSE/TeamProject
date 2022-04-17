@@ -38,4 +38,4 @@ else ()
     link_libraries(Threads::Threads)
 endif ()
 
-add_executable(main main.cpp game_object.cpp graphics.cpp)
+add_executable(main main.cpp network_system.cpp NetworkSystem.h)

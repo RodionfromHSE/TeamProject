@@ -232,7 +232,7 @@ int main() {
         deltaTime.update();
         pollEvents(app);
 
-        for (auto &system: systems)
+        for (auto &system : systems)
             system->update();
     }
 

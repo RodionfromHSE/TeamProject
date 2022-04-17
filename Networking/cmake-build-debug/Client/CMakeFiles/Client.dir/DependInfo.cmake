@@ -18,6 +18,8 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../Library"
   "../Game"
+  "c:/SFML/include"
+  "C:/SFML/include"
   )
 
 # The set of dependency files which are needed:

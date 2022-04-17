@@ -120,6 +120,11 @@ Client_EXTERNAL_OBJECTS =
 ../Client/Client.exe: Client/CMakeFiles/Client.dir/client.cpp.obj
 ../Client/Client.exe: Client/CMakeFiles/Client.dir/__/Game/object.cpp.obj
 ../Client/Client.exe: Client/CMakeFiles/Client.dir/build.make
+../Client/Client.exe: C:/SFML/lib/libsfml-system-d.a
+../Client/Client.exe: C:/SFML/lib/libsfml-window-d.a
+../Client/Client.exe: C:/SFML/lib/libsfml-graphics-d.a
+../Client/Client.exe: C:/SFML/lib/libsfml-network-d.a
+../Client/Client.exe: C:/SFML/lib/libsfml-audio-d.a
 ../Client/Client.exe: Client/CMakeFiles/Client.dir/linklibs.rsp
 ../Client/Client.exe: Client/CMakeFiles/Client.dir/objects1.rsp
 ../Client/Client.exe: Client/CMakeFiles/Client.dir/link.txt
