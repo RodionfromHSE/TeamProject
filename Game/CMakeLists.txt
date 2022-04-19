@@ -38,4 +38,7 @@ else ()
     link_libraries(Threads::Threads)
 endif ()
 
-add_executable(main main.cpp network_system.cpp NetworkSystem.h)
+include_directories(../Networking/Library ../Networking/Server ../Networking/Client ../Networking/Object)
+#include_directories(../Networking/${*})
+#add_directory(../Networking/)
+add_executable(main main.cpp network_system.cpp network_system.h)
