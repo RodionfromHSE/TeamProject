@@ -18,8 +18,13 @@ struct NetworkSystem : System {
     // Hmm... update something
     void update() override;
 
+    ~NetworkSystem(){
+        if (thread.joinable()) { thread.join(); }
+    }
+
 private:
     std::shared_ptr<Server> m_serverPtr;
     std::vector<net::Synchronized<PlayerCoordinates>> m_players;
+    std::thread thread;
 };
 

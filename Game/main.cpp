@@ -225,7 +225,7 @@ int main() {
     systems.push_back(std::make_unique<AnimationSystem>(gameObjects, deltaTime));
     systems.push_back(std::make_unique<PlayerCameraSystem>(gameObjects, player, currentCamera));
     systems.push_back(std::make_unique<CoinsSystem>(gameObjects, player));
-    systems.push_back(std::make_unique<NetworkSystem>(PORT));
+    NetworkSystem networkSystem(PORT);
 
     for (auto &system: systems)
         system->init();
@@ -236,7 +236,6 @@ int main() {
         pollEvents(app);
 
         for (auto &system : systems)
-            if (system != systems.back())
                 system->update();
     }
 

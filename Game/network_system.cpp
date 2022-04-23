@@ -1,6 +1,11 @@
 #include "network_system.h"
 
 NetworkSystem::NetworkSystem(uint16_t port) : m_serverPtr(new Server(port)) {
+    thread = std::thread([this](){
+        while (true){
+            update();
+        }
+    });
 }
 
 void NetworkSystem::update() {

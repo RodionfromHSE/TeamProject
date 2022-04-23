@@ -9,16 +9,12 @@
 
 
 struct Client : net::ClientInterface<EVENT> {
-    // NOLINTNEXTLINE
-    Client(Object player);
-
     void handle_message(net::Message<EVENT> msg, std::shared_ptr<net::Connection<EVENT>> sender_ptr) override;
 
-    void move(int step);
+    Point move(int step);
 
     net::SynchronizedHandler<EVENT> &syn_handler();
 
 private:
     net::SynchronizedHandler<EVENT> m_synHandler;
-    Object m_player;
 };
