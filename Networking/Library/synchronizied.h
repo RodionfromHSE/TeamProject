@@ -24,12 +24,16 @@ namespace net {
         }
 
         const T &get() {
-            if (!m_server_ptr->syn_handler().empty(m_id)) {
+            if (isUpdatable()) {
                 auto msg = m_server_ptr->syn_handler().last_message(m_id);
                 assert(msg.header.size == sizeof m_value);
                 msg >> m_value;
             }
             return m_value;
+        }
+
+        [[nodiscard]] bool isUpdatable() const {
+            return !m_server_ptr->syn_handler().empty(m_id);
         }
 
     private:
@@ -42,6 +46,11 @@ namespace net {
     struct Synchronized<T, false> {
         Synchronized(std::shared_ptr<Client> client_ptr, int id) : m_client_ptr(std::move(client_ptr)),
                                                                    m_id(id) {
+            Message<EVENT> msg;
+            msg.header.id = EVENT::NEW_PLAYER;
+            msg << m_id;
+
+            m_client_ptr->send(msg);
         }
 
 

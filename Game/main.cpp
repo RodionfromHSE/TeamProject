@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "network_system.h"
 #include "game_object.h"
 #include "position.h"
 #include "graphics.h"
@@ -14,6 +15,7 @@
 constexpr std::size_t groundLevel = 300;
 constexpr std::size_t worldWidth = 2048;
 constexpr std::size_t worldHeight = 600;
+constexpr uint16_t PORT = 60'000;
 
 struct ColliderComponent : Component {
     sf::Vector2i boundingBox; // relative to position
@@ -223,6 +225,7 @@ int main() {
     systems.push_back(std::make_unique<AnimationSystem>(gameObjects, deltaTime));
     systems.push_back(std::make_unique<PlayerCameraSystem>(gameObjects, player, currentCamera));
     systems.push_back(std::make_unique<CoinsSystem>(gameObjects, player));
+    systems.push_back(std::make_unique<NetworkSystem>(PORT));
 
     for (auto &system: systems)
         system->init();
@@ -233,7 +236,8 @@ int main() {
         pollEvents(app);
 
         for (auto &system : systems)
-            system->update();
+            if (system != systems.back())
+                system->update();
     }
 
     for (auto &system: systems)

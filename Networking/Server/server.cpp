@@ -31,6 +31,10 @@ void Server::handle_message(std::shared_ptr<net::Connection<EVENT>> client, net:
             msg << ++cnt;
             send_to_client(client, msg);
             break;
+        case EVENT::NEW_PLAYER:
+            msg >> id;
+            m_synHandler.add_message(msg, id, true);
+            break;
         default:
             break;
     }

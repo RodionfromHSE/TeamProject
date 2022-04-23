@@ -79,7 +79,6 @@ namespace net {
                 auto msg = _inMessages.pop_back();
 
                 handle_message(msg.remote, msg.msg);
-//                std::cout << std::flush;
             }
 
         }
