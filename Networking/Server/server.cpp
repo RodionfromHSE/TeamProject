@@ -25,9 +25,7 @@ void Server::handle_message(std::shared_ptr<net::Connection<EVENT>> client, net:
             m_synHandler.add_message(msg, id);
             break;
         case EVENT::NOTHING:
-            Point p;
-            msg >> p;
-            std::cout << p.x << ' ' << p.y << '\n';
+            std::cout << "Hurrah!!!" << '\n';
             msg << ++cnt;
             send_to_client(client, msg);
             break;

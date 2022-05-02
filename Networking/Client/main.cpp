@@ -7,10 +7,14 @@ int main() {
 
     net::Synchronized<Point, false> p(client_ptr, 770);
     int step;
+    auto msg = net::Message<EVENT>();
+    msg.header.id = EVENT::NOTHING;
+
     while (true){
         std::cin >> step;
-        p.set(client_ptr->move(step));
-        client_ptr->update();
+//        client_ptr->send(msg);
+        p.set({step, step});
+//        client_ptr->update(); // TODO
         std::cout.flush();
     }
 }

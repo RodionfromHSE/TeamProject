@@ -18,7 +18,7 @@ struct NetworkSystem : System {
     // Hmm... update something
     void update() override;
 
-    ~NetworkSystem(){
+    inline ~NetworkSystem(){
         if (thread.joinable()) { thread.join(); }
     }
 

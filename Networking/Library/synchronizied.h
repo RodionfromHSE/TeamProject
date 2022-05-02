@@ -18,7 +18,7 @@ namespace net {
             msg.header.id = EVENT::SYNCHRONIZATION;
             msg << m_value << m_id;
 
-            // we want our value to the most actual
+            // we want our value to be most actual
             m_server_ptr->syn_handler().clear(m_id);
             m_server_ptr->send_to_everyone(msg);
         }
@@ -33,6 +33,7 @@ namespace net {
         }
 
         [[nodiscard]] bool isUpdatable() const {
+            m_server_ptr->syn_handler().clear(m_id);
             return !m_server_ptr->syn_handler().empty(m_id);
         }
 
@@ -74,6 +75,9 @@ namespace net {
             return m_value;
         }
 
+        [[nodiscard]] bool isUpdatable() const {
+            return !m_client_ptr->syn_handler().empty(m_id);
+        }
 
     private:
         std::shared_ptr<Client> m_client_ptr;

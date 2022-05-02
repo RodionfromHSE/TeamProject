@@ -237,6 +237,7 @@ int main() {
 
         for (auto &system : systems)
                 system->update();
+        std::cout.flush();
     }
 
     for (auto &system: systems)

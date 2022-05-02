@@ -33,6 +33,7 @@ namespace net {
         };
 
         std::vector<int> get_newbies(){
+            // TODO: make it thread safe and effective
             auto newbiesTmp = std::move(newbies);
             newbies.clear();
 
