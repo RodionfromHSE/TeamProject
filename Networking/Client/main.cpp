@@ -10,7 +10,7 @@ int main() {
     auto msg = net::Message<EVENT>();
     msg.header.id = EVENT::NOTHING;
 
-    while (true){
+    while (true) {
         std::cin >> step;
 //        client_ptr->send(msg);
         p.set({step, step});

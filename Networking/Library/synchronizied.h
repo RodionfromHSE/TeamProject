@@ -33,7 +33,6 @@ namespace net {
         }
 
         [[nodiscard]] bool isUpdatable() const {
-            m_server_ptr->syn_handler().clear(m_id);
             return !m_server_ptr->syn_handler().empty(m_id);
         }
 

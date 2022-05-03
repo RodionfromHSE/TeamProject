@@ -19,12 +19,12 @@ struct Server : net::ServerInterface<EVENT>{
 
     void handle_message(std::shared_ptr<net::Connection<EVENT>> client, net::Message<EVENT> &msg) override;
 
-    const std::vector<Object>& get_objects();
+    const std::vector<Point>& get_objects();
 
     net::SynchronizedHandler<EVENT> &syn_handler();
 
 private:
     net::SynchronizedHandler<EVENT> m_synHandler;
-    std::vector<Object> _objects;
+    std::vector<Point> _objects;
     uint16_t _limit;
 };

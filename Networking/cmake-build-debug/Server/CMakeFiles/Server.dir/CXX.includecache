@@ -18,6 +18,10 @@ message.h
 synchronizied_handler.h
 ../Client/synchronizied_handler.h
 
+../Game/game_enum.h
+cstdint
+-
+
 ../Game/object.h
 game_enum.h
 ../Game/game_enum.h
@@ -55,10 +59,6 @@ tsqueue.h
 ../Library/tsqueue.h
 message.h
 ../Library/message.h
-
-../Library/game_enum.h
-cstdint
--
 
 ../Library/message.h
 fwd.h
@@ -103,6 +103,8 @@ object.h
 ../Server/object.h
 synchronizied_handler.h
 ../Server/synchronizied_handler.h
+
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game/object.cpp
 
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/main.cpp
 server.h
