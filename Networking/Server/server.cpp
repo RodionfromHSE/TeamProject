@@ -12,9 +12,9 @@ bool Server::on_client(std::shared_ptr<net::Connection<EVENT>> client) {
     return true;
 }
 
-const std::vector<Object> &Server::get_objects() {
-    return _objects;
-}
+//const std::vector<Object> &Server::get_objects() {
+//    return _objects;
+//}
 
 int cnt = 0;
 void Server::handle_message(std::shared_ptr<net::Connection<EVENT>> client, net::Message<EVENT> &msg) {
@@ -23,6 +23,8 @@ void Server::handle_message(std::shared_ptr<net::Connection<EVENT>> client, net:
             int id;
             msg >> id;
             m_synHandler.add_message(msg, id);
+            msg << id;
+            send_to_everyone(msg);
             break;
         case EVENT::NOTHING:
             std::cout << "Hurrah!!!" << '\n';

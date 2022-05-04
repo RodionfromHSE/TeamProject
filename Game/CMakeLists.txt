@@ -40,7 +40,8 @@ endif ()
 
 include_directories(../Networking/Library ../Networking/Server ../Networking/Client ../Networking/Game)
 
-set(SOURCE main.cpp network_system.cpp ../Networking/Server/server.cpp ../Networking/Client/client.cpp ../Networking/Game/object.cpp)
+set(SOURCE main.cpp )
+    # network_system.cpp ../Networking/Server/server.cpp ../Networking/Client/client.cpp ../Networking/Game/object.cpp)
 #set(SOURCE main.cpp)
 
 add_executable(main ${SOURCE})

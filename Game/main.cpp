@@ -6,7 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "network_system.h"
+//#include "network_system.h"
 #include "game_object.h"
 #include "position.h"
 #include "graphics.h"
@@ -225,7 +225,7 @@ int main() {
     systems.push_back(std::make_unique<AnimationSystem>(gameObjects, deltaTime));
     systems.push_back(std::make_unique<PlayerCameraSystem>(gameObjects, player, currentCamera));
     systems.push_back(std::make_unique<CoinsSystem>(gameObjects, player));
-    NetworkSystem networkSystem(PORT);
+//    NetworkSystem networkSystem(PORT);
 
     for (auto &system: systems)
         system->init();
