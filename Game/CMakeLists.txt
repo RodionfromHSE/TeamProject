@@ -40,8 +40,14 @@ endif ()
 
 include_directories(../Networking/Library ../Networking/Server ../Networking/Client ../Networking/Game)
 
-set(SOURCE main.cpp )
+set(SOURCE main.cpp box2d.h)
     # network_system.cpp ../Networking/Server/server.cpp ../Networking/Client/client.cpp ../Networking/Game/object.cpp)
 #set(SOURCE main.cpp)
 
 add_executable(main ${SOURCE})
+
+include_directories(BEFORE "${CMAKE_CURRENT_LIST_DIR}/box2d/include")
+
+find_library(BOX2D box2d lib)
+
+target_link_libraries(main LINK_PUBLIC ${BOX2D})
