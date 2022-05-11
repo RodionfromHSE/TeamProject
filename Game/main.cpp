@@ -20,7 +20,7 @@ enum Input {
     Left, Right, Up, Down, Stop, Exit
 };
 
-Input input = Input::Stop;
+//Input input = Input::Stop;
 
 struct ColliderComponent : Component {
     sf::Vector2i boundingBox; // relative to position
@@ -36,26 +36,30 @@ struct PlayerSystem : System {
         createPlayer();
     }
 
-    void update() override {
+    /*void update() override {
         assert(player);
 
         int dx = (int) sf::Keyboard::isKeyPressed(sf::Keyboard::Right) -
                  (int) sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
         movePlayer(dx);
         updatePlayerAnimation(dx);
-    }
+    }*/
 
-    void updateBox2D(){
+    void update() override{
+        World.Step(1/60.f, 8, 3);
+        Input input = Input::Stop;
+        assert(player);
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-            input = Right;
+            input = Input::Right;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-            input = Left;
+            input = Input::Left;
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-            input = Up;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+            input = Input::Up;
         }
         movePlayerBox2D(input);
+        //std::cout << input << '\n';
     }
 
 private:
@@ -68,7 +72,7 @@ private:
 
         playerUPtr->addComponent(std::make_unique<PositionComponent>(0.0f, groundLevel));
          //конструктор для компоненты box2d
-        playerUPtr->addComponent(std::make_unique<Box2dComponent>(0.0f, groundLevel, 2 /*ширина изображения TODO*/, 2 /*высота изображения TODO*/, "player", 1));
+        playerUPtr->addComponent(std::make_unique<Box2dComponent>(0.0f, groundLevel - 100, 32 /* ширина изображения */, 32 /* высота изображения */, "player", 1));
 
         playerUPtr->addComponent(std::make_unique<RenderingComponent>(
                 playerTexture, sf::Vector2i{originX, originY}));
@@ -95,20 +99,21 @@ private:
 
         if (input == Input::Right) {
             if (vel.x < 20) {
-                pBody->ApplyForceToCenter(b2Vec2(40, 0), true);
+                pBody->ApplyForceToCenter(b2Vec2(1500, 0), true);
+                std::cout << (input == Input::Right) << "\n";
             }
         }
 
         if (input == Input::Left) {
             if (vel.x > -20) {
-                pBody->ApplyForceToCenter(b2Vec2(-40, 0), true);
+                pBody->ApplyForceToCenter(b2Vec2(-1500, 0), true);
             }
         }
 
 
         if (input == Input::Up)  {
             if(/*onGround - нужно реализовать, чтобы не прыгать по воздуху */ true) {
-                pBody->ApplyForceToCenter(b2Vec2(0, -120), true);
+                pBody->ApplyForceToCenter(b2Vec2(0, -1500), true);
             }
         }
 
@@ -226,7 +231,7 @@ private:
 
         gameObjects.push_back(std::move(ground));
 
-        setWall((float) worldHeight / 2, (float) groundLevel / 2, (float) worldHeight / 2, (float) groundLevel / 2);//установил нижнию стенку
+        setWall(worldWidth, worldHeight / 2 + groundLevel + 32, worldWidth, worldHeight / 2);//установил нижнию стенку
     }
 
     void setWall(float x, float y, float width, float height)

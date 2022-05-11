@@ -1,0 +1,5 @@
+/home/aleksandr/data/course1/Project/TeamProject/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/aleksandr/data/course1/Project/TeamProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/aleksandr/data/course1/Project/TeamProject/cmake-build-debug/Game/CMakeFiles/main.dir
+/home/aleksandr/data/course1/Project/TeamProject/cmake-build-debug/Game/CMakeFiles/edit_cache.dir
+/home/aleksandr/data/course1/Project/TeamProject/cmake-build-debug/Game/CMakeFiles/rebuild_cache.dir

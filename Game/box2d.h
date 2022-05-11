@@ -26,7 +26,8 @@ struct Box2dComponent : Component {
         bodyDef.position.Set(x / SCALE, y / SCALE);
         body = World.CreateBody(&bodyDef);
         body->CreateFixture(&shape, hardness);
-        if(name == "player") {
+        body->SetUserData((void *) name.c_str());
+        /*if(name == "player") {
             body->SetUserData((void *) "player");
         }
         if(name == "coin"){
@@ -34,7 +35,7 @@ struct Box2dComponent : Component {
         }
         if(name == "obstacle"){
             body->SetUserData((void *) "obstacle");
-        }
+        }*/
     }
 };
 
