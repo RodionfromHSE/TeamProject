@@ -8,7 +8,7 @@
 #include <boost/asio.hpp>
 #include <memory>
 #include <cassert>
+#include <thread>
 // main tools
-#include "game_enum.h"
 #include "tsqueue.h"
 #include "message.h"

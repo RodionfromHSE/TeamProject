@@ -16,7 +16,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 #    link_libraries(Threads::Threads)
 #endif ()
 
-#add_executable(draft DRAFT.cpp)
+add_library(tcp STATIC include.cpp)
 
 # Messages
 message("Current dir: ${CMAKE_CURRENT_LIST_DIR}")

@@ -1,27 +1,19 @@
-
-# Consider dependencies only in project.
-set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
-
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
   "CXX"
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game/object.cpp" "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/CMakeFiles/Server.dir/__/Game/object.cpp.obj"
-  "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/main.cpp" "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/CMakeFiles/Server.dir/main.cpp.obj"
-  "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.cpp" "C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/CMakeFiles/Server.dir/server.cpp.obj"
+  "/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game/object.cpp" "/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/CMakeFiles/Server.dir/__/Game/object.cpp.o"
+  "/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/main.cpp" "/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/CMakeFiles/Server.dir/main.cpp.o"
+  "/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.cpp" "/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/CMakeFiles/Server.dir/server.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_CXX_COMPILER_ID "Clang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../Library"
   "../Game"
-  )
-
-# The set of dependency files which are needed:
-set(CMAKE_DEPENDS_DEPENDENCY_FILES
   )
 
 # Targets to which this target links.

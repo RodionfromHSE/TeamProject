@@ -4,234 +4,309 @@
 	<Project>
 		<Option title="Library"/>
 		<Option makefile_is_custom="1"/>
-		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\Client\;CMake Files\Client\cmake_modules\;CMake Files\Server\;CMake Files\Library\;"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;CMake Files\Client\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\;CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Boost-1.71.0\;CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\boost_headers-1.71.0\;CMake Files\Server\;CMake Files\Library\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Server">
-				<Option output="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/Server.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server"/>
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/Server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="gcc"/>
+				<Option compiler="clang"/>
 				<Compiler>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 Server"/>
-					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 Server"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Server/fast">
-				<Option output="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/Server.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server"/>
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/Server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="gcc"/>
+				<Option compiler="clang"/>
 				<Compiler>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 Server/fast"/>
-					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Client">
-				<Option output="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/Client.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
-					<Add directory="c:/SFML/include"/>
-					<Add directory="C:/SFML/include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 Client"/>
-					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Client/fast">
-				<Option output="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/Client.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
-					<Add directory="c:/SFML/include"/>
-					<Add directory="C:/SFML/include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 Client/fast"/>
-					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 Server/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Server/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="draft">
-				<Option output="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/draft.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client"/>
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/draft" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="gcc"/>
+				<Option compiler="clang"/>
 				<Compiler>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
-					<Add directory="c:/SFML/include"/>
-					<Add directory="C:/SFML/include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 draft"/>
-					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 draft"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="draft/fast">
-				<Option output="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/draft.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client"/>
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/draft" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="gcc"/>
+				<Option compiler="clang"/>
 				<Compiler>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
-					<Add directory="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
-					<Add directory="c:/SFML/include"/>
-					<Add directory="C:/SFML/include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
-					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 draft/fast"/>
-					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 draft/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Client">
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/Client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 Client"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Client/fast">
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/Client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 Client/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Client/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tcp">
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library/libtcp.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library/Makefile&quot;  VERBOSE=1 tcp"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tcp/fast">
+				<Option output="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library/libtcp.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library"/>
+					<Add directory="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library/Makefile&quot;  VERBOSE=1 tcp/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug/Library/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/client.cpp">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/client.cpp">
 			<Option target="Client"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/client.h">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/client.h">
 			<Option target="Client"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/draft.cpp">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/draft.cpp">
 			<Option target="draft"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/main.cpp">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/main.cpp">
 			<Option target="Client"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game/object.cpp">
-			<Option target="Server"/>
-			<Option target="Client"/>
-		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game/object.h">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game/object.cpp">
 			<Option target="Server"/>
 			<Option target="Client"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/main.cpp">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game/object.h">
+			<Option target="Server"/>
+			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library/include.cpp">
+			<Option target="tcp"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/main.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.cpp">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.h">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/CMakeLists.txt">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/CMakeLists.txt">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\Client\"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client/cmake_modules/FindSFML.cmake">
-			<Option virtualFolder="CMake Files\Client\cmake_modules\"/>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/../../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/CMakeLists.txt">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/../../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigDependencies.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/../../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/../../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets-none.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/../../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/../../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Boost-1.71.0\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/../../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Boost-1.71.0\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/../../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0/boost_headers-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\boost_headers-1.71.0\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/../../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0/boost_headers-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\boost_headers-1.71.0\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\Server\"/>
 		</Unit>
-		<Unit filename="C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library/CMakeLists.txt">
+		<Unit filename="/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\Library\"/>
 		</Unit>
 	</Project>
