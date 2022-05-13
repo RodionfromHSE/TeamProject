@@ -22,7 +22,7 @@
 struct GameObject;
 
 //константы для box2d
-b2Vec2 Gravity(0.f, 9.8f);
+b2Vec2 Gravity(0.f, 50.8f);
 b2World World(Gravity);
 const float SCALE = 30.f;
 const float DEG  =  57.29577f;

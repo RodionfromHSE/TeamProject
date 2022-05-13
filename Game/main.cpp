@@ -72,7 +72,7 @@ private:
 
         playerUPtr->addComponent(std::make_unique<PositionComponent>(0.0f, groundLevel));
          //конструктор для компоненты box2d
-        playerUPtr->addComponent(std::make_unique<Box2dComponent>(0.0f, groundLevel - 100, 32 /* ширина изображения */, 32 /* высота изображения */, "player", 1));
+        playerUPtr->addComponent(std::make_unique<Box2dComponent>(0.0f, groundLevel, 32 /* ширина изображения */, 32 /* высота изображения */, "player", 1));
 
         playerUPtr->addComponent(std::make_unique<RenderingComponent>(
                 playerTexture, sf::Vector2i{originX, originY}));
@@ -97,23 +97,25 @@ private:
 
         b2Vec2 vel = pBody->GetLinearVelocity();
 
+        float velChange;
+
         if (input == Input::Right) {
-            if (vel.x < 20) {
-                pBody->ApplyForceToCenter(b2Vec2(1500, 0), true);
-                std::cout << (input == Input::Right) << "\n";
-            }
+            velChange = 5 - vel.x;
         }
 
         if (input == Input::Left) {
-            if (vel.x > -20) {
-                pBody->ApplyForceToCenter(b2Vec2(-1500, 0), true);
-            }
+            velChange = -5 - vel.x;
+        }
+
+        if(input == Input::Right || input == Input::Left){
+            float impulse = pBody->GetMass() * velChange; //disregard time factor
+            pBody->ApplyLinearImpulse( b2Vec2(impulse,0), pBody->GetWorldCenter(), true);
         }
 
 
         if (input == Input::Up)  {
-            if(/*onGround - нужно реализовать, чтобы не прыгать по воздуху */ true) {
-                pBody->ApplyForceToCenter(b2Vec2(0, -1500), true);
+            if(vel.y < 0.1 && vel.y > -0.1 /* проверка onGround */) {
+                pBody->ApplyLinearImpulse(b2Vec2(0, -120), pBody->GetWorldCenter(), true);
             }
         }
 
@@ -121,6 +123,16 @@ private:
 
         player->getComponent<PositionComponent>()->x = positionBody.x * SCALE;
         player->getComponent<PositionComponent>()->y = positionBody.y * SCALE;
+    }
+
+    bool onGround(b2Body *pBody){
+        /*b2Vec2 positionBody = pBody->GetPosition();
+        float bodyPositionY = positionBody.y * SCALE;
+        if(bodyPositionY < groundLevel + 0.5 && bodyPositionY > groundLevel - 0.5){
+            return true;
+        } else {
+            return false;
+        }*/
     }
 
     void updatePlayerAnimation(int dx) {
@@ -231,17 +243,22 @@ private:
 
         gameObjects.push_back(std::move(ground));
 
-        setWall(worldWidth, worldHeight / 2 + groundLevel + 32, worldWidth, worldHeight / 2);//установил нижнию стенку
+        setWall(worldWidth, worldHeight / 2 + groundLevel + 32, 2 * worldWidth, worldHeight / 2);//установил нижнию стенку
     }
 
     void setWall(float x, float y, float width, float height)
     {
-        b2PolygonShape gr;
-        gr.SetAsBox(width / SCALE, height / SCALE);
+        b2PolygonShape ground;
+        ground.SetAsBox(width / SCALE, height / SCALE);
+        //b2FixtureDef GroundDef;
+        //GroundDef.density = 1; //плотность
+        //GroundDef.restitution = 0; //упругость
+        //GroundDef.friction = 100; // трение
+        //GroundDef.shape = &ground;
         b2BodyDef bdef;
         bdef.position.Set(x / SCALE, y / SCALE);
         b2Body *b_ground = World.CreateBody(&bdef);
-        b_ground->CreateFixture(&gr,1);
+        b_ground->CreateFixture(&ground, 1);
     }
 
     GameObjects &gameObjects;
