@@ -4,18 +4,23 @@
 #include <ctime>
 #include <iostream>
 
-#include <SFML/Graphics.hpp>
-
 //#include "network_system.h"
 #include "game_object.h"
 #include "position.h"
 #include "graphics.h"
 #include "animation.h"
+#include "box2d.h"
 
 constexpr std::size_t groundLevel = 300;
 constexpr std::size_t worldWidth = 2048;
 constexpr std::size_t worldHeight = 600;
 constexpr uint16_t PORT = 60'000;
+
+enum Input {
+    Left, Right, Up, Down, Stop, Exit
+};
+
+//Input input = Input::Stop;
 
 struct ColliderComponent : Component {
     sf::Vector2i boundingBox; // relative to position
@@ -31,24 +36,44 @@ struct PlayerSystem : System {
         createPlayer();
     }
 
-    void update() override {
+    /*void update() override {
         assert(player);
 
         int dx = (int) sf::Keyboard::isKeyPressed(sf::Keyboard::Right) -
                  (int) sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
         movePlayer(dx);
         updatePlayerAnimation(dx);
+    }*/
+
+    void update() override{
+        World.Step(1/60.f, 8, 3);
+        Input input = Input::Stop;
+        assert(player);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+            input = Input::Right;
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+            input = Input::Left;
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+            input = Input::Up;
+        }
+        movePlayerBox2D(input);
+        //std::cout << input << '\n';
     }
 
 private:
     void createPlayer() {
         sf::Texture playerTexture;
-        playerTexture.loadFromFile("Pictures/Free/Main Characters/Pink Man/Sprite Sheet.png");
+        playerTexture.loadFromFile("../Pictures/Free/Main Characters/Pink Man/Sprite Sheet.png");
 
         auto playerUPtr = std::make_unique<GameObject>();
         player = &*playerUPtr;
 
         playerUPtr->addComponent(std::make_unique<PositionComponent>(0.0f, groundLevel));
+         //конструктор для компоненты box2d
+        playerUPtr->addComponent(std::make_unique<Box2dComponent>(0.0f, groundLevel - 100, 32 /* ширина изображения */, 32 /* высота изображения */, "player", 1));
+
         playerUPtr->addComponent(std::make_unique<RenderingComponent>(
                 playerTexture, sf::Vector2i{originX, originY}));
         playerUPtr->addComponent(std::make_unique<AnimatorComponent>(
@@ -62,6 +87,40 @@ private:
         assert(positionComponent);
 
         positionComponent->x += (int) ((float) dx * speedInPxsPerSecond * deltaTime.seconds());
+
+    }
+
+    void movePlayerBox2D(Input& input){
+        auto box2dComponent = player->getComponent<Box2dComponent>();
+
+        b2Body *pBody = box2dComponent->body;
+
+        b2Vec2 vel = pBody->GetLinearVelocity();
+
+        if (input == Input::Right) {
+            if (vel.x < 20) {
+                pBody->ApplyForceToCenter(b2Vec2(1500, 0), true);
+                std::cout << (input == Input::Right) << "\n";
+            }
+        }
+
+        if (input == Input::Left) {
+            if (vel.x > -20) {
+                pBody->ApplyForceToCenter(b2Vec2(-1500, 0), true);
+            }
+        }
+
+
+        if (input == Input::Up)  {
+            if(/*onGround - нужно реализовать, чтобы не прыгать по воздуху */ true) {
+                pBody->ApplyForceToCenter(b2Vec2(0, -1500), true);
+            }
+        }
+
+        b2Vec2 positionBody = pBody->GetPosition();
+
+        player->getComponent<PositionComponent>()->x = positionBody.x * SCALE;
+        player->getComponent<PositionComponent>()->y = positionBody.y * SCALE;
     }
 
     void updatePlayerAnimation(int dx) {
@@ -120,6 +179,7 @@ struct PlayerCameraSystem : System {
         auto cameraComponent = camera->getComponent<CameraComponent>();
         auto playerPositionComponent = player->getComponent<PositionComponent>();
 
+
         assert(cameraPositionComponent);
         assert(cameraComponent);
         assert(playerPositionComponent);
@@ -146,7 +206,7 @@ struct SurroundingsSystem : System {
 private:
     void createBackground() {
         sf::Texture backgroundTexture;
-        backgroundTexture.loadFromFile("Pictures/Free/Background/Blue.png");
+        backgroundTexture.loadFromFile("../Pictures/Free/Background/Blue.png");
         backgroundTexture.setRepeated(true);
 
         auto background = std::make_unique<GameObject>();
@@ -161,7 +221,7 @@ private:
 
     void createGround() {
         sf::Texture groundTexture;
-        groundTexture.loadFromFile("Pictures/Free/Background/Pink.png");
+        groundTexture.loadFromFile("../Pictures/Free/Background/Pink.png");
         groundTexture.setRepeated(true);
 
         auto ground = std::make_unique<GameObject>();
@@ -170,6 +230,18 @@ private:
                 ->rect = sf::IntRect(0, 0, 2 * worldWidth, worldHeight);
 
         gameObjects.push_back(std::move(ground));
+
+        setWall(worldWidth, worldHeight / 2 + groundLevel + 32, worldWidth, worldHeight / 2);//установил нижнию стенку
+    }
+
+    void setWall(float x, float y, float width, float height)
+    {
+        b2PolygonShape gr;
+        gr.SetAsBox(width / SCALE, height / SCALE);
+        b2BodyDef bdef;
+        bdef.position.Set(x / SCALE, y / SCALE);
+        b2Body *b_ground = World.CreateBody(&bdef);
+        b_ground->CreateFixture(&gr,1);
     }
 
     GameObjects &gameObjects;
@@ -186,7 +258,7 @@ struct CoinsSystem : System {
 private:
     void createStrawberry() {
         sf::Texture fruitTexture;
-        fruitTexture.loadFromFile("Pictures/Free/Items/Fruits/Cherries.png");
+        fruitTexture.loadFromFile("../Pictures/Free/Items/Fruits/Cherries.png");
 
         auto fruitUPtr = std::make_unique<GameObject>();
         fruitUPtr->addComponent(std::make_unique<PositionComponent>(40.0f, groundLevel));
@@ -194,7 +266,12 @@ private:
                 fruitTexture, sf::Vector2i{16, 32}));
         fruitUPtr->addComponent(std::make_unique<AnimatorComponent>(
                 sf::Vector2u{32, 32}, Animation{0, 17, 22.0f}));
+
+        //конструктор для компоненты box2d
+        fruitUPtr->addComponent(std::make_unique<Box2dComponent>(40.0f, groundLevel, 2 /*ширина изображения*/, 2 /*высота изображения*/, "coin", 0));
+
         gameObjects.push_back(std::move(fruitUPtr));
+
     }
 
     GameObjects &gameObjects;
