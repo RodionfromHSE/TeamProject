@@ -12,6 +12,7 @@ struct System {
     virtual void shutdown() {}
 
     virtual ~System() = default;
+
 };
 
 using Systems = std::vector<std::unique_ptr<System>>;

@@ -58,8 +58,7 @@ struct PlayerSystem : System {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
             input = Input::Up;
         }
-        movePlayerBox2D(input);
-        //std::cout << input << '\n';
+        move(input);
     }
 
 private:
@@ -71,7 +70,7 @@ private:
         player = &*playerUPtr;
 
         playerUPtr->addComponent(std::make_unique<PositionComponent>(0.0f, groundLevel));
-         //конструктор для компоненты box2d
+
         playerUPtr->addComponent(std::make_unique<Box2dComponent>(0.0f, groundLevel, 32 /* ширина изображения */, 32 /* высота изображения */, "player", 1));
 
         playerUPtr->addComponent(std::make_unique<RenderingComponent>(
@@ -82,58 +81,29 @@ private:
         gameObjects.push_back(std::move(playerUPtr));
     }
 
-    void movePlayer(int dx) {
-        auto positionComponent = player->getComponent<PositionComponent>();
-        assert(positionComponent);
 
-        positionComponent->x += (int) ((float) dx * speedInPxsPerSecond * deltaTime.seconds());
-
-    }
-
-    void movePlayerBox2D(Input& input){
+    void move(Input& input){
         auto box2dComponent = player->getComponent<Box2dComponent>();
 
-        b2Body *pBody = box2dComponent->body;
-
-        b2Vec2 vel = pBody->GetLinearVelocity();
-
-        float velChange;
-
         if (input == Input::Right) {
-            velChange = 5 - vel.x;
+            box2dComponent->runRight();
         }
 
         if (input == Input::Left) {
-            velChange = -5 - vel.x;
-        }
-
-        if(input == Input::Right || input == Input::Left){
-            float impulse = pBody->GetMass() * velChange; //disregard time factor
-            pBody->ApplyLinearImpulse( b2Vec2(impulse,0), pBody->GetWorldCenter(), true);
+            box2dComponent->runLeft();
         }
 
 
         if (input == Input::Up)  {
-            if(vel.y < 0.1 && vel.y > -0.1 /* проверка onGround */) {
-                pBody->ApplyLinearImpulse(b2Vec2(0, -120), pBody->GetWorldCenter(), true);
+            if(box2dComponent->onGround()) {
+                box2dComponent->jump();
             }
         }
 
-        b2Vec2 positionBody = pBody->GetPosition();
 
-        player->getComponent<PositionComponent>()->x = positionBody.x * SCALE;
-        player->getComponent<PositionComponent>()->y = positionBody.y * SCALE;
+        box2dComponent->updatePosition(player->getComponent<PositionComponent>()->x, player->getComponent<PositionComponent>()->y);
     }
 
-    bool onGround(b2Body *pBody){
-        /*b2Vec2 positionBody = pBody->GetPosition();
-        float bodyPositionY = positionBody.y * SCALE;
-        if(bodyPositionY < groundLevel + 0.5 && bodyPositionY > groundLevel - 0.5){
-            return true;
-        } else {
-            return false;
-        }*/
-    }
 
     void updatePlayerAnimation(int dx) {
         auto animationComponent = player->getComponent<AnimatorComponent>();
@@ -179,9 +149,11 @@ struct PlayerCameraSystem : System {
         camera = &*cameraUPtr;
         gameObjects.push_back(std::move(cameraUPtr));
 
+
         camera->addComponent(std::make_unique<PositionComponent>(0, 0));
         camera->addComponent(std::make_unique<CameraComponent>(0.0f));
     }
+
 
     void update() override {
         assert(player);
@@ -242,24 +214,8 @@ private:
                 ->rect = sf::IntRect(0, 0, 2 * worldWidth, worldHeight);
 
         gameObjects.push_back(std::move(ground));
-
-        setWall(worldWidth, worldHeight / 2 + groundLevel + 32, 2 * worldWidth, worldHeight / 2);//установил нижнию стенку
     }
 
-    void setWall(float x, float y, float width, float height)
-    {
-        b2PolygonShape ground;
-        ground.SetAsBox(width / SCALE, height / SCALE);
-        //b2FixtureDef GroundDef;
-        //GroundDef.density = 1; //плотность
-        //GroundDef.restitution = 0; //упругость
-        //GroundDef.friction = 100; // трение
-        //GroundDef.shape = &ground;
-        b2BodyDef bdef;
-        bdef.position.Set(x / SCALE, y / SCALE);
-        b2Body *b_ground = World.CreateBody(&bdef);
-        b_ground->CreateFixture(&ground, 1);
-    }
 
     GameObjects &gameObjects;
 };
@@ -295,6 +251,24 @@ private:
     const PlayerPtr &player;
 };
 
+struct Box2dSystem : System{
+
+    void init() override{
+        setWall(worldWidth, worldHeight / 2 + groundLevel + 32, 2 * worldWidth, worldHeight / 2);//установил нижнию стенку
+    }
+private:
+
+    void setWall(float x, float y, float width, float height)
+    {
+        b2PolygonShape ground;
+        ground.SetAsBox(width / SCALE, height / SCALE);
+        b2BodyDef bdef;
+        bdef.position.Set(x / SCALE, y / SCALE);
+        b2Body *b_ground = World.CreateBody(&bdef);
+        b_ground->CreateFixture(&ground, 1);
+    }
+};
+
 void pollEvents(sf::RenderWindow &app) {
     /// TODO: Сделать объект Input который будет содержать в том числе и Pointer
     /// (мотивация - есть же еще мышка, свайпы, другие клавиши)
@@ -319,6 +293,7 @@ int main() {
     systems.push_back(std::make_unique<AnimationSystem>(gameObjects, deltaTime));
     systems.push_back(std::make_unique<PlayerCameraSystem>(gameObjects, player, currentCamera));
     systems.push_back(std::make_unique<CoinsSystem>(gameObjects, player));
+    systems.push_back(std::make_unique<Box2dSystem>());
 //    NetworkSystem networkSystem(PORT);
 
     for (auto &system: systems)
