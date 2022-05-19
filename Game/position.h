@@ -8,8 +8,8 @@
 #include "game_object.h"
 
 struct PositionComponent : Component {
-    int x;
-    int y;
+    float x;
+    float y;
 
     PositionComponent(int newX, int newY) : x(newX), y(newY) {}
 };

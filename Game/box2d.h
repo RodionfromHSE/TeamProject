@@ -29,38 +29,6 @@ struct Box2dComponent : Component {
         body->SetUserData((void *) name.c_str());
     }
 
-    void jump(){
-        body->ApplyLinearImpulse(b2Vec2(0, -120), body->GetWorldCenter(), true);
-    }
-
-    void runRight(){
-        b2Vec2 vel = body->GetLinearVelocity();
-        float velChange = 5 - vel.x;
-        float impulse = body->GetMass() * velChange; //disregard time factor
-        body->ApplyLinearImpulse( b2Vec2(impulse,0), body->GetWorldCenter(), true);
-    }
-
-    void runLeft(){
-        b2Vec2 vel = body->GetLinearVelocity();
-        float velChange = -5 - vel.x;
-        float impulse = body->GetMass() * velChange; //disregard time factor
-        body->ApplyLinearImpulse( b2Vec2(impulse,0), body->GetWorldCenter(), true);
-    }
-
-    bool onGround(){ //работает, но костыльная функция, нужно придумать нормальную функцию
-        b2Vec2 vel = body->GetLinearVelocity();
-        if(vel.y < 0.1 && vel.y > -0.1){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    void updatePosition(int &x, int &y){
-        b2Vec2 positionBody = body->GetPosition();
-        x = positionBody.x * SCALE;
-        y = positionBody.y * SCALE;
-    }
 };
 
 #endif //__PROJECT_BOX2D_H
