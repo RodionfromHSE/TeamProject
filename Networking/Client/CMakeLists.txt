@@ -32,5 +32,6 @@ else ()
     link_libraries(sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
 endif ()
 
-add_executable(Client main.cpp client.cpp ../Game/object.cpp)
+add_executable(Client main.cpp client.cpp ../Game/object.cpp
+        )
 add_executable(draft draft.cpp)

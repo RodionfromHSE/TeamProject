@@ -43,8 +43,8 @@ endif ()
 
 include_directories(../Networking/Library ../Networking/Server ../Networking/Client ../Networking/Game)
 
-set(SOURCE main.cpp box2d.h)
-    # network_system.cpp ../Networking/Server/server.cpp ../Networking/Client/client.cpp ../Networking/Game/object.cpp)
+set(SOURCE main.cpp box2d.h
+     network_system.cpp ../Networking/Server/server.cpp ../Networking/Client/client.cpp ../Networking/Game/object.cpp)
 #set(SOURCE main.cpp)
 
 #find_package(box2d CONFIG REQUIRED)

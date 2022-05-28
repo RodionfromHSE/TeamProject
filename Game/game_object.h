@@ -17,7 +17,7 @@
 #include <utility>
 #include <bitset>
 #include <array>
-#include <Box2D/Box2D.h>
+#include <box2d.h>
 
 struct GameObject;
 

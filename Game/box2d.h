@@ -13,20 +13,20 @@ struct Box2dComponent : Component {
     b2BodyDef bodyDef;
     b2Body *body;
 
-    Box2dComponent(float x, float y, float widthShape, float heightShape, std::string name, bool isDynamic) {
+    Box2dComponent(float x, float y, float widthShape, float heightShape, const std::string& name, bool isDynamic) {
         shape.SetAsBox(widthShape / SCALE, heightShape / SCALE); //создаем выпуклую оболочку
-        if(isDynamic) {
+        if (isDynamic) {
             bodyDef.type = b2_dynamicBody;
         }
 
         bindingToShape(name, x, y);
     }
 
-    void bindingToShape(std::string name, float x, float y) {
+    void bindingToShape([[maybe_unused]] const std::string& name, float x, float y) {
         bodyDef.position.Set(x / SCALE, y / SCALE);
         body = World.CreateBody(&bodyDef);
         body->CreateFixture(&shape, hardness);
-        body->SetUserData((void *) name.c_str());
+//        body->SetUserData((void *) name.c_str());
     }
 
 };

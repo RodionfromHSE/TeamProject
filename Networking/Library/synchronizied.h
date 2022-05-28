@@ -4,8 +4,10 @@
 #include "../Server/server.h"
 #include "../Client/client.h"
 
+enum Usage {OnClient, OnServer};
+
 namespace net {
-    template<typename T, bool OnServer = true>
+    template<typename T, Usage usage = OnServer>
     struct Synchronized {
         Synchronized(std::shared_ptr<Server> server_ptr, int id) : m_server_ptr(std::move(server_ptr)),
                                                                    m_id(id) {
@@ -43,7 +45,7 @@ namespace net {
     };
 
     template<typename T>
-    struct Synchronized<T, false> {
+    struct Synchronized<T, Usage::OnClient> {
         Synchronized(std::shared_ptr<Client> client_ptr, int id) : m_client_ptr(std::move(client_ptr)),
                                                                    m_id(id) {
             Message<EVENT> msg;
