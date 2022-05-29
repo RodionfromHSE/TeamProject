@@ -48,6 +48,8 @@ namespace net {
     struct Synchronized<T, Usage::OnClient> {
         Synchronized(std::shared_ptr<Client> client_ptr, int id) : m_client_ptr(std::move(client_ptr)),
                                                                    m_id(id) {
+            if (!m_client_ptr->is_connected()) return;
+
             Message<EVENT> msg;
             msg.header.id = EVENT::NEW_PLAYER;
             msg << m_id;

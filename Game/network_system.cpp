@@ -1,6 +1,6 @@
 #include "network_system.h"
 
-NetworkSystem::NetworkSystem(std::string host, uint16_t port) : m_clientPtr(nullptr), m_player(m_clientPtr, ID){
+NetworkSystem::NetworkSystem(std::string host, uint16_t port) : m_clientPtr(new Client()), m_player(m_clientPtr, constant::ID){
     m_clientPtr->connect(host, port);
     if (!m_clientPtr->is_connected())
         throw std::logic_error("Can't establish connection:(");

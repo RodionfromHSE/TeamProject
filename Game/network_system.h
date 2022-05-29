@@ -6,11 +6,17 @@
 #include "../Networking/Server/server.h"
 #include "../Networking/Library/synchronizied.h"
 
-namespace {
-    const std::string HOST = "127.0.0.1";
-    const uint16_t PORT = 60'000;
-    const int ID = 770;
+namespace constant {
+    inline const std::string HOST = "127.0.0.1";
+    inline const uint16_t PORT = 60'000;
+    inline int ID = 770;
 }
+
+//void login(){
+//    std::cout << "Hello!\n"
+//                 "What is your id? ";
+//    std::cin >> constant::ID;
+//}
 
 struct PlayerCoordinates {
     int x = 0, y = 0;
@@ -19,7 +25,7 @@ struct PlayerCoordinates {
 
 struct NetworkSystem : System {
     // TODO: Synchronize Player
-    NetworkSystem(std::string host = HOST, uint16_t port = PORT);
+    NetworkSystem(std::string host = constant::HOST, uint16_t port = constant::PORT);
 
     // Hmm... update something
     void update() override;
@@ -29,7 +35,7 @@ struct NetworkSystem : System {
     }
 
     inline ~NetworkSystem() {
-        if (thread.joinable()) { thread.join(); }
+        if (thread.joinable()) { thread.detach(); }
     }
 
 private:
