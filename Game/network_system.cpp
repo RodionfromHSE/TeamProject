@@ -1,22 +1,16 @@
 #include "network_system.h"
 
-ClientSystem::ClientSystem(uint16_t port) : m_clientPtr(new Client()), m_player(m_clientPtr, PLAYER_ID) {
-    m_clientPtr->connect(host, PORT);
-    m_player.set({0, 0});
-
-    thread = std::thread([this]() {
-        while (true) {
+NetworkSystem::NetworkSystem(std::string host, uint16_t port) : m_clientPtr(nullptr), m_player(m_clientPtr, ID){
+    m_clientPtr->connect(host, port);
+    if (!m_clientPtr->is_connected())
+        throw std::logic_error("Can't establish connection:(");
+    thread = std::thread([this](){
+        while (true){
             update();
         }
     });
 }
 
-void ClientSystem::update() {
-    // Here we'll new players arrive and old update
+void NetworkSystem::update() {
     m_clientPtr->update();
-
-    if (m_player.isUpdatable())
-        std::cout << m_player.get().x << ' ' << m_player.get().y << '\n';
-
 }
-

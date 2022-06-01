@@ -111,6 +111,7 @@ int main() {
 
     sf::Sprite sBackground(bgTex), sObstacle(obstacleTex);
 
+
     World world;
     Player persA(persATex, {1000, 300}, {-1, 1}, {75, 0}, &world);
 

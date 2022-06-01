@@ -22,8 +22,8 @@
 struct GameObject;
 
 //константы для box2d
-b2Vec2 Gravity(0.f, 50.8f);
-b2World World(Gravity);
+//b2Vec2 Gravity(0.f, 50.8f);
+//b2World World(Gravity);
 const float SCALE = 30.f;
 const float DEG  =  57.29577f;
 
@@ -31,6 +31,9 @@ struct Component {
     GameObject *owner = nullptr;
 
     virtual ~Component() = default;
+
+    virtual void init(){
+    }
 };
 
 inline std::size_t getComponentID() {
@@ -59,8 +62,13 @@ struct GameObject {
     T *addComponent(std::unique_ptr<T> component) {
         T *raw = component.get();
         component->owner = this;
+        component->init();
         components[getComponentID<T>()] = std::move(component);
         return raw;
+    }
+
+    void onContact(GameObject *pObject) {
+        //вызвать обработчик, который в этот GameObject положила CoinSystem
     }
 
 private:

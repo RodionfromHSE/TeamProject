@@ -1,13 +1,16 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.18)
 project(Game)
 
-set(CMAKE_CXX_STANDARD  17)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 find_package(Boost 1.71.0 REQUIRED)
 find_package(Threads REQUIRED)
 
 if (WIN32 AND NOT MSVC AND NOT BORLAND)
+    find_package(OpenGL REQUIRED)
+#    find_package(GLUT REQUIRED)
+
     # For sockets to work correctly
     link_libraries(wsock32 ws2_32)
     # SFML linking
@@ -34,20 +37,25 @@ else ()
     find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
     include_directories(${SFML_INCLUDE_DIRS})
     link_libraries(sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
-    # for safe asio usage
+    # For safe asio usage
     link_libraries(Threads::Threads)
 endif ()
 
 include_directories(../Networking/Library ../Networking/Server ../Networking/Client ../Networking/Game)
 
-set(SOURCE main.cpp box2d.h)
-    # network_system.cpp ../Networking/Server/server.cpp ../Networking/Client/client.cpp ../Networking/Game/object.cpp)
+set(SOURCE main.cpp box2d.h
+     network_system.cpp ../Networking/Server/server.cpp ../Networking/Client/client.cpp ../Networking/Game/object.cpp)
 #set(SOURCE main.cpp)
 
+#find_package(box2d CONFIG REQUIRED)
+add_subdirectory(box2d)
+
+#find_library(BOX2D STATIC NAMES box2d glad glfw imgui sajson PATHS lib REQUIRED)
+#message("-- Box2d found in " ${BOX2D} ${CACHE})
+
 add_executable(main ${SOURCE})
-
-include_directories(BEFORE "${CMAKE_CURRENT_LIST_DIR}/box2d/include")
-
-find_library(BOX2D box2d lib)
-
-target_link_libraries(main LINK_PUBLIC ${BOX2D})
+target_link_libraries(main LINK_PUBLIC box2d)
+target_include_directories(main PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include/box2d")
+message("-- Files included from " "${CMAKE_CURRENT_LIST_DIR}/include/box2d")
+#target_link_libraries(main PRIVATE Box2D::Box2D)
+#target_link_libraries(main LINK_PUBLIC ${OPENGL_LIBRARIES})

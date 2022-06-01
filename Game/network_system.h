@@ -5,33 +5,38 @@
 #include "../Networking/Client/client.h"
 #include "../Networking/Server/server.h"
 #include "../Networking/Library/synchronizied.h"
-#include "../Networking/Library/synchronizied_handler.h"
+
+namespace {
+    const std::string HOST = "127.0.0.1";
+    const uint16_t PORT = 60'000;
+    const int ID = 770;
+}
 
 struct PlayerCoordinates {
     int x = 0, y = 0;
 };
 
-const std::string host = "127.0.0.1";
-const int PORT = 60'000;
-const int PLAYER_ID = 770;
 
-struct ClientSystem : System {
+struct NetworkSystem : System {
     // TODO: Synchronize Player
-    ClientSystem(uint16_t port);
+    NetworkSystem(std::string host = HOST, uint16_t port = PORT);
 
     // Hmm... update something
     void update() override;
 
-    PlayerCoordinates getPlayer(){ return m_player.get(); }
-    void setCoors(int x, int y){ m_player.set({x, y}); }
+    inline void set(PlayerCoordinates pc){
+        m_player.set(pc);
+    }
 
-    inline ~ClientSystem(){
+    inline ~NetworkSystem() {
         if (thread.joinable()) { thread.join(); }
     }
 
 private:
     std::shared_ptr<Client> m_clientPtr;
-    net::Synchronized<PlayerCoordinates, Parameter::OnClient> m_player;
+    net::Synchronized<PlayerCoordinates, Usage::OnClient> m_player;
     std::thread thread;
 };
+
+
 
