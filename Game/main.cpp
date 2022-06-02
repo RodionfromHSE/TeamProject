@@ -3,7 +3,6 @@
 #include <cassert>
 #include <ctime>
 #include <iostream>
-#include <random>
 
 #include "network_system.h"
 #include "game_object.h"
@@ -15,7 +14,6 @@
 constexpr std::size_t groundLevel = 300;
 constexpr std::size_t worldWidth = 2048;
 constexpr std::size_t worldHeight = 600;
-constexpr uint16_t PORT = 60'000;
 
 enum Input {
     Left, Right, Up, Down, Stop, Exit
@@ -37,16 +35,16 @@ struct PlayerSystem : System {
         createPlayer();
     }
 
-    void update() override {
+    void update() override{
         Input input = Input::Stop;
         assert(player);
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
             input = Input::Right;
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
             input = Input::Left;
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
             input = Input::Up;
         }
         move(input);
@@ -62,8 +60,7 @@ private:
 
         playerUPtr->addComponent(std::make_unique<PositionComponent>(0.0f, groundLevel));
 
-        playerUPtr->addComponent(std::make_unique<Box2dComponent>(0.0f, groundLevel, 32 /* ширина изображения */,
-                                                                  32 /* высота изображения */, "player", 1));
+        playerUPtr->addComponent(std::make_unique<Box2dComponent>(0.0f, groundLevel, 32 /* ширина изображения */, 32 /* высота изображения */, true, false, "player"));
 
         playerUPtr->addComponent(std::make_unique<RenderingComponent>(
                 playerTexture, sf::Vector2i{originX, originY}));
@@ -73,36 +70,36 @@ private:
         gameObjects.push_back(std::move(playerUPtr));
     }
 
-    void stop() {
+    void stop(){
         auto box2dComponent = player->getComponent<Box2dComponent>();
         b2Vec2 vel = box2dComponent->body->GetLinearVelocity();
         b2Vec2 force = b2Vec2(0, vel.y);
         box2dComponent->body->SetLinearVelocity(force);
     }
 
-    void jump() {
+    void jump(){
         auto box2dComponent = player->getComponent<Box2dComponent>();
         box2dComponent->body->ApplyLinearImpulse(b2Vec2(0, -150), box2dComponent->body->GetWorldCenter(), true);
     }
 
-    void runRight() {
+    void runRight(){
         auto box2dComponent = player->getComponent<Box2dComponent>();
         b2Vec2 vel = box2dComponent->body->GetLinearVelocity();
-        b2Vec2 force = b2Vec2(8, vel.y);
+        b2Vec2 force = b2Vec2(8,vel.y);
         box2dComponent->body->SetLinearVelocity(force);
     }
 
-    void runLeft() {
+    void runLeft(){
         auto box2dComponent = player->getComponent<Box2dComponent>();
         b2Vec2 vel = box2dComponent->body->GetLinearVelocity();
-        b2Vec2 force = b2Vec2(-8, vel.y);
+        b2Vec2 force = b2Vec2(-8,vel.y);
         box2dComponent->body->SetLinearVelocity(force);
     }
 
-    bool onGround() {//работает, но костыльная функция, нужно придумать нормальную функцию
+    bool onGround(){//работает, но костыльная функция, нужно придумать нормальную функцию
         auto box2dComponent = player->getComponent<Box2dComponent>();
         b2Vec2 vel = box2dComponent->body->GetLinearVelocity();
-        if (vel.y < 0.1 && vel.y > -0.1) {
+        if(vel.y < 0.1 && vel.y > -0.1){
             return true;
         } else {
             return false;
@@ -110,9 +107,9 @@ private:
     }
 
 
-    void move(Input &input) {
+    void move(Input& input){
 
-        if (input != Input::Right && input != Input::Left) {
+        if(input != Input::Right && input != Input::Left){
             stop();
         }
 
@@ -125,14 +122,13 @@ private:
         }
 
 
-        if (input == Input::Up) {
-            if (onGround()) {
+        if (input == Input::Up)  {
+            if(onGround()) {
                 jump();
             }
         }
 
 
-        //box2dComponent->updatePosition(player->getComponent<PositionComponent>()->x, player->getComponent<PositionComponent>()->y);
     }
 
 
@@ -231,7 +227,7 @@ private:
                         backgroundTexture, sf::Vector2i{}, Layer::Background));
         renderingComponent->rect = sf::IntRect(0, 0, 2 * worldWidth, worldHeight);
         //background->addComponent(std::make_unique<Box2dComponent>(worldWidth, worldHeight / 2 + groundLevel + 32, 2 * worldWidth, worldHeight / 2, "Ground",
-        //                                                           false));
+       //                                                           false));
 
         gameObjects.push_back(std::move(background));
     }
@@ -245,10 +241,8 @@ private:
         ground->addComponent(std::make_unique<PositionComponent>(-worldWidth, groundLevel));
         ground->addComponent(std::make_unique<RenderingComponent>(groundTexture))
                 ->rect = sf::IntRect(0, 0, 2 * worldWidth, worldHeight);
-        ground->addComponent(
-                std::make_unique<Box2dComponent>(worldWidth, worldHeight / 2 + groundLevel + 32, 2 * worldWidth,
-                                                 worldHeight / 2, "Ground",
-                                                 false));
+        ground->addComponent(std::make_unique<Box2dComponent>(worldWidth, worldHeight / 2 + groundLevel + 32, 2 * worldWidth, worldHeight / 2,
+                                                              false, false, "ground"));
         gameObjects.push_back(std::move(ground));
     }
 
@@ -270,16 +264,14 @@ private:
         fruitTexture.loadFromFile("../Pictures/Free/Items/Fruits/Cherries.png");
 
         auto fruitUPtr = std::make_unique<GameObject>();
-        fruitUPtr->addComponent(std::make_unique<PositionComponent>(40.0f, groundLevel));
+        fruitUPtr->addComponent(std::make_unique<PositionComponent>(40.0f, groundLevel - 20));
         fruitUPtr->addComponent(std::make_unique<RenderingComponent>(
                 fruitTexture, sf::Vector2i{16, 32}));
         fruitUPtr->addComponent(std::make_unique<AnimatorComponent>(
                 sf::Vector2u{32, 32}, Animation{0, 17, 22.0f}));
 
-        //конструктор для компоненты box2d
-        fruitUPtr->addComponent(
-                std::make_unique<Box2dComponent>(40.0f, groundLevel, 2 /*ширина изображения*/, 2 /*высота изображения*/,
-                                                 "coin", 0));
+        //конструктор для компоненты box2d0
+        fruitUPtr->addComponent(std::make_unique<Box2dComponent>(40.0f, groundLevel - 20, 2 /*ширина изображения*/, 2 /*высота изображения*/, false, true, "cherry"));
 
         gameObjects.push_back(std::move(fruitUPtr));
 
@@ -289,18 +281,23 @@ private:
     const PlayerPtr &player;
 };
 
-struct Box2dSystem : System {
-    explicit Box2dSystem(GameObjects &gameObjects) : gameObjects(gameObjects) {}
+/*struct Box2dSystem : System{
+    b2World World = b2World(b2Vec2(0.f, 50.8f));
 
+    MyContactListener myContactListenerInstance;
 
-    void init() override {
-        //setWall(worldWidth, worldHeight / 2 + groundLevel + 32, 2 * worldWidth, worldHeight / 2);//установил нижнию стенку
+    //in FooTest constructor
+
+    explicit Box2dSystem(GameWorld &gameObjects) : gameObjects(gameObjects){
     }
 
+
+    void init() override{
+        World.SetContactListener(&myContactListenerInstance);
+    }
 private:
 
-    void setWall(float x, float y, float width,
-                 float height) //должно быть где-то в инициализации, стенка тоже игровой обьект с компонентой box2d
+    void setWall(float x, float y, float width, float height) //должно быть где-то в инициализации, стенка тоже игровой обьект с компонентой box2d
     {
         b2PolygonShape ground;
         ground.SetAsBox(width / SCALE, height / SCALE);
@@ -310,9 +307,8 @@ private:
         b_ground->CreateFixture(&ground, 1);
     }
 
-    void updatePosition(GameObject &gameObject) {
-        if (!gameObject.hasComponent<Box2dComponent>() || gameObject.getComponent<Box2dComponent>()->bodyDef.type !=
-                                                          b2_dynamicBody /* у земли не нужно обновлять координаты */) {
+    void updatePosition(GameObject &gameObject){
+        if(!gameObject.hasComponent<Box2dComponent>() || gameObject.getComponent<Box2dComponent>()->bodyDef.type != b2_dynamicBody  у земли не нужно обновлять координаты ){
             return;
         }
         auto box2dComponent = gameObject.getComponent<Box2dComponent>();
@@ -322,19 +318,29 @@ private:
         positionComponent->y = positionBody.y * SCALE;
     }
 
-    void update() {
-        World.Step(1 / 60.f, 8, 3);
-        for (auto &gameObject: gameObjects) {
-            updatePosition(*gameObject);
+    void itemCollection(){
+        for (b2Contact* contact = World.GetContactList(); contact; contact = contact->GetNext()) {
+            b2Fixture *fixture = contact->GetFixtureA();
+            fixture->IsSensor();
+            if(contact->GetFixtureA()->IsSensor()) {
+            }
         }
     }
 
-    GameObjects &gameObjects;
+    void update(){
+        World.Step(1/60.f, 8, 3);
+        for (auto &gameObject: gameObjects) {
+            updatePosition(*gameObject);
+        }
+        // TODO: restore this strange function
+        itemCollection();
+    }
 
-};
+    GameWorld &gameObjects;
 
-void initialization(Systems &systems, GameObjects &gameObjects, DeltaTime &deltaTime, PlayerPtr &player,
-                    CameraPtr &currentCamera, sf::RenderWindow &app) {
+};*/
+
+void initialization(Systems &systems, GameObjects &gameObjects, DeltaTime &deltaTime, PlayerPtr &player, CameraPtr &currentCamera,  sf::RenderWindow &app){
     systems.push_back(std::make_unique<PlayerSystem>(gameObjects, player, deltaTime));
     systems.push_back(std::make_unique<Box2dSystem>(gameObjects));
     systems.push_back(std::make_unique<SurroundingsSystem>(gameObjects));
@@ -367,23 +373,20 @@ int main() {
 
     Systems systems;
     initialization(systems, gameObjects, deltaTime, player, currentCamera, app);
-    try {
-//        NetworkSystem networkSystem;
-    } catch (std::exception &e) {
-        std::cout << e.what() << '\n';
-    }
 
-    std::random_device dev;
-    std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> dist10(1,10); // distribution in range [1, 6]
+    ClientSystem clientSystem(PORT);
 
+
+    int x, y;
     while (app.isOpen()) {
+        //std::cin >> x >> y;
+        //clientSystem.setCoors(x, y);
+
         deltaTime.update();
         pollEvents(app);
 
         for (auto &system : systems)
-            system->update();
-//        networkSystem.set({(int)dist10(rng), (int)dist10(rng)});
+                system->update();
         std::cout.flush();
     }
 
