@@ -264,14 +264,14 @@ private:
         fruitTexture.loadFromFile("../Pictures/Free/Items/Fruits/Cherries.png");
 
         auto fruitUPtr = std::make_unique<GameObject>();
-        fruitUPtr->addComponent(std::make_unique<PositionComponent>(40.0f, groundLevel - 20));
+        fruitUPtr->addComponent(std::make_unique<PositionComponent>(40.0f, groundLevel));
         fruitUPtr->addComponent(std::make_unique<RenderingComponent>(
                 fruitTexture, sf::Vector2i{16, 32}));
         fruitUPtr->addComponent(std::make_unique<AnimatorComponent>(
                 sf::Vector2u{32, 32}, Animation{0, 17, 22.0f}));
 
         //конструктор для компоненты box2d0
-        fruitUPtr->addComponent(std::make_unique<Box2dComponent>(40.0f, groundLevel - 20, 2 /*ширина изображения*/, 2 /*высота изображения*/, false, true, "cherry"));
+        fruitUPtr->addComponent(std::make_unique<Box2dComponent>(40.0f, groundLevel, 2 /*ширина изображения*/, 2 /*высота изображения*/, false, true, "cherry"));
 
         gameObjects.push_back(std::move(fruitUPtr));
 
@@ -374,7 +374,7 @@ int main() {
     Systems systems;
     initialization(systems, gameObjects, deltaTime, player, currentCamera, app);
 
-    ClientSystem clientSystem(PORT);
+    //ClientSystem clientSystem(PORT);
 
 
     int x, y;
