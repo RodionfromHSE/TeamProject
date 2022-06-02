@@ -55,10 +55,10 @@ class MyContactListener : public b2ContactListener
         auto box2dComponentA = gameObjectA->getComponent<Box2dComponent>();
         auto box2dComponentB = gameObjectB->getComponent<Box2dComponent>();
 
-        if(box2dComponentA->name == "cherry"){
+        if(box2dComponentA->name == "cherry" && box2dComponentB->name == "player"){
             moveCherry(gameObjectA);
         }
-        if(box2dComponentB->name == "cherry"){
+        if(box2dComponentB->name == "cherry" && box2dComponentA->name == "player"){
             moveCherry(gameObjectB);
         }
         /*GameObject *gameObject = (GameObject *)contact->GetFixtureA()->GetBody()->GetUserData();
