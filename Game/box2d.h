@@ -1,7 +1,3 @@
-//
-// Created by aleksandr on 05.05.22.
-//
-
 #ifndef __PROJECT_BOX2D_H
 #define __PROJECT_BOX2D_H
 
@@ -40,7 +36,7 @@ struct Box2dComponent : Component {
     }
 
     void init() {
-        body->SetUserData((void *) owner);
+        body->GetUserData().pointer = reinterpret_cast<uintptr_t>(owner);
     }
 
 };
@@ -50,12 +46,12 @@ class MyContactListener : public b2ContactListener
     void BeginContact(b2Contact* contact) {
         b2Fixture *fixtureA = contact->GetFixtureA();
         b2Fixture *fixtureB = contact->GetFixtureB();
-        GameObject *gameObjectA = static_cast<GameObject *>(fixtureA->GetBody()->GetUserData());
-        GameObject *gameObjectB = static_cast<GameObject *>(fixtureB->GetBody()->GetUserData());
+        GameObject *gameObjectA = static_cast<GameObject *>((void*)fixtureA->GetBody()->GetUserData().pointer);
+        GameObject *gameObjectB = static_cast<GameObject *>((void*)fixtureB->GetBody()->GetUserData().pointer   );
         auto box2dComponentA = gameObjectA->getComponent<Box2dComponent>();
         auto box2dComponentB = gameObjectB->getComponent<Box2dComponent>();
 
-        if(box2dComponentA->name == "cherry" && box2dComponentB->name == "player"){
+        if(box2dComponentA->name == "cherry" && box2dComponentB->name == "player") {
             moveCherry(gameObjectA);
         }
         if(box2dComponentB->name == "cherry" && box2dComponentA->name == "player"){

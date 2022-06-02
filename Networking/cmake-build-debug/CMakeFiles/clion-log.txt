@@ -1,7 +1,38 @@
-C:\WINDOWS\system32\wsl.exe --distribution Ubuntu-20.04 --exec /bin/sh -c "export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd '/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug' && /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' '/mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking'"
-Current dir: /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server
--- Found SFML 2.5.1 in /usr/lib/x86_64-linux-gnu/cmake/SFML
-Current dir: /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library
+"C:\Program Files\JetBrains\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - MinGW Makefiles" C:\Users\home\Desktop\Programming\C++\TeamProject\Networking
+-- The C compiler identification is GNU 11.2.0
+-- The CXX compiler identification is GNU 11.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/msys64/mingw64/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/msys64/mingw64/bin/g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Boost: C:/msys64/mingw64/include (found suitable version "1.77.0", minimum required is "1.71.0")  
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+Current dir: C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server
+-- Found SFML 2.5.1 in C:/SFML/include
+Copied from C:/SFML/include/../bin/openal32.dll;C:/SFML/include/../bin/sfml-audio-2.dll;C:/SFML/include/../bin/sfml-audio-d-2.dll;C:/SFML/include/../bin/sfml-graphics-2.dll;C:/SFML/include/../bin/sfml-graphics-d-2.dll;C:/SFML/include/../bin/sfml-network-2.dll;C:/SFML/include/../bin/sfml-network-d-2.dll;C:/SFML/include/../bin/sfml-system-2.dll;C:/SFML/include/../bin/sfml-system-d-2.dll;C:/SFML/include/../bin/sfml-window-2.dll;C:/SFML/include/../bin/sfml-window-d-2.dll to C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Client
+Current dir: C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Library
 -- Configuring done
--- Generating done
--- Build files have been written to: /mnt/c/Users/home/Desktop/Programming/C++/TeamProject/Networking/cmake-build-debug
+CMake Error at Client/CMakeLists.txt:36 (add_executable):
+  Cannot find source file:
+
+    draft.cpp
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .h .hh .h++
+  .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .ispc
+
+
+CMake Error at Client/CMakeLists.txt:36 (add_executable):
+  No SOURCES given to target: draft
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

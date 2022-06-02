@@ -44,7 +44,7 @@ endif ()
 include_directories(../Networking/Library ../Networking/Server ../Networking/Client ../Networking/Game)
 
 set(SOURCE main.cpp box2d.h
-     network_system.cpp ../Networking/Server/server.cpp ../Networking/Client/client.cpp ../Networking/Game/object.cpp)
+     network_system.cpp ../Networking/Server/server.cpp ../Networking/Client/client.cpp ../Networking/Game/object.cpp TextBox.h startWindow.h Button.h)
 #set(SOURCE main.cpp)
 
 #find_package(box2d CONFIG REQUIRED)
@@ -56,6 +56,8 @@ add_subdirectory(box2d)
 add_executable(main ${SOURCE})
 target_link_libraries(main LINK_PUBLIC box2d)
 target_include_directories(main PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include/box2d")
+target_include_directories(main PRIVATE "${CMAKE_CURRENT_LIST_DIR}/../Pictures/" )
 message("-- Files included from " "${CMAKE_CURRENT_LIST_DIR}/include/box2d")
+message("-- Runtime dir " "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 #target_link_libraries(main PRIVATE Box2D::Box2D)
 #target_link_libraries(main LINK_PUBLIC ${OPENGL_LIBRARIES})

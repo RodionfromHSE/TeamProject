@@ -3,6 +3,7 @@
 #include <cassert>
 #include <ctime>
 #include <iostream>
+#include <random>
 
 #include "network_system.h"
 #include "game_object.h"
@@ -10,6 +11,9 @@
 #include "graphics.h"
 #include "animation.h"
 #include "box2d.h"
+#include "TextBox.h"
+#include "startWindow.h"
+
 
 constexpr std::size_t groundLevel = 300;
 constexpr std::size_t worldWidth = 2048;
@@ -363,7 +367,10 @@ void pollEvents(sf::RenderWindow &app) {
             app.close();
 }
 
+
+
 int main() {
+    std::cout << login();
     sf::RenderWindow app(sf::VideoMode(1600, 1200), "Team PR 1");
 
     DeltaTime deltaTime;
@@ -373,8 +380,11 @@ int main() {
 
     Systems systems;
     initialization(systems, gameObjects, deltaTime, player, currentCamera, app);
+    NetworkSystem networkSystem;
 
-    //ClientSystem clientSystem(PORT);
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> dist10(1, 10); // distribution in range [1, 6]
 
 
     int x, y;
@@ -385,8 +395,9 @@ int main() {
         deltaTime.update();
         pollEvents(app);
 
-        for (auto &system : systems)
-                system->update();
+        for (auto &system: systems)
+            system->update();
+        networkSystem.set({(int) dist10(rng), (int) dist10(rng)});
         std::cout.flush();
     }
 
