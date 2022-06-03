@@ -34,4 +34,3 @@ endif ()
 
 add_executable(Client main.cpp client.cpp ../Game/object.cpp
         )
-add_executable(draft draft.cpp)

@@ -17,6 +17,7 @@ Server/CMakeFiles/Server.dir/main.cpp.obj: \
  ../Library/tsqueue.h \
  ../Server/server.h \
  ../Server/main.cpp \
+ ../Server/players_keeper.h \
  ../Server/server.h
 Server/CMakeFiles/Server.dir/server.cpp.obj: \
  ../Game/game_enum.h \

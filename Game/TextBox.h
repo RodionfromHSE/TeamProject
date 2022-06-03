@@ -15,7 +15,7 @@ class TextBox {
 public:
     TextBox(int size, sf::Color color, bool sel) {
         textbox.setCharacterSize(size);
-        textbox.setColor(color);
+        textbox.setFillColor(color);
         isSelected = sel;
 
         // Check if the textbox is selected upon creation and display it accordingly:

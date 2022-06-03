@@ -6,7 +6,7 @@
 
 enum Usage {OnClient, OnServer};
 
-namespace net {
+namespace net{
     template<typename T, Usage usage = OnServer>
     struct Synchronized {
         Synchronized(std::shared_ptr<Server> server_ptr, int id) : m_server_ptr(std::move(server_ptr)),
@@ -23,6 +23,10 @@ namespace net {
             // we want our value to be most actual
             m_server_ptr->syn_handler().clear(m_id);
             m_server_ptr->send_to_everyone(msg);
+        }
+
+        [[nodiscard]] int getId(){
+            return m_id;
         }
 
         const T &get() {
@@ -69,6 +73,10 @@ namespace net {
             m_client_ptr->send(msg);
         }
 
+        [[nodiscard]] int getId(){
+            return m_id;
+        }
+
         [[nodiscard]] const T &get() {
             if (!m_client_ptr->syn_handler().empty(m_id)) {
                 auto msg = m_client_ptr->syn_handler().last_message(m_id);
@@ -80,6 +88,14 @@ namespace net {
 
         [[nodiscard]] bool isUpdatable() const {
             return !m_client_ptr->syn_handler().empty(m_id);
+        }
+
+        void initOnServer(){
+            Message<EVENT> msg;
+            msg.header.id = EVENT::NEW_PLAYER;
+            msg << m_id;
+
+            m_client_ptr->send(msg);
         }
 
     private:

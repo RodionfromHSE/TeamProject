@@ -370,7 +370,7 @@ void pollEvents(sf::RenderWindow &app) {
 
 
 int main() {
-    std::cout << login();
+    int id = login();
     sf::RenderWindow app(sf::VideoMode(1600, 1200), "Team PR 1");
 
     DeltaTime deltaTime;
@@ -389,9 +389,6 @@ int main() {
 
     int x, y;
     while (app.isOpen()) {
-        //std::cin >> x >> y;
-        //clientSystem.setCoors(x, y);
-
         deltaTime.update();
         pollEvents(app);
 

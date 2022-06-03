@@ -25,7 +25,7 @@ struct PlayerCoordinates {
 
 struct NetworkSystem : System {
     // TODO: Synchronize Player
-    NetworkSystem(std::string host = constant::HOST, uint16_t port = constant::PORT);
+    NetworkSystem(int id = constant::ID, std::string host = constant::HOST, uint16_t port = constant::PORT);
 
     // Hmm... update something
     void update() override;

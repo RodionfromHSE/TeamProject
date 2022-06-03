@@ -9,22 +9,27 @@
 #include "synchronizied_handler.h"
 
 /*
- * Goal it to create a server supporting vector of objects. So customer will be
+ * Goal is to create a server supporting vector of objects. So customer will be
  * able to iterate through synchronized objects and change them.
  */
-struct Server : net::ServerInterface<EVENT>{
-    explicit Server(uint16_t port, uint16_t limit = 100);
+// TODO: garbage queue
+struct Server : net::ServerInterface<EVENT> {
+    explicit Server(uint16_t port);
 
     bool on_client(std::shared_ptr<net::Connection<EVENT>> client) override;
 
     void handle_message(std::shared_ptr<net::Connection<EVENT>> client, net::Message<EVENT> &msg) override;
 
-    const std::vector<Point>& get_objects();
+    inline net::SynchronizedHandler<EVENT> &get_synHandler() {
+        return m_synHandler;
+    }
+    inline net::TSQueue<net::Message<EVENT>> &get_msgQueue() {
+        return m_msgQueue;
+    }
 
     net::SynchronizedHandler<EVENT> &syn_handler();
 
 private:
     net::SynchronizedHandler<EVENT> m_synHandler;
-    std::vector<Point> _objects;
-    uint16_t _limit;
+    net::TSQueue<net::Message<EVENT>> m_msgQueue;
 };

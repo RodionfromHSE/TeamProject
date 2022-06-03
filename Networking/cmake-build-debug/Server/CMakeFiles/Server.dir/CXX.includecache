@@ -104,11 +104,17 @@ object.h
 synchronizied_handler.h
 ../Server/synchronizied_handler.h
 
-C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Game/object.cpp
-
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/main.cpp
 server.h
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/server.h
+synchronizied.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/synchronizied.h
+players_keeper.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/players_keeper.h
+
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/players_keeper.h
+fwd.h
+C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/fwd.h
 synchronizied.h
 C:/Users/home/Desktop/Programming/C++/TeamProject/Networking/Server/synchronizied.h
 
