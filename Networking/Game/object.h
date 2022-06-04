@@ -2,7 +2,7 @@
 
 #include "game_enum.h"
 
-struct Point{
+struct Point {
     int x, y;
 };
 

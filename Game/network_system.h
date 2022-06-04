@@ -34,6 +34,15 @@ struct NetworkSystem : System {
         m_player.set(pc);
     }
 
+    template<class T>
+    std::shared_ptr<net::Synchronized<T, Usage::OnClient>> make_synchronized(int id){
+        return std::make_shared<net::Synchronized<T, Usage::OnClient>>(m_clientPtr, id);
+    }
+
+    int getId(){
+        return m_player.getId();
+    }
+
     inline ~NetworkSystem() {
         if (thread.joinable()) { thread.detach(); }
     }
