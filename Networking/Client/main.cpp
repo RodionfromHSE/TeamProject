@@ -2,10 +2,11 @@
 #include "synchronizied.h"
 #include "client_interface.h"
 
+const int PORT = 1234;
 
 int main() {
     std::shared_ptr<Client> client_ptr(new Client());
-    client_ptr->connect("127.0.0.1", 60'000);
+    client_ptr->connect("127.0.0.1", PORT);
 
     net::Synchronized<Point, Usage::OnClient> p(client_ptr, 770);
     int step;

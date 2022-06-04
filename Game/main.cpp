@@ -371,6 +371,8 @@ void pollEvents(sf::RenderWindow &app) {
 
 int main() {
     int id = login();
+    NetworkSystem networkSystem(id);
+
     sf::RenderWindow app(sf::VideoMode(1600, 1200), "Team PR 1");
 
     DeltaTime deltaTime;
@@ -380,7 +382,7 @@ int main() {
 
     Systems systems;
     initialization(systems, gameObjects, deltaTime, player, currentCamera, app);
-    NetworkSystem networkSystem;
+
 
     std::random_device dev;
     std::mt19937 rng(dev());

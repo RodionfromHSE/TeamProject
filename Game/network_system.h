@@ -8,7 +8,7 @@
 
 namespace constant {
     inline const std::string HOST = "127.0.0.1";
-    inline const uint16_t PORT = 60'000;
+    inline const uint16_t PORT = 1234;
     inline int ID = 770;
 }
 

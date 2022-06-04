@@ -82,7 +82,7 @@ namespace net {
                                                 add_to_incoming();
                                             }
                                         } else {
-                                            std::cout << "Header reading failed\n";
+                                            std::cout << "Header reading failed: " << ec.message() << "\n";
                                             _socket.close();
                                         }
                                     });
