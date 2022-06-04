@@ -1,18 +1,15 @@
-#ifndef TEAMPROJECT_SERVER_H
-#define TEAMPROJECT_SERVER_H
+#pragma once
 
 #include "fwd.h"
-#include "message.h"
-#include "tsqueue.h"
 #include "connection.h"
 
 
 using boost::asio::ip::tcp;
-namespace myLibrary {
+namespace net {
     template<typename T>
     struct ServerInterface {
-        explicit ServerInterface(uint16_t port) : _acceptor(_ioContext, tcp::endpoint(tcp::v4(), port)), _idCount(10'000) {
-        }
+        explicit ServerInterface(uint16_t port) : _acceptor(_ioContext, tcp::endpoint(tcp::v4(), port)),
+                                                  _idCount(10'000) {}
 
         ~ServerInterface() {
             stop();
@@ -41,22 +38,21 @@ namespace myLibrary {
             std::cout << "Server closed!\n";
         }
 
-        void send_to_client(std::shared_ptr<Connection<T>> client,
-                            Message<T> &msg) {
+        void send_to_client(std::shared_ptr<Connection <T> > client, Message <T> &msg) {
             if (client && client->is_connected()) {
                 client->send(msg);
                 return;
             }
 
-            disconnect_client(client);
+            off_client(client);
             client.reset();
             _connections.erase(std::remove(_connections.begin(), _connections.end(), client), _connections.end());
         }
 
-        void send_to_everyone(Message<T> &msg, std::shared_ptr<Connection<T>> ignoreClient) {
+        void send_to_everyone(Message <T> &msg, std::shared_ptr<Connection <T> > ignoreClient=nullptr) {
             bool isAnyDisconnected = false;
 
-            for (auto &client : _connections) {
+            for (auto &client: _connections) {
                 if (client && client->is_connected()) {
                     if (client != ignoreClient) {
                         client->send(msg);
@@ -64,7 +60,7 @@ namespace myLibrary {
                     continue;
                 }
 
-                disconnect_client(client);
+                off_client(client);
                 client.reset();
                 isAnyDisconnected = true;
             }
@@ -82,7 +78,6 @@ namespace myLibrary {
                 auto msg = _inMessages.pop_back();
 
                 handle_message(msg.remote, msg.msg);
-//                std::cout << std::flush;
             }
 
         }
@@ -92,7 +87,6 @@ namespace myLibrary {
         void start_accept() {
             _acceptor.async_accept([this](boost::system::error_code ec, tcp::socket socket) {
                 if (!ec) {
-//                    std::shared_ptr<Connection<T>> conn = nullptr;
                     std::shared_ptr<Connection<T>> conn = std::make_shared<Connection<T>>(Connection<T>::Owner::SERVER,
                                                                                           _inMessages,
                                                                                           std::move(socket),
@@ -112,26 +106,20 @@ namespace myLibrary {
             });
         }
 
-        virtual bool connect_client(std::shared_ptr<Connection<T>> client) {
-            return false;
-        }
+        virtual bool on_client(std::shared_ptr<Connection <T> > client) { return false; }
 
-        virtual void handle_message(std::shared_ptr<Connection<T>> client,
-                            Message<T> &msg) {
-        }
+        virtual void handle_message(std::shared_ptr<Connection < T>> client, Message <T> &msg) = 0;
 
-        virtual void disconnect_client(std::shared_ptr<Connection<T>> client) {
-        }
+        virtual void off_client(std::shared_ptr<Connection < T>> client) {}
 
     private:
         boost::asio::io_context _ioContext;
         std::thread _contextThr;
         tcp::acceptor _acceptor;
 
-        std::vector<std::shared_ptr<Connection<T>>> _connections;
-        TSQueue<OwnedMessage<T>> _inMessages;
+        std::vector<std::shared_ptr<Connection<T> > > _connections;
+        TSQueue <OwnedMessage<T>> _inMessages;
 
         uint16_t _idCount;
     };
-}// namespace myLibrary
-#endif//TEAMPROJECT_SERVER_H
+}

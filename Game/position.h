@@ -8,14 +8,10 @@
 #include "game_object.h"
 
 struct PositionComponent : Component {
-    int x;
-    int y;
+    float x;
+    float y;
 
     PositionComponent(int newX, int newY) : x(newX), y(newY) {}
-
-    ~PositionComponent() override;
 };
-
-PositionComponent::~PositionComponent() = default;
 
 #endif //__PROJECT_POSITION_H

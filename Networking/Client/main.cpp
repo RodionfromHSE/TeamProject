@@ -1,57 +1,38 @@
-#include <boost/asio.hpp>
-#include <thread>
-#include <iostream>
-#include <string>
-#include <vector>
+#include "client.h"
+#include "synchronizied.h"
+#include "client_interface.h"
 
-using boost::asio::ip::tcp;
+const int PORT = 1234;
 
-//void checkConnection(boost::system::error_code &ec) {
-//    if (!ec) {
-//        std::cout << "Well done!\n";
-//        return;
-//    }
-//    std::cout << "Error: " << ec.message() << '\n';
-//}
+int main() {
+    std::shared_ptr<Client> client_ptr(new Client());
+    client_ptr->connect("127.0.0.1", PORT);
 
-//std::vector<char> &getBuffer{
-//        inline static  = {};
-//        return buf;
-//};
+    net::Synchronized<Point, Usage::OnClient> p(client_ptr, 770);
+    int step;
+    auto msg = net::Message<EVENT>();
+    msg.header.id = EVENT::NOTHING;
 
-
-//std::vector<char> buf(1024);
-
-//void grabData(tcp::socket &socket) {
-//    socket.read_some(boost::asio::buffer(buf.data(), buf.size()),
-//                     [&](std::size_t len, boost::system::error_code &ec)
-//    {
-//        if (!ec) {
-//            std::cout << "\n\n+++" << len << "+++\n\n";
-//            for (auto c: buf) {
-//                std::cout << c;
-//            }
-//            grabData(socket);
-//        }
-//    }
-//}
-
-
-int main(int argc, char *argv[]) {
-    try {
-        boost::asio::io_context ioContext;
-        boost::system::error_code ec;
-        tcp::endpoint endpoint(boost::asio::ip::make_address("127.0.0.1", ec), 60000);
-
-//        std::thread thr([&]() { ioContext.run(); });
-
-
-        tcp::socket socket(ioContext);
-        socket.connect(endpoint, ec);
-        if (socket.is_open()) {
-            std::cout << "Connected!\n";
+    std::thread thread([&]() {
+        while (true) {
+            client_ptr->update();
+            std::cout.flush();
         }
-    } catch (std::exception &e) {
-        std::cout << e.what() << '\n';
+    });
+
+
+    while (true) {
+        if (client_ptr->is_connected()) {
+            if (p.isUpdatable())
+                std::cout << "Coordinates from remote: " << p.get().x << ' ' << p.get().y << '\n';
+            else
+                std::cout << "Current coordinates: " << p.get().x << ' ' << p.get().y << '\n';
+            std::cin >> step;
+            //        client_ptr->send(msg);
+            p.set({step, step});
+            std::cout.flush();
+        } else
+            break;
     }
+    thread.detach();
 }

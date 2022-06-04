@@ -103,12 +103,14 @@ int main() {
     app.setFramerateLimit(60);
 
     sf::Texture bgTex, obstacleTex, persATex, persBTex;
-    bgTex.loadFromFile("textures/background.png");
-    obstacleTex.loadFromFile("textures/obstacle.png");
-    persATex.loadFromFile("textures/player1.png");
-    persBTex.loadFromFile("textures/player2.png");
+    std::string pref = "../Pictures/Free/";
+    bgTex.loadFromFile(pref + "Background/Blue.png");
+    obstacleTex.loadFromFile(pref + "Items/Fruits/Apple.png");
+    persATex.loadFromFile(pref + "Main Characters/Mask Dude/Idle/0.png");
+    persBTex.loadFromFile(pref + "Main Characters/Mask Dude/Idle/0.png");
 
     sf::Sprite sBackground(bgTex), sObstacle(obstacleTex);
+
 
     World world;
     Player persA(persATex, {1000, 300}, {-1, 1}, {75, 0}, &world);

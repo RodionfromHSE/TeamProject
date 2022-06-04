@@ -1,9 +1,8 @@
-#ifndef MESSAGE_H
-#define MESSAGE_H
+#pragma once
 
 #include "fwd.h"
 
-namespace myLibrary{
+namespace net {
 
     template<typename T>
     struct Header{
@@ -35,10 +34,6 @@ namespace myLibrary{
 
             std::size_t sz = msg.size();
 
-            for (auto &c : msg.body)
-                std::cout << c << ' ';
-            std::cout << '\n';
-
             msg.body.resize(sz + sizeof(DataType));
 
             std::memcpy(msg.body.data() + sz, reinterpret_cast<const uint8_t*>(&data), sizeof(DataType));
@@ -54,15 +49,9 @@ namespace myLibrary{
             static_assert(std::is_standard_layout_v<DataType>);
 
             std::size_t sz = msg.size() - sizeof(DataType);
-
             std::memcpy(reinterpret_cast<uint8_t*>(&data), msg.body.data() + sz, sizeof(DataType));
 
             msg.body.resize(sz);
-
-            for (auto &c : msg.body)
-                std::cout << c << ' ';
-            std::cout << '\n';
-
             msg.header.size = msg.size();
 
             return msg;
@@ -77,13 +66,11 @@ namespace myLibrary{
 
     template<typename T>
     struct OwnedMessage{
-        friend std::ostream &operator<<(std::ostream& os, OwnedMessage msg){
-            return os << msg.msg;
+        friend std::ostream &operator<<(std::ostream& os, OwnedMessage ownMsg){
+            return os << ownMsg.msg;
         }
     public:
         std::shared_ptr<Connection<T>> remote;
         Message<T> msg;
     };
 }
-
-#endif //TEAMPROJECT_MESSAGE_H

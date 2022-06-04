@@ -1,53 +1,31 @@
 #include "client.h"
 
-enum class CharacterAction : uint32_t
-{
-    Move,
-    SuccessfulMove
-};
+std::vector<Point> moves{{-1,  0},
+                         {0, 1},
+                         {0,  -1},
+                         {1,  0}};
 
-using namespace myLibrary;
+Point Client::move(int step) {
+    return moves[step];
+}
 
-struct Player{
-    int getOx(){
-        return i++;
+void Client::handle_message(net::Message<EVENT> msg, std::shared_ptr<net::Connection<EVENT>> sender_ptr) {
+    switch (msg.header.id) {
+        case EVENT::SYNCHRONIZATION:
+            int id;
+            msg >> id;
+            m_synHandler.add_message(msg, id);
+            break;
+        case EVENT::NOTHING:
+            int cnt;
+            msg >> cnt;
+            std::cout << "Message " << cnt << '\n';
+        default:
+            break;
     }
-
-    std::pair<float, float> get_position(){
-        return std::make_pair(x, y);
-    }
-
-    std::pair<float, float> move(float dx, float dy){
-        x += dx, y += dy;
-        return std::make_pair(x, y);
-    }
-private:
-    int i = 0;
-    float x = 0, y = 0;
-
-};
+}
 
 
-class CustomClient : public ClientInterface<CharacterAction>
-{
-public:
-    void PingServer(Player& p)
-    {
-        Message<CharacterAction> msg;
-        msg.header.id = CharacterAction::Move;
-        msg << p.get_position() << p.move(1, 1);
-        send(msg);
-    }
-
-//    void MessageAll()
-//    {
-//        Message<CharacterAction> msg;
-//        msg.header.id = CharacterAction::MessageAll;
-//        send(msg);
-//    }
-};
-
-int main()
-{
-
+net::SynchronizedHandler<EVENT> &Client::syn_handler() {
+    return m_synHandler;
 }
