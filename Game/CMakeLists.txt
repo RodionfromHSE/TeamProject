@@ -8,7 +8,7 @@ find_package(Boost 1.71.0 REQUIRED)
 find_package(Threads REQUIRED)
 
 if (WIN32 AND NOT MSVC AND NOT BORLAND)
-    find_package(OpenGL REQUIRED)
+#    find_package(OpenGL REQUIRED)
 #    find_package(GLUT REQUIRED)
 
     # For sockets to work correctly
